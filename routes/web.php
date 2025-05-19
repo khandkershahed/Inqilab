@@ -22,5 +22,6 @@ Route::get('/', [HomeController::class, 'home'])->name('homepage');
 //     return view('admin.dashboard');
 // })->middleware(['auth:admin', 'verified'])->name('admin.dashboard');
 
+require __DIR__ . '/api.php';
 require __DIR__ . '/auth.php';
 require __DIR__ . '/admin.php';
