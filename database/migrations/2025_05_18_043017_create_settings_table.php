@@ -26,14 +26,15 @@ return new class extends Migration
             $table->string('primary_email', 100)->nullable();
             $table->string('support_email', 100)->nullable();
             $table->string('info_email', 100)->nullable();
-            $table->string('sales_email', 100)->nullable();
+            $table->string('news_email', 100)->nullable();
             $table->string('primary_phone', 20)->nullable();
+            $table->string('fax', 20)->nullable();
             $table->string('alternative_phone', 20)->nullable();
             $table->string('whatsapp_number', 20)->nullable();
 
             // Address
-            $table->text('address_line_one')->nullable();
-            $table->text('address_line_two')->nullable();
+            $table->text('address_one')->nullable();
+            $table->text('address_two')->nullable();
 
             // Timezone & Language
             $table->string('default_language', 50)->nullable();

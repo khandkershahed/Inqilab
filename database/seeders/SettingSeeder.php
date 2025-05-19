@@ -16,73 +16,74 @@ class SettingSeeder extends Seeder
     {
         DB::table('settings')->insert([
             // Branding
-            'website_name' => 'My Boilerplate App',
-            'site_title' => 'My Awesome Platform',
-            'site_motto' => 'Empowering your ideas.',
+            'website_name' => 'Weekly Inqilab',
+            'site_title' => 'Weekly Inqilab - Your Trusted News Source',
+            'site_motto' => 'Empowering Your Ideas with Truth',
             'site_logo_white' => 'images/settings/logo-white.png',
             'site_logo_black' => 'images/settings/logo-black.png',
             'site_favicon' => 'images/settings/favicon.ico',
             'login_background_image' => 'images/settings/login-bg.jpg',
 
             // Contact Information
-            'primary_email' => 'admin@example.com',
-            'support_email' => 'support@example.com',
-            'info_email' => 'info@example.com',
-            'sales_email' => 'sales@example.com',
-            'primary_phone' => '+1234567890',
-            'alternative_phone' => '+0987654321',
-            'whatsapp_number' => '+1234567890',
+            'primary_email' => 'news@weeklyinqilab.com',
+            'support_email' => 'support@weeklyinqilab.com',
+            'info_email' => 'info@weeklyinqilab.com',
+            'news_email' => 'news@weeklyinqilab.com',
+            'primary_phone' => '+1 (929) 328-5971',
+            'fax' => '201 4898035',
+            'alternative_phone' => '9293285971',
+            'whatsapp_number' => '+1 (929) 328-5971',
 
             // Address
-            'address_line_one' => '123 Boilerplate St.',
-            'address_line_two' => 'Suite 456, Dev City',
+            'address_one' => '86-11 101 AVENUE, OZONE PARK, NY, 11416, USA',
+            'address_two' => '৫০/এফ ইনার সার্কুলার রোড নয়া পল্টন ঢাকা-১০০০',
 
             // Timezone & Language
-            'default_language' => 'en',
+            'default_language' => 'bn',
             'default_currency' => 'BDT',
             'system_timezone' => 'Asia/Dhaka',
 
             // SEO & Analytics
-            'site_url' => 'https://www.example.com',
-            'meta_title' => 'Welcome to My Boilerplate App',
-            'meta_keyword' => 'laravel, boilerplate, starter, template',
-            'meta_tags' => 'laravel, php, framework',
-            'meta_description' => 'A powerful Laravel boilerplate for any project.',
+            'site_url' => 'https://weeklyinqilab.com/',
+            'meta_title' => 'Weekly Inqilab - Your Trusted News Source',
+            'meta_keyword' => 'Weekly Inqilab, Bangla News, Politics, Sports, Entertainment',
+            'meta_tags' => 'Weekly Inqilab, Bangla News, Politics, Sports, Entertainment',
+            'meta_description' => 'Weekly Inqilab is your trusted source for the latest news in politics, sports, entertainment, and more.',
             'google_analytics' => null,
             'google_adsense' => null,
             'facebook_pixel_id' => null,
             'og_image' => 'uploads/settings/og-image.jpg',
-            'og_title' => 'My Boilerplate App',
-            'og_description' => 'Kickstart your Laravel projects with ease.',
-            'canonical_url' => 'https://www.example.com',
+            'og_title' => 'Weekly Inqilab - Your Trusted News Source',
+            'og_description' => 'Stay updated with the latest news from Weekly Inqilab.',
+            'canonical_url' => 'https://weeklyinqilab.com/',
 
             // Copyright
-            'copyright_title' => '© 2025 My Company. All rights reserved.',
-            'copyright_url' => 'https://www.example.com',
+            'copyright_title' => 'কপিরাইট © ২০২৫ সাপ্তাহিক ইনকিলাব কর্তৃক সর্বসত্ব ® সংরক্ষিত',
+            'copyright_url' => 'https://weeklyinqilab.com/',
 
             // Social Media URLs
-            'facebook_url' => 'https://facebook.com/mycompany',
-            'instagram_url' => 'https://instagram.com/mycompany',
-            'linkedin_url' => 'https://linkedin.com/company/mycompany',
-            'whatsapp_url' => 'https://wa.me/1234567890',
-            'twitter_url' => 'https://twitter.com/mycompany',
-            'youtube_url' => 'https://youtube.com/@mycompany',
-            'pinterest_url' => 'https://pinterest.com/mycompany',
-            'reddit_url' => 'https://reddit.com/u/mycompany',
-            'tumblr_url' => 'https://mycompany.tumblr.com',
-            'tiktok_url' => 'https://tiktok.com/@mycompany',
-            'website_url' => 'https://www.example.com',
+            'facebook_url' => 'https://facebook.com/weeklyinqilab',
+            'instagram_url' => 'https://instagram.com/weeklyinqilab',
+            'linkedin_url' => 'https://linkedin.com/company/weeklyinqilab',
+            'whatsapp_url' => 'https://wa.me/9293285971',
+            'twitter_url' => 'https://twitter.com/weeklyinqilab',
+            'youtube_url' => 'https://youtube.com/@weeklyinqilab',
+            'pinterest_url' => 'https://pinterest.com/weeklyinqilab',
+            'reddit_url' => 'https://reddit.com/r/weeklyinqilab',
+            'tumblr_url' => 'https://weeklyinqilab.tumblr.com',
+            'tiktok_url' => 'https://tiktok.com/@weeklyinqilab',
+            'website_url' => 'https://weeklyinqilab.com/',
 
             // Feature Toggles
             'maintenance_mode' => false,
             'enable_user_registration' => true,
             'enable_email_verification' => true,
             'enable_api_access' => false,
-            'enable_multilanguage' => false,
+            'enable_multilanguage' => true,
             'is_demo' => false,
 
             // Business Settings
-            'company_name' => 'My Company Inc.',
+            'company_name' => 'Inqilab Enterprise and Publications Ltd.',
             'minimum_order_amount' => 50,
 
             // Business Hours
@@ -103,8 +104,8 @@ class SettingSeeder extends Seeder
             'mail_username' => 'user@example.com',
             'mail_password' => 'secret',
             'mail_encryption' => 'tls',
-            'mail_from_address' => 'noreply@example.com',
-            'mail_from_name' => 'My Boilerplate',
+            'mail_from_address' => 'noreply@weeklyinqilab.com',
+            'mail_from_name' => 'Weekly Inqilab',
 
             // Security & Compliance
             'captcha_enabled' => false,
@@ -112,8 +113,8 @@ class SettingSeeder extends Seeder
             'captcha_secret_key' => null,
             'cookie_consent_enabled' => true,
             'cookie_consent_text' => 'This website uses cookies to ensure you get the best experience.',
-            'privacy_policy_url' => 'https://www.example.com/privacy',
-            'terms_conditions_url' => 'https://www.example.com/terms',
+            'privacy_policy_url' => 'https://weeklyinqilab.com/privacy-policy',
+            'terms_conditions_url' => 'https://weeklyinqilab.com/terms-conditions',
 
             // Advanced Settings
             'theme_color' => '#3490dc',

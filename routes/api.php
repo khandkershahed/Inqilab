@@ -19,6 +19,7 @@ use App\Http\Controllers\Frontend\Api\HomeApiController;
 
 Route::prefix('api/v1')->group(function () {
     Route::get('/categories', [HomeApiController::class, 'allCategories']);
+    Route::get('/site-informations', [HomeApiController::class, 'siteInformations']);
     Route::get('/categories/{slug}', [HomeApiController::class, 'categoryDetails']);
     // Route::post('/register', [UserApiController::class, 'register']);
     // Route::post('/login', [UserApiController::class, 'login']);
