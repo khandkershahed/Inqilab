@@ -218,7 +218,7 @@ class HomeApiController extends Controller
                     ->orWhere('sub_category_id', $category->id)
                     ->orWhere('sub_sub_category_id', $category->id);
             })
-                ->with(['category', 'subCategory', 'subSubCategory', 'images'])
+                ->with(['category', 'subCategory', 'images'])
                 ->where('status', 'published')
                 ->orderByDesc('published_at')
                 ->get(); // Optional: ->paginate(10)
