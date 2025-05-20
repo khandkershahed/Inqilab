@@ -4,6 +4,8 @@ namespace App\Models;
 
 use App\Traits\HasSlug;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Category extends Model
@@ -40,7 +42,13 @@ class Category extends Model
     //     // return Product::whereJsonContains('category_id', (string) $this->id);
     //     return Product::whereJsonContains('category_id', json_encode($this->id))->where('status', 'published');
     // }
-
+    public function news(): HasMany
+    {
+        return $this->hasMany(News::class, 'category_id')
+            ->orWhere(function (Builder $query) {
+                $query->whereColumn('sub_category_id', 'categories.id');
+            });
+    }
     public function scopeActive($query)
     {
         return $query->where('status', 'active');

@@ -21,6 +21,8 @@ Route::prefix('api/v1')->group(function () {
     Route::get('/categories', [HomeApiController::class, 'allCategories']);
     Route::get('/site-informations', [HomeApiController::class, 'siteInformations']);
     Route::get('/categories/{slug}', [HomeApiController::class, 'categoryDetails']);
+    Route::get('/category-news/{slug}', [HomeApiController::class, 'categoryWiseNews']);
+
     // Route::post('/register', [UserApiController::class, 'register']);
     // Route::post('/login', [UserApiController::class, 'login']);
     // Route::post('/reset-password/{token}', [UserApiController::class, 'reset']);

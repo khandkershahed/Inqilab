@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend\Api;
 
+use App\Models\News;
 use App\Models\Setting;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -194,6 +195,47 @@ class HomeApiController extends Controller
                 'success' => false,
                 'message' => 'Error retrieving site information.',
                 'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    public function categoryWiseNews($slug)
+    {
+        try {
+            // Get category by slug
+            $category = Category::where('slug', $slug)->first();
+
+            if (!$category) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Category not found.',
+                ], 404);
+            }
+
+            // Fetch news where this category is used as category, subcategory or sub-subcategory
+            $news = News::where(function ($query) use ($category) {
+                $query->where('category_id', $category->id)
+                    ->orWhere('sub_category_id', $category->id)
+                    ->orWhere('sub_sub_category_id', $category->id);
+            })
+                ->with(['category', 'subCategory', 'subSubCategory', 'images'])
+                ->where('status', 'published')
+                ->orderByDesc('published_at')
+                ->get(); // Optional: ->paginate(10)
+
+            return response()->json([
+                'success'  => true,
+                'message'  => 'News found for category: ' . $category->name,
+                'category' => $category,
+                'data'     => $news,
+            ]);
+        } catch (\Exception $e) {
+            Log::error('Failed to load category-wise news: ' . $e->getMessage());
+
+            return response()->json([
+                'success' => false,
+                'message' => 'An error occurred while retrieving news.',
+                'error'   => $e->getMessage(),
             ], 500);
         }
     }
