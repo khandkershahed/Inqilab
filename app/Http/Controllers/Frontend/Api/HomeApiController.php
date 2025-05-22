@@ -10,6 +10,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\URL;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\NewsResource;
 
 class HomeApiController extends Controller
 {
@@ -228,7 +229,7 @@ class HomeApiController extends Controller
                 'success'  => true,
                 'message'  => 'News found for category: ' . $category->name,
                 'category' => $category,
-                'data'     => $news,
+                'data'     => NewsResource::collection($news),
             ]);
         } catch (\Exception $e) {
             Log::error('Failed to load category-wise news: ' . $e->getMessage());
@@ -249,24 +250,10 @@ class HomeApiController extends Controller
                 ->orderByDesc('published_at')
                 ->get();
 
-            //include category name instead of id
-            $news->map(function ($item) {
-                $item->category_name = optional($item->category)->name;
-                $item->category_bangla_name = optional($item->category)->bangla_name;
-                $item->subCategory_name = optional($item->subCategory)->name;
-                $item->sub_category = optional($item->subCategory)->name;
-                $item->subCategory_bangla_name = optional($item->subCategory)->bangla_name;
-                $item->thumbnail = $item->thumbnail->map(function ($thumbnail) {
-                    return url('storage/' . $thumbnail->thumbnail);
-                });
-                $item->banner_image = $item->banner_image ? url('storage/' . $item->banner_image) : null;
-                return $item;
-            });
-
             return response()->json([
                 'success' => true,
                 'message' => 'Breaking news retrieved successfully.',
-                'data'    => $news,
+                'data'    => NewsResource::collection($news),
             ], 200);
         } catch (\Exception $e) {
             Log::error('Failed to fetch breaking news: ' . $e->getMessage());
@@ -278,6 +265,7 @@ class HomeApiController extends Controller
             ], 500);
         }
     }
+
     public function spotlightNews()
     {
         try {
@@ -285,22 +273,11 @@ class HomeApiController extends Controller
                 ->where('status', 'published')
                 ->orderByDesc('published_at')
                 ->get();
-            $news->map(function ($item) {
-                $item->category_name = optional($item->category)->name;
-                $item->category_bangla_name = optional($item->category)->bangla_name;
-                $item->subCategory_name = optional($item->subCategory)->name;
-                $item->sub_category = optional($item->subCategory)->name;
-                $item->subCategory_bangla_name = optional($item->subCategory)->bangla_name;
-                $item->thumbnail = $item->thumbnail->map(function ($thumbnail) {
-                    return url('storage/' . $thumbnail->thumbnail);
-                });
-                $item->banner_image = $item->banner_image ? url('storage/' . $item->banner_image) : null;
-                return $item;
-            });
+
             return response()->json([
                 'success' => true,
                 'message' => 'Spotlight news retrieved successfully.',
-                'data'    => $news,
+                'data'    => NewsResource::collection($news),
             ], 200);
         } catch (\Exception $e) {
             Log::error('Failed to fetch spotlight news: ' . $e->getMessage());
@@ -312,30 +289,18 @@ class HomeApiController extends Controller
             ], 500);
         }
     }
+
     public function latestNews()
     {
         try {
             $news = News::where('status', 'published')
                 ->orderByDesc('published_at')
                 ->get();
-            //include category name instead of id. Attempt to read property "name" on null error solved by using optional()
 
-            $news->map(function ($item) {
-                $item->category_name = optional($item->category)->name;
-                $item->category_bangla_name = optional($item->category)->bangla_name;
-                $item->subCategory_name = optional($item->subCategory)->name;
-                $item->sub_category = optional($item->subCategory)->name;
-                $item->subCategory_bangla_name = optional($item->subCategory)->bangla_name;
-                $item->thumbnail = $item->thumbnail->map(function ($thumbnail) {
-                    return url('storage/' . $thumbnail->thumbnail);
-                });
-                $item->banner_image = $item->banner_image ? url('storage/' . $item->banner_image) : null;
-                return $item;
-            });
             return response()->json([
                 'success' => true,
                 'message' => 'Latest news retrieved successfully.',
-                'data'    => $news,
+                'data'    => NewsResource::collection($news),
             ], 200);
         } catch (\Exception $e) {
             Log::error('Failed to fetch latest news: ' . $e->getMessage());
@@ -347,30 +312,18 @@ class HomeApiController extends Controller
             ], 500);
         }
     }
+
     public function viewedNews()
     {
         try {
             $news = News::where('is_most_read', 1)
                 ->where('status', 'published')
-                // ->orderByDesc('view_count')
                 ->get();
-            //include category name instead of id
-            $news->map(function ($item) {
-                $item->category_name = optional($item->category)->name;
-                $item->category_bangla_name = optional($item->category)->bangla_name;
-                $item->subCategory_name = optional($item->subCategory)->name;
-                $item->sub_category = optional($item->subCategory)->name;
-                $item->subCategory_bangla_name = optional($item->subCategory)->bangla_name;
-                $item->thumbnail = $item->thumbnail->map(function ($thumbnail) {
-                    return url('storage/' . $thumbnail->thumbnail);
-                });
-                $item->banner_image = $item->banner_image ? url('storage/' . $item->banner_image) : null;
-                return $item;
-            });
+
             return response()->json([
                 'success' => true,
                 'message' => 'Most viewed news retrieved successfully.',
-                'data'    => $news,
+                'data'    => NewsResource::collection($news),
             ], 200);
         } catch (\Exception $e) {
             Log::error('Failed to fetch most viewed news: ' . $e->getMessage());
@@ -382,6 +335,7 @@ class HomeApiController extends Controller
             ], 500);
         }
     }
+
     public function trendingNews()
     {
         try {
@@ -389,23 +343,11 @@ class HomeApiController extends Controller
                 ->where('status', 'published')
                 ->orderByDesc('published_at')
                 ->get();
-            //include category name instead of id
-            $news->map(function ($item) {
-                $item->category_name = optional($item->category)->name;
-                $item->category_bangla_name = optional($item->category)->bangla_name;
-                $item->subCategory_name = optional($item->subCategory)->name;
-                $item->sub_category = optional($item->subCategory)->name;
-                $item->subCategory_bangla_name = optional($item->subCategory)->bangla_name;
-                $item->thumbnail = $item->thumbnail->map(function ($thumbnail) {
-                    return url('storage/' . $thumbnail->thumbnail);
-                });
-                $item->banner_image = $item->banner_image ? url('storage/' . $item->banner_image) : null;
-                return $item;
-            });
+
             return response()->json([
                 'success' => true,
                 'message' => 'Trending news retrieved successfully.',
-                'data'    => $news,
+                'data'    => NewsResource::collection($news),
             ], 200);
         } catch (\Exception $e) {
             Log::error('Failed to fetch trending news: ' . $e->getMessage());
