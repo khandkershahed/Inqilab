@@ -23,6 +23,11 @@ Route::prefix('api/v1')->group(function () {
     Route::get('/site-informations', [HomeApiController::class, 'siteInformations']);
     Route::get('/categories/{slug}', [HomeApiController::class, 'categoryDetails']);
     Route::get('/category-news/{slug}', [HomeApiController::class, 'categoryWiseNews']);
+    Route::get('/breaking-news', [HomeApiController::class, 'breakingNews']);
+    Route::get('/spotlight-news', [HomeApiController::class, 'spotlightNews']);
+    Route::get('/latest-news', [HomeApiController::class, 'latestNews']);
+    Route::get('/viewed-news', [HomeApiController::class, 'viewedNews']);
+    Route::get('/trending-news', [HomeApiController::class, 'trendingNews']);
 
     // Route::post('/register', [UserApiController::class, 'register']);
     // Route::post('/login', [UserApiController::class, 'login']);

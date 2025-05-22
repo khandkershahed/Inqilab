@@ -61,13 +61,7 @@
 
                     <div class="post d-flex flex-column-fluid" id="kt_post">
                         <div id="kt_content_container" class="container-xxl">
-                            @if (session('error'))
-                                @foreach ($messages as $item)
-                                    <div class="alert alert-danger">
-                                        {{ $item }}
-                                    </div>
-                                @endforeach
-                            @endif
+                            @include('admin.layouts.flash-message')
                             {{ $slot }}
                         </div>
                     </div>
@@ -176,7 +170,19 @@
             });
         });
     </script>
+    <script>
+        $(document).ready(function() {
+            // Auto-hide alerts after 5 seconds (5000 milliseconds)
+            setTimeout(function() {
+                $('.alert').fadeOut('slow');
+            }, 5000);
 
+            // Close alert on clicking the close button
+            $('[data-dismiss="alert"]').on('click', function() {
+                $(this).closest('.alert').fadeOut('slow');
+            });
+        });
+    </script>
 
 
 </body>

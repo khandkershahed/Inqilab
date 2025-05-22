@@ -1,14 +1,10 @@
 <x-admin-app-layout :title="'Category Edit'">
     <div class="card card-flash">
-        <!--begin::Card header-->
         <div class="card-header mt-6">
             <div class="card-title"></div>
-
-            <!--begin::Card toolbar-->
             <div class="card-toolbar">
-                <!--begin::Button-->
                 <a href="{{ route('admin.categories.index') }}" class="btn btn-light-info">
-                    <!--begin::Svg Icon | path: categorys/duotune/general/gen035.svg-->
+
                     <span class="svg-icon svg-icon-3">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                             fill="none">
@@ -25,10 +21,23 @@
             </div>
         </div>
         <div class="card-body pt-0">
-            <form method="POST" action="{{ route('admin.categories.update', $category->id) }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('admin.categories.update', $category->id) }}"
+                enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="row">
+                    <div class="col-lg-6 mb-7">
+                        <x-metronic.label for="name"
+                            class="col-form-label required fw-bold fs-6">{{ __('Category Name') }}</x-metronic.label>
+                        <x-metronic.input id="name" type="text" name="name" placeholder="Enter the name"
+                            :value="old('name', $category->name)"></x-metronic.input>
+                    </div>
+                    <div class="col-lg-6 mb-7">
+                        <x-metronic.label for="bangla_name"
+                            class="col-form-label required fw-bold fs-6">{{ __('Category Bangla Name') }}</x-metronic.label>
+                        <x-metronic.input id="bangla_name" type="text" name="bangla_name"
+                            placeholder="Enter the Bangla name" :value="old('bangla_name', $category->bangla_name)"></x-metronic.input>
+                    </div>
 
                     <div class="col-lg-2 mb-7">
                         <x-metronic.label for="status" class="col-form-label required fw-bold fs-6">
@@ -41,7 +50,7 @@
                         </x-metronic.select-option>
                     </div>
 
-                    <div class="col-lg-5 mb-7">
+                    <div class="col-lg-4 mb-7">
                         <x-metronic.label for="parent_id"
                             class="col-form-label fw-bold fs-6">{{ __('Select a parent Category') }}</x-metronic.label>
                         <x-metronic.select-option id="parent_id" name="parent_id" data-hide-search="false"
@@ -51,13 +60,19 @@
                         </x-metronic.select-option>
                     </div>
 
-                    <div class="col-lg-5 mb-7">
-                        <x-metronic.label for="name"
-                            class="col-form-label required fw-bold fs-6">{{ __('Category Name') }}</x-metronic.label>
-                        <x-metronic.input id="name" type="text" name="name" placeholder="Enter the name"
-                            :value="old('name', $category->name)"></x-metronic.input>
-                    </div>
 
+                    <div class="col-lg-3 mb-7">
+                        <x-metronic.label for="code"
+                            class="col-form-label required fw-bold fs-6">{{ __('Category Code') }}</x-metronic.label>
+                        <x-metronic.input id="code" type="text" name="code" placeholder="Category Code"
+                            :value="old('code',$category->code)"></x-metronic.input>
+                    </div>
+                    <div class="col-lg-3 mb-7">
+                        <x-metronic.label for="serial"
+                            class="col-form-label required fw-bold fs-6">{{ __('Category serial') }}</x-metronic.label>
+                        <x-metronic.input id="serial" type="text" name="serial" placeholder="Category serial"
+                            :value="old('serial',$category->serial)"></x-metronic.input>
+                    </div>
                     <div class="col-lg-12 mb-7">
                         <x-metronic.label for="description" class="col-form-label fw-bold fs-6 ">{{ __('Description') }}
                         </x-metronic.label>
@@ -70,21 +85,24 @@
                         <x-metronic.label for="logo" class="col-form-label fw-bold fs-6 ">{{ __('Icon') }}
                         </x-metronic.label>
 
-                        <x-metronic.file-input id="logo" name="logo" :source="asset('storage/'.$category->logo)" :value="old('logo', $category->logo)"></x-metronic.file-input>
+                        <x-metronic.file-input id="logo" name="logo" :source="asset('storage/' . $category->logo)"
+                            :value="old('logo', $category->logo)"></x-metronic.file-input>
                     </div>
                     <div class="col-lg-4 mb-7">
                         <x-metronic.label for="image"
                             class="col-form-label fw-bold fs-6 required">{{ __('Thumbnail Image') }}
                         </x-metronic.label>
 
-                        <x-metronic.file-input id="image" name="image" :source="asset('storage/'.$category->image)" :value="old('image', $category->image)"></x-metronic.file-input>
+                        <x-metronic.file-input id="image" name="image" :source="asset('storage/' . $category->image)"
+                            :value="old('image', $category->image)"></x-metronic.file-input>
                     </div>
                     <div class="col-lg-4 mb-7">
                         <x-metronic.label for="banner_image"
                             class="col-form-label fw-bold fs-6 ">{{ __('Banner Image') }}
                         </x-metronic.label>
 
-                        <x-metronic.file-input id="banner_image" :source="asset('storage/'.$category->banner_image)" :value="old('banner_image', $category->banner_image)" name="banner_image"></x-metronic.file-input>
+                        <x-metronic.file-input id="banner_image" :source="asset('storage/' . $category->banner_image)" :value="old('banner_image', $category->banner_image)"
+                            name="banner_image"></x-metronic.file-input>
                     </div>
 
                 </div>

@@ -28,15 +28,13 @@
                         <table id="kt_datatable_example_5"
                             class="table table-striped table-row-bordered gy-5 gs-7 border rounded">
                             <thead class="bg-dark text-light">
-
-                                <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
-
-                                    <th class="min-w-10px">{{ __('category.Sl') }}</th>
-                                    <th class="min-w-150px">{{ __('category.Name') }}</th>
-                                    <th class="min-w-150px">{{ __('category.Slug') }}</th>
-                                    <th class="min-w-150px">{{ __('category.Status') }}</th>
-                                    <th class="min-w-150px">{{ __('category.Parent') }}</th>
-                                    <th class="min-w-70px">{{ __('category.Action') }}</th>
+                                <tr class="text-start text-white fw-bolder fs-7 text-uppercase gs-0">
+                                    <th class="min-w-10px">{{ __('Sl') }}</th>
+                                    <th class="min-w-150px">{{ __('Name') }}</th>
+                                    <th class="min-w-150px">{{ __('Slug') }}</th>
+                                    <th class="min-w-150px">{{ __('Status') }}</th>
+                                    <th class="min-w-150px">{{ __('Parent') }}</th>
+                                    <th class="min-w-70px">{{ __('Action') }}</th>
                                 </tr>
 
                             </thead>
@@ -46,36 +44,24 @@
                                 @forelse ($categories as $category)
 
                                     <tr>
-
-
                                         <td>
-
                                             <span class="fw-bolder"> {{ $loop->iteration }}</span>
-
                                         </td>
                                         <td>
-
                                             <span class="fw-bolder"> {{ $category->name }}</span>
-
                                         </td>
                                         <td>
-
                                             <span class="fw-bolder"> {{ $category->slug }}</span>
-
                                         </td>
                                         <td>
-
                                             <div
                                                 class="badge {{ $category->status == 'active' ? 'badge-light-success' : 'badge-light-danger' }}">
                                                 {{ $category->status == 'active' ? 'Active' : 'InActive' }}
                                             </div>
-
                                         </td>
                                         <td>
-
                                             <span class="fw-bolder">
                                                 {{ $category->parent_id ? $category->parent->name : 'N/A' }}</span>
-
                                         </td>
 
 
@@ -134,7 +120,7 @@
 
                                             <a href="{{ route('admin.categories.show', $category->id) }}"
                                                 class="menu-link"><i
-                                                    class="fa-solid fa-eye text-success me-1 fs-4"></i></a>
+                                                    class="fa-solid fa-eye text-success me-4 fs-4"></i></a>
 
                                             {{-- @endif --}}
 
@@ -144,7 +130,7 @@
 
                                             <a href="{{ route('admin.categories.edit', $category->id) }}"
                                                 class="menu-link"><i
-                                                    class="fa-solid fa-edit text-primary me-1 fs-4"></i></a>
+                                                    class="fa-solid fa-edit text-primary me-4 fs-4"></i></a>
 
                                             {{-- @endif --}}
 
@@ -211,7 +197,7 @@
 
                                                 <a href="{{ route('admin.categories.show', $child->id) }}"
                                                     class="menu-link"><i
-                                                        class="fa-solid fa-eye text-success me-1 fs-4"></i></a>
+                                                        class="fa-solid fa-eye text-success me-4 fs-4"></i></a>
 
                                                 {{-- @endif --}}
 
@@ -220,7 +206,7 @@
 
                                                 <a href="{{ route('admin.categories.edit', $child->id) }}"
                                                     class="menu-link"><i
-                                                        class="fa-solid fa-edit text-primary me-1 fs-4"></i></a>
+                                                        class="fa-solid fa-edit text-primary me-4 fs-4"></i></a>
 
                                                 {{-- @endif --}}
 

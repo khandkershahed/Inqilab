@@ -10,7 +10,7 @@
                 src="{{ !empty($site->site_logo) && file_exists(public_path('storage/settings/' . $site->site_logo)) ? asset('storage/settings/' . $site->site_logo) : asset('') }}"
                 class="h-60px logo w-200px"> --}}
 
-            <h3 class="text-light">New Site</h3>
+            <h3 class="text-black fw-bold">New Site</h3>
 
         </a>
         <div id="kt_aside_toggle" class="btn btn-icon w-auto px-0 btn-active-color-primary aside-toggle active"
@@ -73,17 +73,13 @@
                             'icon' => 'icons/duotune/ecommerce/ecm002.svg',
 
                             'routes' => [
-                                'admin.product.index',
-                                'admin.product.create',
-                                'admin.product.edit',
+                                'admin.news.index',
+                                'admin.news.create',
+                                'admin.news.edit',
 
                                 'admin.banner.index',
                                 'admin.banner.create',
                                 'admin.banner.edit',
-
-                                'admin.brands.index',
-                                'admin.brands.create',
-                                'admin.brands.edit',
 
                                 'admin.categories.index',
                                 'admin.categories.create',
@@ -112,24 +108,6 @@
 
                             'subMenu' => [
                                 [
-                                    'title' => 'Product',
-                                    'routes' => ['admin.product.index', 'admin.product.create', 'admin.product.edit'],
-                                    'route' => 'admin.product.index',
-                                ],
-
-                                [
-                                    'title' => 'Banner',
-                                    'routes' => ['admin.banner.index', 'admin.banner.create', 'admin.banner.edit'],
-                                    'route' => 'admin.banner.index',
-                                ],
-
-                                [
-                                    'title' => 'Brand',
-                                    'routes' => ['admin.brands.index', 'admin.brands.create', 'admin.brands.edit'],
-                                    'route' => 'admin.brands.index',
-                                ],
-
-                                [
                                     'title' => 'Category',
                                     'routes' => [
                                         'admin.categories.index',
@@ -138,6 +116,19 @@
                                     ],
                                     'route' => 'admin.categories.index',
                                 ],
+                                [
+                                    'title' => 'News',
+                                    'routes' => ['admin.news.index', 'admin.news.create', 'admin.news.edit'],
+                                    'route' => 'admin.news.index',
+                                ],
+
+                                [
+                                    'title' => 'Banner',
+                                    'routes' => ['admin.banner.index', 'admin.banner.create', 'admin.banner.edit'],
+                                    'route' => 'admin.banner.index',
+                                ],
+
+
 
                                 [
                                     'title' => 'Blog Category',

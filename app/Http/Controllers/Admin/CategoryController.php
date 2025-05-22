@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
@@ -96,13 +97,16 @@ class CategoryController extends Controller
             // Create the category model instance
             $category = Category::create([
                 'name'         => $request->name,
+                'bangla_name'  => $request->bangla_name,
                 'parent_id'    => $request->parent_id,
+                'code'         => $request->code,
+                'serial'       => $request->serial,
 
-                'logo'         => $uploadedFiles['logo']['status'] == 1 ? $uploadedFiles['logo']['file_path'] : null,
-                'image'        => $uploadedFiles['image']['status'] == 1 ? $uploadedFiles['image']['file_path'] : null,
+                'logo'         => $uploadedFiles['logo']['status']         == 1 ? $uploadedFiles['logo']['file_path']        : null,
+                'image'        => $uploadedFiles['image']['status']        == 1 ? $uploadedFiles['image']['file_path']       : null,
                 'banner_image' => $uploadedFiles['banner_image']['status'] == 1 ? $uploadedFiles['banner_image']['file_path'] : null,
 
-                'added_by'     => Auth::guard('admin')->user()->id,
+                'added_by'     => Auth::guard('admin')->user()->name,
 
                 'description'  => $request->description,
                 'status'       => $request->status,
@@ -170,10 +174,13 @@ class CategoryController extends Controller
                     $filePath = 'category/' . $key;
                     $oldFile  = $category->$key ?? null;
 
-                    if ($oldFile) {
-                        Storage::delete("public/" . $oldFile);
+                    // Delete old file from public storage
+                    if ($oldFile && Storage::disk('public')->exists($oldFile)) {
+                        Storage::disk('public')->delete($oldFile);
                     }
+
                     $uploadedFiles[$key] = customUpload($file, $filePath);
+
                     if ($uploadedFiles[$key]['status'] === 0) {
                         return redirect()->back()->with('error', $uploadedFiles[$key]['error_message']);
                     }
@@ -181,18 +188,20 @@ class CategoryController extends Controller
                     $uploadedFiles[$key] = ['status' => 0];
                 }
             }
-
             // Update the category with the new or existing file paths
             $category->update([
                 'name'         => $request->name,
+                'bangla_name'  => $request->bangla_name,
                 'parent_id'    => $request->parent_id,
+                'code'         => $request->code,
+                'serial'       => $request->serial,
                 'logo'         => $uploadedFiles['logo']['status'] == 1 ? $uploadedFiles['logo']['file_path'] : $category->logo,
                 'image'        => $uploadedFiles['image']['status'] == 1 ? $uploadedFiles['image']['file_path'] : $category->image,
                 'banner_image' => $uploadedFiles['banner_image']['status'] == 1 ? $uploadedFiles['banner_image']['file_path'] : $category->banner_image,
                 'description'  => $request->description,
                 'status'       => $request->status,
 
-                'added_by'     => Auth::guard('admin')->user()->id,
+                'updated_by'   => Auth::guard('admin')->user()->name,
             ]);
 
             DB::commit();
@@ -200,7 +209,7 @@ class CategoryController extends Controller
             return redirect()->back()->with('success', 'Category updated successfully');
         } catch (\Exception $e) {
             DB::rollback();
-            return redirect()->back()->with('error', 'An error occurred while updating the category: ' . $e->getMessage());
+            return redirect()->back()->withInput()->with('error', 'An error occurred while updating the category: ' . $e->getMessage());
         }
     }
 
@@ -217,8 +226,8 @@ class CategoryController extends Controller
         foreach ($files as $key => $file) {
             if (! empty($file)) {
                 $oldFile = $category->$key ?? null;
-                if ($oldFile) {
-                    Storage::delete("public/" . $oldFile);
+                if ($oldFile && Storage::disk('public')->exists($oldFile)) {
+                    Storage::disk('public')->delete($oldFile);
                 }
             }
         }

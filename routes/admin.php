@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\AdminProfileController;
@@ -51,8 +52,7 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
 
     //Resource Controller
     Route::resources([
-            'brands'         => BrandController::class,
-            'product'        => ProductController::class,
+            'news'           => NewsController::class,
             'banner'         => BannerController::class,
             'categories'     => CategoryController::class,
 

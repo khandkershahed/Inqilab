@@ -28,7 +28,18 @@
             <form method="POST" action="{{ route('admin.categories.store') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
-
+                    <div class="col-lg-6 mb-7">
+                        <x-metronic.label for="name"
+                            class="col-form-label required fw-bold fs-6">{{ __('Category Name') }}</x-metronic.label>
+                        <x-metronic.input id="name" type="text" name="name"
+                            placeholder="Enter the category name" :value="old('name')"></x-metronic.input>
+                    </div>
+                    <div class="col-lg-6 mb-7">
+                        <x-metronic.label for="bangla_name"
+                            class="col-form-label required fw-bold fs-6">{{ __('Category Bangla Name') }}</x-metronic.label>
+                        <x-metronic.input id="bangla_name" type="text" name="bangla_name"
+                            placeholder="Enter the category Bangla name" :value="old('bangla_name')"></x-metronic.input>
+                    </div>
                     <div class="col-lg-2 mb-7">
                         <x-metronic.label for="status" class="col-form-label required fw-bold fs-6">
                             {{ __('Select a Status ') }}</x-metronic.label>
@@ -40,7 +51,7 @@
                         </x-metronic.select-option>
                     </div>
 
-                    <div class="col-lg-5 mb-7">
+                    <div class="col-lg-4 mb-7">
                         <x-metronic.label for="parent_id"
                             class="col-form-label fw-bold fs-6">{{ __('Select a parent Category') }}</x-metronic.label>
                         <x-metronic.select-option id="parent_id" name="parent_id" data-hide-search="false"
@@ -49,13 +60,19 @@
                             {!! $categoriesOptions !!}
                         </x-metronic.select-option>
                     </div>
-
-                    <div class="col-lg-5 mb-7">
-                        <x-metronic.label for="name"
-                            class="col-form-label required fw-bold fs-6">{{ __('Category Name') }}</x-metronic.label>
-                        <x-metronic.input id="name" type="text" name="name" placeholder="Enter the category name"
-                            :value="old('name')"></x-metronic.input>
+                    <div class="col-lg-3 mb-7">
+                        <x-metronic.label for="code"
+                            class="col-form-label required fw-bold fs-6">{{ __('Category Code') }}</x-metronic.label>
+                        <x-metronic.input id="code" type="text" name="code"
+                            placeholder="Category Code" :value="old('code')"></x-metronic.input>
                     </div>
+                    <div class="col-lg-3 mb-7">
+                        <x-metronic.label for="serial"
+                            class="col-form-label required fw-bold fs-6">{{ __('Category serial') }}</x-metronic.label>
+                        <x-metronic.input id="serial" type="text" name="serial"
+                            placeholder="Category serial" :value="old('serial')"></x-metronic.input>
+                    </div>
+
 
                     <div class="col-lg-12 mb-7">
                         <x-metronic.label for="description" class="col-form-label fw-bold fs-6 ">{{ __('Description') }}

@@ -240,4 +240,120 @@ class HomeApiController extends Controller
             ], 500);
         }
     }
+
+    public function breakingNews()
+    {
+        try {
+            $news = News::where('is_breaking', 1)
+                ->where('status', 'published')
+                ->orderByDesc('published_at')
+                ->get();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Breaking news retrieved successfully.',
+                'data'    => $news,
+            ], 200);
+        } catch (\Exception $e) {
+            Log::error('Failed to fetch breaking news: ' . $e->getMessage());
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to retrieve breaking news.',
+                'error'   => $e->getMessage(),
+            ], 500);
+        }
+    }
+    public function spotlightNews()
+    {
+        try {
+            $news = News::where('is_featured', 1)
+                ->where('status', 'published')
+                ->orderByDesc('published_at')
+                ->get();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Spotlight news retrieved successfully.',
+                'data'    => $news,
+            ], 200);
+        } catch (\Exception $e) {
+            Log::error('Failed to fetch spotlight news: ' . $e->getMessage());
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to retrieve spotlight news.',
+                'error'   => $e->getMessage(),
+            ], 500);
+        }
+    }
+    public function latestNews()
+    {
+        try {
+            $news = News::where('status', 'published')
+                ->orderByDesc('published_at')
+                ->get();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Latest news retrieved successfully.',
+                'data'    => $news,
+            ], 200);
+        } catch (\Exception $e) {
+            Log::error('Failed to fetch latest news: ' . $e->getMessage());
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to retrieve latest news.',
+                'error'   => $e->getMessage(),
+            ], 500);
+        }
+    }
+    public function viewedNews()
+    {
+        try {
+            $news = News::where('is_most_read', 1)
+                ->where('status', 'published')
+                // ->orderByDesc('view_count')
+                ->get();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Most viewed news retrieved successfully.',
+                'data'    => $news,
+            ], 200);
+        } catch (\Exception $e) {
+            Log::error('Failed to fetch most viewed news: ' . $e->getMessage());
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to retrieve most viewed news.',
+                'error'   => $e->getMessage(),
+            ], 500);
+        }
+    }
+    public function trendingNews()
+    {
+        try {
+            $news = News::where('is_trending', 1)
+                ->where('status', 'published')
+                ->orderByDesc('published_at')
+                ->get();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Trending news retrieved successfully.',
+                'data'    => $news,
+            ], 200);
+        } catch (\Exception $e) {
+            Log::error('Failed to fetch trending news: ' . $e->getMessage());
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to retrieve trending news.',
+                'error'   => $e->getMessage(),
+            ], 500);
+        }
+    }
+
 }
