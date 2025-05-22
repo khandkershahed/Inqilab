@@ -249,6 +249,12 @@ class HomeApiController extends Controller
                 ->orderByDesc('published_at')
                 ->get();
 
+            //include category name instead of id
+            $news->map(function ($item) {
+                $item->category_name = $item->category->name;
+                return $item;
+            });
+
             return response()->json([
                 'success' => true,
                 'message' => 'Breaking news retrieved successfully.',
@@ -293,7 +299,11 @@ class HomeApiController extends Controller
             $news = News::where('status', 'published')
                 ->orderByDesc('published_at')
                 ->get();
-
+            //include category name instead of id
+            $news->map(function ($item) {
+                $item->category_name = $item->category->name;
+                return $item;
+            });
             return response()->json([
                 'success' => true,
                 'message' => 'Latest news retrieved successfully.',
@@ -316,7 +326,11 @@ class HomeApiController extends Controller
                 ->where('status', 'published')
                 // ->orderByDesc('view_count')
                 ->get();
-
+            //include category name instead of id
+            $news->map(function ($item) {
+                $item->category_name = $item->category->name;
+                return $item;
+            });
             return response()->json([
                 'success' => true,
                 'message' => 'Most viewed news retrieved successfully.',
@@ -339,7 +353,11 @@ class HomeApiController extends Controller
                 ->where('status', 'published')
                 ->orderByDesc('published_at')
                 ->get();
-
+            //include category name instead of id
+            $news->map(function ($item) {
+                $item->category_name = $item->category->name;
+                return $item;
+            });
             return response()->json([
                 'success' => true,
                 'message' => 'Trending news retrieved successfully.',
@@ -355,5 +373,4 @@ class HomeApiController extends Controller
             ], 500);
         }
     }
-
 }
