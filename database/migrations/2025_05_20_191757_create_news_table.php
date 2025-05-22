@@ -22,7 +22,7 @@ return new class extends Migration
             $table->text('title');
             $table->text('bangla_title')->nullable();
             $table->json('category')->nullable();
-            $table->text('slug')->unique();
+            $table->text('slug')->nullable();
             $table->text('summary')->nullable();
             $table->text('bangla_summary')->nullable();
 
