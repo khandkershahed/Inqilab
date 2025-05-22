@@ -251,7 +251,15 @@ class HomeApiController extends Controller
 
             //include category name instead of id
             $news->map(function ($item) {
-                $item->category_name = $item->category->name;
+                $item->category_name = optional($item->category)->name;
+                $item->category_bangla_name = optional($item->category)->bangla_name;
+                $item->subCategory_name = optional($item->subCategory)->name;
+                $item->sub_category = optional($item->subCategory)->name;
+                $item->subCategory_bangla_name = optional($item->subCategory)->bangla_name;
+                $item->thumbnail = $item->thumbnail->map(function ($thumbnail) {
+                    return url('storage/' . $thumbnail->thumbnail);
+                });
+                $item->banner_image = $item->banner_image ? url('storage/' . $item->banner_image) : null;
                 return $item;
             });
 
@@ -277,7 +285,18 @@ class HomeApiController extends Controller
                 ->where('status', 'published')
                 ->orderByDesc('published_at')
                 ->get();
-
+            $news->map(function ($item) {
+                $item->category_name = optional($item->category)->name;
+                $item->category_bangla_name = optional($item->category)->bangla_name;
+                $item->subCategory_name = optional($item->subCategory)->name;
+                $item->sub_category = optional($item->subCategory)->name;
+                $item->subCategory_bangla_name = optional($item->subCategory)->bangla_name;
+                $item->thumbnail = $item->thumbnail->map(function ($thumbnail) {
+                    return url('storage/' . $thumbnail->thumbnail);
+                });
+                $item->banner_image = $item->banner_image ? url('storage/' . $item->banner_image) : null;
+                return $item;
+            });
             return response()->json([
                 'success' => true,
                 'message' => 'Spotlight news retrieved successfully.',
@@ -305,7 +324,12 @@ class HomeApiController extends Controller
                 $item->category_name = optional($item->category)->name;
                 $item->category_bangla_name = optional($item->category)->bangla_name;
                 $item->subCategory_name = optional($item->subCategory)->name;
+                $item->sub_category = optional($item->subCategory)->name;
                 $item->subCategory_bangla_name = optional($item->subCategory)->bangla_name;
+                $item->thumbnail = $item->thumbnail->map(function ($thumbnail) {
+                    return url('storage/' . $thumbnail->thumbnail);
+                });
+                $item->banner_image = $item->banner_image ? url('storage/' . $item->banner_image) : null;
                 return $item;
             });
             return response()->json([
@@ -335,7 +359,12 @@ class HomeApiController extends Controller
                 $item->category_name = optional($item->category)->name;
                 $item->category_bangla_name = optional($item->category)->bangla_name;
                 $item->subCategory_name = optional($item->subCategory)->name;
+                $item->sub_category = optional($item->subCategory)->name;
                 $item->subCategory_bangla_name = optional($item->subCategory)->bangla_name;
+                $item->thumbnail = $item->thumbnail->map(function ($thumbnail) {
+                    return url('storage/' . $thumbnail->thumbnail);
+                });
+                $item->banner_image = $item->banner_image ? url('storage/' . $item->banner_image) : null;
                 return $item;
             });
             return response()->json([
@@ -365,7 +394,12 @@ class HomeApiController extends Controller
                 $item->category_name = optional($item->category)->name;
                 $item->category_bangla_name = optional($item->category)->bangla_name;
                 $item->subCategory_name = optional($item->subCategory)->name;
+                $item->sub_category = optional($item->subCategory)->name;
                 $item->subCategory_bangla_name = optional($item->subCategory)->bangla_name;
+                $item->thumbnail = $item->thumbnail->map(function ($thumbnail) {
+                    return url('storage/' . $thumbnail->thumbnail);
+                });
+                $item->banner_image = $item->banner_image ? url('storage/' . $item->banner_image) : null;
                 return $item;
             });
             return response()->json([
