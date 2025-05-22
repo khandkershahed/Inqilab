@@ -299,9 +299,13 @@ class HomeApiController extends Controller
             $news = News::where('status', 'published')
                 ->orderByDesc('published_at')
                 ->get();
-            //include category name instead of id
+            //include category name instead of id. Attempt to read property "name" on null error solved by using optional()
+
             $news->map(function ($item) {
-                $item->category_name = $item->category->name;
+                $item->category_name = optional($item->category)->name;
+                $item->category_bangla_name = optional($item->category)->bangla_name;
+                $item->subCategory_name = optional($item->subCategory)->name;
+                $item->subCategory_bangla_name = optional($item->subCategory)->bangla_name;
                 return $item;
             });
             return response()->json([
@@ -328,7 +332,10 @@ class HomeApiController extends Controller
                 ->get();
             //include category name instead of id
             $news->map(function ($item) {
-                $item->category_name = $item->category->name;
+                $item->category_name = optional($item->category)->name;
+                $item->category_bangla_name = optional($item->category)->bangla_name;
+                $item->subCategory_name = optional($item->subCategory)->name;
+                $item->subCategory_bangla_name = optional($item->subCategory)->bangla_name;
                 return $item;
             });
             return response()->json([
@@ -355,7 +362,10 @@ class HomeApiController extends Controller
                 ->get();
             //include category name instead of id
             $news->map(function ($item) {
-                $item->category_name = $item->category->name;
+                $item->category_name = optional($item->category)->name;
+                $item->category_bangla_name = optional($item->category)->bangla_name;
+                $item->subCategory_name = optional($item->subCategory)->name;
+                $item->subCategory_bangla_name = optional($item->subCategory)->bangla_name;
                 return $item;
             });
             return response()->json([
