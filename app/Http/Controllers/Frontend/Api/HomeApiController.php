@@ -359,4 +359,43 @@ class HomeApiController extends Controller
             ], 500);
         }
     }
+
+    public function newsDetails($slug)
+    {
+        try {
+            $news = News::where('slug', $slug)
+                ->with(['images', 'category', 'subCategory'])
+                ->where('status', 'published')
+                ->first();
+
+            if (!$news) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'News not found.',
+                ], 404);
+            }
+
+            $relatedNews = News::where('category_id', $news->category_id)
+                ->orWhere('sub_category_id', $news->sub_category_id)
+                ->where('slug', '!=', $slug)
+                ->where('status', 'published')
+                ->orderByDesc('published_at')
+                ->get();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'News details retrieved successfully.',
+                'news_details' => new NewsResource($news),
+                'related_news' => NewsResource::collection($relatedNews),
+            ], 200);
+        } catch (\Exception $e) {
+            Log::error('Failed to fetch news details: ' . $e->getMessage());
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to retrieve news details.',
+                'error'   => $e->getMessage(),
+            ], 500);
+        }
+    }
 }
