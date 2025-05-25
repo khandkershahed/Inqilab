@@ -421,7 +421,12 @@ class HomeApiController extends Controller
                 ->with(['images'])
                 ->orderByDesc('published_at')
                 ->get();
-
+            if ($news->isEmpty()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'No news found for the given search query.',
+                ], 404);
+            }
             return response()->json([
                 'success' => true,
                 'message' => 'Search results retrieved successfully.',
@@ -460,7 +465,12 @@ class HomeApiController extends Controller
                 ->select('title', 'slug')
                 // ->limit(10)
                 ->get();
-
+            if ($suggestions->isEmpty()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'No search suggestions found for the given query.',
+                ], 404);
+            }
             return response()->json([
                 'success' => true,
                 'message' => 'Search suggestions retrieved successfully.',
