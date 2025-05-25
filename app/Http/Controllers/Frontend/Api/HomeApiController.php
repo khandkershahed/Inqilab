@@ -398,4 +398,43 @@ class HomeApiController extends Controller
             ], 500);
         }
     }
+    public function globalSearch(Request $request)
+    {
+        $query = $request->input('query');
+
+        if (empty($query)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Search query cannot be empty.',
+            ], 400);
+        }
+
+        try {
+            // Search in news titles, summaries, and content
+            $news = News::where('status', 'published')
+                ->where(function ($q) use ($query) {
+                    $q->where('title', 'like', '%' . $query . '%')
+                        ->orWhere('bangla_title', 'like', '%' . $query . '%')
+                        ->orWhere('summary', 'like', '%' . $query . '%')
+                        ->orWhere('content', 'like', '%' . $query . '%');
+                })
+                ->with(['images'])
+                ->orderByDesc('published_at')
+                ->get();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Search results retrieved successfully.',
+                'data'    => NewsResource::collection($news),
+            ], 200);
+        } catch (\Exception $e) {
+            Log::error('Failed to perform search: ' . $e->getMessage());
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to perform search.',
+                'error'   => $e->getMessage(),
+            ], 500);
+        }
+    }
 }
