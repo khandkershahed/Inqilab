@@ -29,8 +29,8 @@ Route::prefix('api/v1')->group(function () {
     Route::get('/viewed-news', [HomeApiController::class, 'viewedNews']);
     Route::get('/trending-news', [HomeApiController::class, 'trendingNews']);
     Route::get('/news-details/{slug}', [HomeApiController::class, 'newsDetails']);
-    Route::post('/search', [HomeApiController::class, 'globalSearch']);
-
+    Route::get('/search', [HomeApiController::class, 'globalSearch']);
+    Route::get('/search-suggestions', [HomeApiController::class, 'searchSuggestions']);
     // Route::post('/register', [UserApiController::class, 'register']);
     // Route::post('/login', [UserApiController::class, 'login']);
     // Route::post('/reset-password/{token}', [UserApiController::class, 'reset']);

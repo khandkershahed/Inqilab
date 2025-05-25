@@ -437,4 +437,43 @@ class HomeApiController extends Controller
             ], 500);
         }
     }
+
+    public function searchSuggestions(Request $request)
+    {
+        $query = $request->input('query');
+
+        if (empty($query)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Search query cannot be empty.',
+            ], 400);
+        }
+
+        try {
+            // Get suggestions from news titles and summaries
+            $suggestions = News::where('status', 'published')
+                ->where(function ($q) use ($query) {
+                    $q->where('title', 'like', '%' . $query . '%')
+                        ->orWhere('bangla_title', 'like', '%' . $query . '%')
+                        ->orWhere('summary', 'like', '%' . $query . '%');
+                })
+                ->select('title', 'slug')
+                // ->limit(10)
+                ->get();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Search suggestions retrieved successfully.',
+                'data'    => $suggestions,
+            ], 200);
+        } catch (\Exception $e) {
+            Log::error('Failed to fetch search suggestions: ' . $e->getMessage());
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to retrieve search suggestions.',
+                'error'   => $e->getMessage(),
+            ], 500);
+        }
+    }
 }
