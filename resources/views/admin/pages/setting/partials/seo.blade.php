@@ -2,34 +2,36 @@
     <h5 class="text-center m-0 p-0">SEO Information</h5>
 </div>
 <div class="row mt-3">
-    <div class="fv-row col-lg-6 mb-7">
-        <x-metronic.label class="fw-semibold fs-6 mb-2">Site Title</x-metronic.label>
-        <x-metronic.input type="text" name="site_title" value="{{ optional($setting)->site_title }}"
-            class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Site Title" />
+   <!-- SEO & Analytics -->
+    <div class="col-lg-6 mb-7">
+        <x-metronic.label for="site_url" class="col-form-label fw-bold fs-6">{{ __('Site URL') }}</x-metronic.label>
+        <x-metronic.input id="site_url" type="url" name="site_url"
+            :value="old('site_url', optional($setting)->site_url)" placeholder="Site URL" />
     </div>
-    <div class="fv-row col-lg-6 mb-7">
-        <x-metronic.label class="fw-semibold fs-6 mb-2">Site URL</x-metronic.label>
-        <x-metronic.input type="text" name="site_url" value="{{ optional($setting)->site_url }}"
-            class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Site URL" />
+
+    <div class="col-lg-6 mb-7">
+        <x-metronic.label for="meta_title" class="col-form-label fw-bold fs-6">{{ __('Meta Title') }}</x-metronic.label>
+        <textarea id="meta_title" name="meta_title" rows="2" class="form-control form-control-solid">{{ old('meta_title', optional($setting)->meta_title) }}</textarea>
     </div>
-    <div class="fv-row col-lg-6 mb-7">
-        <x-metronic.label class="fw-semibold fs-6 mb-2">Meta Keyword</x-metronic.label>
-        <x-metronic.input type="text" name="meta_keyword" value="{{ optional($setting)->meta_keyword }}"
-            class="form-control form-control-solid mb-3 mb-lg-0"
-            placeholder="keyword one, keyword two, keyword three, ...." />
+
+    <div class="col-lg-6 mb-7">
+        <x-metronic.label for="meta_keyword" class="fw-semibold fs-6 mb-2">{{ __('Meta Keyword') }}</x-metronic.label>
+        <x-metronic.input id="meta_keyword" type="text" name="meta_keyword"
+            :value="old('meta_keyword', optional($setting)->meta_keyword)" placeholder="keyword one, keyword two, ..." />
     </div>
-    <div class="fv-row col-lg-6 mb-7">
-        <x-metronic.label class="fw-semibold fs-6 mb-2">Meta Description</x-metronic.label>
-        <x-metronic.input type="text" name="meta_description"
-            value="{{ optional($setting)->meta_description }}"
-            class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Meta Description" />
+
+    <div class="col-lg-6 mb-7">
+        <x-metronic.label for="meta_tags" class="col-form-label fw-bold fs-6">{{ __('Meta Tags') }}</x-metronic.label>
+        <textarea id="meta_tags" name="meta_tags" rows="2" class="form-control form-control-solid">{{ old('meta_tags', optional($setting)->meta_tags) }}</textarea>
     </div>
-    <div class="fv-row col-lg-12 mb-7">
-        <x-metronic.label class="fw-semibold fs-6 mb-2">Google Analytics</x-metronic.label>
-        <textarea class="form-control form-control-solid mb-3 mb-lg-0" name="google_analytics" id="" rows="7">{!! optional($setting)->google_analytics !!}</textarea>
+
+    <div class="col-lg-12 mb-7">
+        <x-metronic.label for="meta_description" class="col-form-label fw-bold fs-6">{{ __('Meta Description') }}</x-metronic.label>
+        <textarea id="meta_description" name="meta_description" rows="3" class="form-control form-control-solid">{{ old('meta_description', optional($setting)->meta_description) }}</textarea>
     </div>
-    <div class="fv-row col-lg-12 mb-7">
-        <x-metronic.label class="fw-semibold fs-6 mb-2">Google Adsense</x-metronic.label>
-        <textarea class="form-control form-control-solid mb-3 mb-lg-0" name="google_adsense" id="" rows="7">{!! optional($setting)->google_adsense !!}</textarea>
+
+    <div class="col-lg-12 mb-7">
+        <x-metronic.label for="google_analytics" class="col-form-label fw-bold fs-6">{{ __('Google Analytics') }}</x-metronic.label>
+        <textarea id="google_analytics" name="google_analytics" rows="5" class="form-control form-control-solid">{{ old('google_analytics', optional($setting)->google_analytics) }}</textarea>
     </div>
 </div>

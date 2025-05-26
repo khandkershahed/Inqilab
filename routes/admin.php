@@ -3,9 +3,15 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\StaffController;
+use App\Http\Controllers\Admin\ContactController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\AdminProfileController;
+use App\Http\Controllers\Admin\SubscriptionController;
+use App\Http\Controllers\Admin\AdvertisementController;
 use App\Http\Controllers\Admin\Auth\PasswordController;
+use App\Http\Controllers\Admin\UserManagementController;
 use App\Http\Controllers\Admin\Auth\NewPasswordController;
 use App\Http\Controllers\Admin\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Admin\Auth\ConfirmablePasswordController;
@@ -53,22 +59,14 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
     //Resource Controller
     Route::resources([
             'news'           => NewsController::class,
-            'banner'         => BannerController::class,
+            'advertisement'  => AdvertisementController::class,
             'categories'     => CategoryController::class,
-
-            'blog_category'  => BlogCategoryController::class,
-            'blog'           => BlogController::class,
-
-            'coupon'         => CouponController::class,
-
             'contact'        => ContactController::class,
             'subscription'   => SubscriptionController::class,
 
             'faq'            => FaqController::class,
             'term'           => TermController::class,
             'support-policy' => SupportPolicyController::class,
-            'return-policy'  => ReturnPolicyController::class,
-            'buying-policy'  => BuyingPolicyController::class,
 
             'staff'          => StaffController::class,
             'user'           => UserManagementController::class,
@@ -78,6 +76,9 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
 
     Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
     Route::put('/settings', [SettingController::class, 'updateOrcreateSetting'])->name('settings.updateOrCreate');
+
+    Route::post('advertisement/toggle-status/{id}', [AdvertisementController::class, 'toggleStatus'])->name('advertisement.toggle-status');
+
 
     Route::get('/notifications/read/{id}', [AdminController::class, 'markAsRead'])->name('notifications.read');
 });

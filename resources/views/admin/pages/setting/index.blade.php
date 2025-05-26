@@ -14,8 +14,6 @@
                     enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
-
-
                     <div class="card-body">
                         <div class="tab-content bg-white p-5" id="myTabContent">
                             <div class="tab-pane fade active show" id="generalInfo" role="tabpanel">
@@ -41,14 +39,14 @@
                                     </div>
                                 </div>
                             </div>
-                            
-                            {{-- <div class="tab-pane fade" id="companies" role="tabpanel">
+
+                            <div class="tab-pane fade" id="email" role="tabpanel">
                                 <div class="row">
-                                    <div class="col-lg-12 company_container">
-                                        @include('admin.pages.setting.partials.companies')
+                                    <div class="col-lg-12 email_container">
+                                        @include('admin.pages.setting.partials.email')
                                     </div>
                                 </div>
-                            </div> --}}
+                            </div>
 
                             <div class="tab-pane fade" id="services" role="tabpanel">
                                 <div class="row">
@@ -105,10 +103,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="privacy" role="tabpanel">
+                            <div class="tab-pane fade" id="advanced_settings" role="tabpanel">
                                 <div class="row">
-                                    <div class="col-lg-12 privacy_container">
-                                        {{-- @include('admin.pages.setting.partials.privacy') --}}
+                                    <div class="col-lg-12 advanced_settings_container">
+                                        @include('admin.pages.setting.partials.advanced_settings')
                                     </div>
                                 </div>
                             </div>

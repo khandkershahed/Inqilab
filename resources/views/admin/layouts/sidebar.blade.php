@@ -77,9 +77,9 @@
                                 'admin.news.create',
                                 'admin.news.edit',
 
-                                'admin.banner.index',
-                                'admin.banner.create',
-                                'admin.banner.edit',
+                                'admin.advertisement.index',
+                                'admin.advertisement.create',
+                                'admin.advertisement.edit',
 
                                 'admin.categories.index',
                                 'admin.categories.create',
@@ -123,9 +123,9 @@
                                 ],
 
                                 [
-                                    'title' => 'Banner',
-                                    'routes' => ['admin.banner.index', 'admin.banner.create', 'admin.banner.edit'],
-                                    'route' => 'admin.banner.index',
+                                    'title' => 'Advertisement',
+                                    'routes' => ['admin.advertisement.index', 'admin.advertisement.create', 'admin.advertisement.edit'],
+                                    'route' => 'admin.advertisement.index',
                                 ],
 
                                 [
@@ -169,14 +169,6 @@
                                 'admin.support-policy.index',
                                 'admin.support-policy.create',
                                 'admin.support-policy.edit',
-
-                                'admin.return-policy.index',
-                                'admin.return-policy.create',
-                                'admin.return-policy.edit',
-
-                                'admin.buying-policy.index',
-                                'admin.buying-policy.create',
-                                'admin.buying-policy.edit',
                             ],
 
                             'subMenu' => [
@@ -206,26 +198,6 @@
                                         'admin.support-policy.edit',
                                     ],
                                     'route' => 'admin.support-policy.index',
-                                ],
-
-                                [
-                                    'title' => 'Return & Policy',
-                                    'routes' => [
-                                        'admin.return-policy.index',
-                                        'admin.return-policy.create',
-                                        'admin.return-policy.edit',
-                                    ],
-                                    'route' => 'admin.return-policy.index',
-                                ],
-
-                                [
-                                    'title' => 'Buying & Policy',
-                                    'routes' => [
-                                        'admin.buying-policy.index',
-                                        'admin.buying-policy.create',
-                                        'admin.buying-policy.edit',
-                                    ],
-                                    'route' => 'admin.buying-policy.index',
                                 ],
                             ],
                         ],
