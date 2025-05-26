@@ -26,12 +26,12 @@ class NewsSeeder extends Seeder
                 // Add 5 news for subcategory
                 $this->createNewsForCategory($parent, $child);
 
-                if ($child->children && $child->children->count()) {
-                    foreach ($child->children as $subChild) {
-                        // Add 5 news for sub-subcategory
-                        $this->createNewsForCategory($parent, $child, $subChild);
-                    }
-                }
+                // if ($child->children && $child->children->count()) {
+                //     foreach ($child->children as $subChild) {
+                //         // Add 5 news for sub-subcategory
+                //         $this->createNewsForCategory($parent, $child, $subChild);
+                //     }
+                // }
             }
         }
     }
@@ -44,7 +44,6 @@ class NewsSeeder extends Seeder
             News::create([
                 'category_id'        => $parent->id,
                 'sub_category_id'    => $sub?->id,
-                'sub_sub_category_id' => $subSub?->id,
                 'title'              => $title,
                 'bangla_title'       => 'বাংলা শিরোনাম ' . $i,
                 'slug'               => Str::slug($title . '-' . Str::random(4)),

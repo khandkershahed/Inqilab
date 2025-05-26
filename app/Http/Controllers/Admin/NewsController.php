@@ -2,8 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Models\News;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\NewsRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class NewsController extends Controller
 {
@@ -12,7 +18,10 @@ class NewsController extends Controller
      */
     public function index()
     {
-        //
+        $data = [
+            'newses' => News::with('category', 'subCategory')->latest('id')->get(),
+        ];
+        return view('admin.pages.news.index', $data);
     }
 
     /**
@@ -20,16 +29,107 @@ class NewsController extends Controller
      */
     public function create()
     {
-        //
+        $data = [
+            'categories'    => Category::whereNull('parent_id')->get(),
+            'subCategories' => Category::whereNotNull('parent_id')->get(),
+        ];
+        return view('admin.pages.news.create', $data);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(NewsRequest $request)
     {
-        //
+        DB::beginTransaction();
+
+        try {
+            // Initialize variables to store file paths
+            $files = [
+                'thumbnail'     => $request->file('thumbnail'),
+                'banner_image'  => $request->file('banner_image'),
+            ];
+            $uploadedFiles = [];
+
+            foreach ($files as $key => $file) {
+                if (!empty($file)) {
+                    $filePath = 'news/' . $key;
+                    $uploadResult = customUpload($file, $filePath);
+
+                    if ($uploadResult['status'] === 0) {
+                        return redirect()->back()->with('error', $uploadResult['error_message']);
+                    }
+
+                    $uploadedFiles[$key] = $uploadResult;
+                } else {
+                    $uploadedFiles[$key] = ['status' => 0];
+                }
+            }
+
+            // Handle boolean flags
+            $flags = [
+                'is_featured',
+                'is_most_read',
+                'is_breaking',
+                'show_on_homepage',
+                'show_in_slider',
+                'is_trending'
+            ];
+
+            $flagData = [];
+            foreach ($flags as $flag) {
+                $flagData[$flag] = $request->has($flag) ? 1 : 0;
+            }
+
+            // Create the news record
+            $news = News::create([
+                'title'                 => $request->title,
+                'bangla_title'          => $request->bangla_title,
+                'tags'                  => $request->tags,
+                'summary'               => $request->summary,
+                'bangla_summary'        => $request->bangla_summary,
+                'content'               => $request->content,
+                'bangla_content'        => $request->bangla_content,
+                'video_url'             => $request->video_url,
+                'thumbnail'             => $uploadedFiles['thumbnail']['status'] === 1 ? $uploadedFiles['thumbnail']['file_path'] : null,
+                'banner_image'          => $uploadedFiles['banner_image']['status'] === 1 ? $uploadedFiles['banner_image']['file_path'] : null,
+                'meta_title'            => $request->meta_title,
+                'meta_description'      => $request->meta_description,
+                'meta_keywords'         => $request->meta_keywords,
+                'category_id'           => $request->category_id,
+                'sub_category_id'       => $request->sub_category_id,
+                'author_id'             => $request->author_id,
+                'status'                => $request->status,
+                'published_at'          => $request->status === 'published' ? now() : null,
+                'view_count'            => 0,
+                'share_count'           => 0,
+                'comment_count'         => 0,
+                'created_by'            => Auth::guard('admin')->id(),
+                'updated_by'            => Auth::guard('admin')->id(),
+            ] + $flagData);
+
+            DB::commit();
+
+            return redirect()->route('admin.news.index')->with('success', 'News has been created successfully.');
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            if (isset($uploadedFiles['thumbnail']['file_path'])) {
+                Storage::disk('public')->delete($uploadedFiles['thumbnail']['file_path']);
+            }
+
+            if (isset($uploadedFiles['banner_image']['file_path'])) {
+                Storage::disk('public')->delete($uploadedFiles['banner_image']['file_path']);
+            }
+
+            // Optional: log the error
+            // Log::error($e);
+
+            return back()->withInput()->with('error', 'Failed to create news: ' . $e->getMessage());
+        }
     }
+
+
 
     /**
      * Display the specified resource.
@@ -44,16 +144,100 @@ class NewsController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $data = [
+            'news'          => News::findOrFail($id),
+            'categories'    => Category::whereNull('parent_id')->get(),
+            'subCategories' => Category::whereNotNull('parent_id')->get(),
+        ];
+        return view('admin.pages.news.edit', $data);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(NewsRequest $request, $id)
     {
-        //
+        $news = News::findOrFail($id);
+        DB::beginTransaction();
+        try {
+            // Initialize updated file paths
+            $files = [
+                'thumbnail'     => $request->file('thumbnail'),
+                'banner_image'  => $request->file('banner_image'),
+            ];
+            $uploadedFiles = [];
+            foreach ($files as $key => $file) {
+                if (!empty($file)) {
+                    $uploadPath = 'news/' . $key;
+                    $uploadResult = customUpload($file, $uploadPath);
+                    if ($uploadResult['status'] === 0) {
+                        return redirect()->back()->with('error', $uploadResult['error_message']);
+                    }
+                    // Delete the old file if exists
+                    if (!empty($news->$key)) {
+                        Storage::disk('public')->delete($news->$key);
+                    }
+                    $uploadedFiles[$key] = $uploadResult['file_path'];
+                } else {
+                    $uploadedFiles[$key] = $news->$key; // Keep existing path if no new upload
+                }
+            }
+
+            // Handle boolean flags
+            $flags = [
+                'is_featured',
+                'is_most_read',
+                'is_breaking',
+                'show_on_homepage',
+                'show_in_slider',
+                'is_trending'
+            ];
+
+            $flagData = [];
+            foreach ($flags as $flag) {
+                $flagData[$flag] = $request->has($flag) ? 1 : 0;
+            }
+
+            // Update News data
+            $news->update([
+                'title'                 => $request->title,
+                'bangla_title'          => $request->bangla_title,
+                'tags'                  => $request->tags,
+                'summary'               => $request->summary,
+                'bangla_summary'        => $request->bangla_summary,
+                'content'               => $request->content,
+                'bangla_content'        => $request->bangla_content,
+                'video_url'             => $request->video_url,
+                'thumbnail'             => $uploadedFiles['thumbnail'],
+                'banner_image'          => $uploadedFiles['banner_image'],
+                'meta_title'            => $request->meta_title,
+                'meta_description'      => $request->meta_description,
+                'meta_keywords'         => $request->meta_keywords,
+                'category_id'           => $request->category_id,
+                'sub_category_id'       => $request->sub_category_id,
+                'author_id'             => $request->author_id,
+                'status'                => $request->status,
+                'published_at'          => $request->status === 'published' && $news->published_at === null ? now() : $news->published_at,
+                'updated_by'            => Auth::guard('admin')->id(),
+            ] + $flagData);
+
+            DB::commit();
+
+            return redirect()->route('admin.news.index')->with('success', 'News has been updated successfully.');
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            // If any new file was uploaded, delete it since the update failed
+            foreach (['thumbnail', 'banner_image'] as $key) {
+                if (!empty($uploadedFiles[$key]) && $uploadedFiles[$key] !== $news->$key) {
+                    Storage::disk('public')->delete($uploadedFiles[$key]);
+                }
+            }
+
+            return back()->withInput()->with('error', 'Failed to update news: ' . $e->getMessage());
+        }
     }
+
 
     /**
      * Remove the specified resource from storage.

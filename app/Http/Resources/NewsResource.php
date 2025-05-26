@@ -15,7 +15,8 @@ class NewsResource extends JsonResource
     public function toArray(Request $request): array
     {
         // return parent::toArray($request);
-        return ['id'                     => $this->id,
+        return [
+            'id'                     => $this->id,
             'category_id'            => $this->category_id,
             'sub_category_id'        => $this->sub_category_id,
             'sub_sub_category_id'    => $this->sub_sub_category_id,

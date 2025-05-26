@@ -128,30 +128,6 @@
                                     'route' => 'admin.banner.index',
                                 ],
 
-
-
-                                [
-                                    'title' => 'Blog Category',
-                                    'routes' => [
-                                        'admin.blog_category.index',
-                                        'admin.blog_category.create',
-                                        'admin.blog_category.edit',
-                                    ],
-                                    'route' => 'admin.blog_category.index',
-                                ],
-
-                                [
-                                    'title' => 'Blog',
-                                    'routes' => ['admin.blog.index', 'admin.blog.create', 'admin.blog.edit'],
-                                    'route' => 'admin.blog.index',
-                                ],
-
-                                [
-                                    'title' => 'Coupon',
-                                    'routes' => ['admin.coupon.index', 'admin.coupon.create', 'admin.coupon.edit'],
-                                    'route' => 'admin.coupon.index',
-                                ],
-
                                 [
                                     'title' => 'Contact',
                                     'routes' => ['admin.contact.index', 'admin.contact.create', 'admin.contact.edit'],

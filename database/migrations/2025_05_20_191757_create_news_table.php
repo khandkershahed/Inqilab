@@ -13,15 +13,13 @@ return new class extends Migration
     {
         Schema::create('news', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('category_id')->nullable()->constrained('categories')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreignId('sub_category_id')->nullable()->constrained('categories')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreignId('sub_sub_category_id')->nullable()->constrained('categories')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('category_id')->nullable()->constrained('categories')->cascadeOnUpdate()->nullOnDelete();
+            $table->foreignId('sub_category_id')->nullable()->constrained('categories')->cascadeOnUpdate()->nullOnDelete();
             $table->unsignedBigInteger('author_id')->nullable()->index(); // references users table
 
             // Basic Info
             $table->text('title');
             $table->text('bangla_title')->nullable();
-            $table->json('category')->nullable();
             $table->text('slug')->nullable();
             $table->text('summary')->nullable();
             $table->text('bangla_summary')->nullable();
@@ -51,7 +49,7 @@ return new class extends Migration
             $table->boolean('is_trending')->default(false);
 
             // Publication control
-            $table->enum('status', ['draft', 'published', 'archived'])->default('draft');
+            $table->enum('status', ['draft', 'published', 'archived', 'unpublished'])->default('draft');
             $table->timestamp('published_at')->nullable();
 
             // Engagement metrics
