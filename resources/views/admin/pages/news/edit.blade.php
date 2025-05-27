@@ -1,4 +1,4 @@
-<x-admin-app-layout :title="'News Add'">
+<x-admin-app-layout :title="'News Edit'">
     <style>
         .image-input-empty {
             background-image: url({{ asset('admin/assets/media/svg/files/blank-image.svg') }});

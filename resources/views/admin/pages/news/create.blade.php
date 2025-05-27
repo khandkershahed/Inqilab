@@ -226,30 +226,7 @@
                                                     </span>
                                                 </div>
                                             </div>
-                                            {{-- news Mutli Image --}}
-                                            {{-- <div class="col-8">
-                                                <div class="pt-5 fv-row">
-                                                    <x-metronic.label for="" class="form-label">Add the
-                                                        news multi image</x-metronic.label>
-                                                    <div class="dropzone-field">
-                                                        <label for="files" class="custom-file-upload">
-                                                            <div class="d-flex align-items-center">
-                                                                <p class="mb-0"><i
-                                                                        class="bi bi-file-earmark-arrow-up text-primary fs-3x"></i>
-                                                                </p>
-                                                                <h5 class="mb-0">Drop files here or click to upload.
-                                                                    <br>
-                                                                    <span class="text-muted"
-                                                                        style="font-size: 10px">Upload 10 File</span>
-                                                                </h5>
-                                                            </div>
-                                                        </label>
-                                                        <input type="file" id="files" name="multi_images[]"
-                                                            multiple class="form-control" style="display: none;"
-                                                            onchange="console.log(this.selected.value)" />
-                                                    </div>
-                                                </div>
-                                            </div> --}}
+
                                             <div class="col-lg-12">
                                                 <div class="pt-5 fv-row">
                                                     <x-metronic.label for="video_url" class="form-label">News
@@ -384,7 +361,7 @@
                                                     Title</x-metronic.label>
                                                 <x-metronic.input type="text" name="meta_title"
                                                     class="mb-2 form-control" placeholder="News meta title"
-                                                    :value="old('meta_title')">
+                                                    :value="old('meta_title')"></x-metronic.input>
                                             </div>
                                             <div class="text-muted fs-7">
                                                 Add news Meta Title.
@@ -423,7 +400,6 @@
                         </a>
                         <button type="submit" class="btn btn-primary">
                             <span class="indicator-label"> Save Changes </span>
-                            </span>
                         </button>
                     </div>
                 </div>
@@ -504,27 +480,10 @@
                 new Tagify(input3);
             });
 
-
             // news Multiimage Submit
             var uploadedDocumentMap = {}; // Assuming you have this variable defined somewhere
 
-            var myDropzone = new Dropzone("#news_multiimage", {
-                url: "{{ route('admin.news.store') }}",
-                paramName: "multi_image", // The name that will be used to transfer the file
-                uploadMultiple: true,
-                parallelUploads: 10,
-                maxFiles: 10,
-                maxFilesize: 10, // MB
-                addRemoveLinks: true,
-                accept: function(file, done) {
-                    console.log(file);
-                    $('#kt_ecommerce_add_news_form').append(
-                        '<input type="hidden" name="document[ value="{{ old('document') }}"]" value="' + file
-                        .file + '">');
-                    done();
-                },
-                method: "post",
-            });
+
 
             document.getElementById('kt_ecommerce_add_news_form').addEventListener('submit', function(event) {
                 var formData = new FormData(this);
@@ -555,6 +514,5 @@
             const ckEditorInitializer = new CKEditorInitializer('.ckeditor');
             ckEditorInitializer.initialize();
         </script>
-
     @endpush
 </x-admin-app-layout>
