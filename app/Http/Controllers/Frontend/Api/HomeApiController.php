@@ -216,8 +216,7 @@ class HomeApiController extends Controller
             // Fetch news where this category is used as category, subcategory or sub-subcategory
             $news = News::where(function ($query) use ($category) {
                 $query->where('category_id', $category->id)
-                    ->orWhere('sub_category_id', $category->id)
-                    ->orWhere('sub_sub_category_id', $category->id);
+                    ->orWhere('sub_category_id', $category->id);
             })
                 ->with(['images'])
                 // ->with(['category', 'subCategory', 'images'])
