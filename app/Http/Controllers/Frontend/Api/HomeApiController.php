@@ -227,7 +227,8 @@ class HomeApiController extends Controller
             return response()->json([
                 'success'  => true,
                 'message'  => 'News found for category: ' . $category->name,
-                'category' => $category,
+                'category' => $this->transformCategory($category),
+                // 'category' => $category,
                 'data'     => NewsResource::collection($news),
             ]);
         } catch (\Exception $e) {
