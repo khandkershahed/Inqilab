@@ -296,7 +296,7 @@
                                                 <div class="form-check form-check-custom form-check-solid mb-7">
                                                     <input class="form-check-input" type="checkbox"
                                                         name="is_featured" id="is_featured" value="1"
-                                                        {{ old('is_featured', $news->is_featured) ? 'checked' : 'checked' }}>
+                                                        @checked($news->is_featured == "1")>
                                                     <label class="form-check-label" for="is_featured">
                                                         Featured News
                                                     </label>
@@ -304,8 +304,7 @@
                                                 {{-- is_most_read --}}
                                                 <div class="form-check form-check-custom form-check-solid mb-7">
                                                     <input class="form-check-input" type="checkbox"
-                                                        name="is_most_read" id="is_most_read" value="1"
-                                                        {{ old('is_most_read', $news->is_most_read) ? 'checked' : '' }}>
+                                                        name="is_most_read" id="is_most_read" value="1" @checked($news->is_most_read == "1")>
                                                     <label class="form-check-label" for="is_most_read">
                                                         Most Read News
                                                     </label>
@@ -316,8 +315,7 @@
                                                 {{-- is_breaking --}}
                                                 <div class="form-check form-check-custom form-check-solid mb-7">
                                                     <input class="form-check-input" type="checkbox"
-                                                        name="is_breaking" id="is_breaking" value="1"
-                                                        {{ old('is_breaking', $news->is_breaking) ? 'checked' : '' }}>
+                                                        name="is_breaking" id="is_breaking" value="1" @checked($news->is_breaking == "1")>
                                                     <label class="form-check-label" for="is_breaking">
                                                         Breaking News
                                                     </label>
@@ -325,8 +323,7 @@
 
                                                 <div class="form-check form-check-custom form-check-solid mb-7">
                                                     <input class="form-check-input" type="checkbox"
-                                                        name="is_trending" id="is_trending" value="1"
-                                                        {{ old('is_trending', $news->is_trending) ? 'checked' : '' }}>
+                                                        name="is_trending" id="is_trending" value="1" @checked($news->is_trending == "1")>
                                                     <label class="form-check-label" for="is_trending">
                                                         Trending News
                                                     </label>

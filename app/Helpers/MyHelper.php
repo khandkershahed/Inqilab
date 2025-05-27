@@ -69,7 +69,8 @@ if (!function_exists('customUpload')) {
     function customUpload(UploadedFile $mainFile, string $uploadPath, ?int $reqWidth = null, ?int $reqHeight = null): array
     {
         try {
-            $originalName   = pathinfo($mainFile->getClientOriginalName(), PATHINFO_FILENAME);
+            // $originalName   = pathinfo($mainFile->getClientOriginalName(), PATHINFO_FILENAME);
+            $originalName = preg_replace('/[^A-Za-z0-9]+/', '_', pathinfo($mainFile->getClientOriginalName(), PATHINFO_FILENAME));
             $fileExtension  = $mainFile->getClientOriginalExtension();
             $currentTime    = Str::random(10) . time();
             $fileName       = Str::limit($originalName, 100) . '_' . $currentTime . '.' . $fileExtension;
