@@ -163,13 +163,15 @@
                                     <div class="py-4 mt-3 card-body">
                                         <div class="row">
                                             <div class="col-lg-6 mb-7">
-                                                <x-metronic.label for="" class="form-label">Thumbnail image
+                                                <div>
+                                                    <x-metronic.label for="" class="form-label">Thumbnail image
                                                     (Only *.png,, *.webp *.jpg and *.jpeg)</x-metronic.label>
+                                                </div>
                                                 <div class="image-input image-input-empty" data-kt-image-input="true"
                                                     style="background-image: url({{ asset('storage/' . $news->thumbnail) }}); width: auto; background-size: contain;
                                                     background-position: center;
                                                     border: 1px solid #009ae5;">
-                                                    <div class="image-input-wrapper w-100px h-70px"
+                                                    <div class="image-input-wrapper w-150px h-150px"
                                                         style="background-size: contain; background-position: center">
                                                     </div>
                                                     <label
@@ -198,13 +200,15 @@
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 mb-7">
-                                                <x-metronic.label for="" class="form-label">Banner image (Only
+                                                <div>
+                                                    <x-metronic.label for="" class="form-label">Banner image (Only
                                                     *.png,, *.webp *.jpg and *.jpeg)</x-metronic.label>
+                                                </div>
                                                 <div class="image-input image-input-empty" data-kt-image-input="true"
                                                     style="background-image: url({{ asset('storage/' . $news->banner_image) }}); width: auto; background-size: contain;
                                                     background-position: center;
                                                     border: 1px solid #009ae5;">
-                                                    <div class="image-input-wrapper w-100px h-70px"
+                                                    <div class="image-input-wrapper w-150px h-150px"
                                                         style="background-size: contain; background-position: center">
                                                     </div>
 

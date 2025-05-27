@@ -162,17 +162,19 @@
                                     <div class="py-4 mt-3 card-body">
                                         <div class="row">
                                             <div class="col-lg-6 mb-7">
-                                                <x-metronic.label for="" class="form-label">Thumbnail image (Only *.png,, *.webp *.jpg and *.jpeg)</x-metronic.label>
+                                                <div>
+                                                    <x-metronic.label for="thumbnail" class="form-label">Thumbnail image (Only *.png,, *.webp *.jpg and *.jpeg)</x-metronic.label>
+                                                </div>
                                                 <div class="image-input image-input-empty" data-kt-image-input="true"
                                                     style="width: auto;background-size: contain;
                                                     border: 1px solid #009ae5;">
-                                                    <div class="image-input-wrapper w-100px h-70px"></div>
+                                                    <div class="image-input-wrapper w-150px h-150px"></div>
                                                     <label
                                                         class="shadow btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body"
                                                         data-kt-image-input-action="change" data-bs-toggle="tooltip"
                                                         data-bs-dismiss="click" title="Change avatar">
                                                         <i class="bi bi-pencil-fill fs-7"></i>
-                                                        <input type="file" name="thumbnail"
+                                                        <input type="file" name="thumbnail" id="thumbnail"
                                                             accept=".png, .jpg, .jpeg, .webp" />
                                                         <input type="hidden" name="avatar_remove" />
                                                     </label>
@@ -193,12 +195,14 @@
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 mb-7">
-                                                <x-metronic.label for="" class="form-label">Banner image (Only *.png,, *.webp *.jpg and *.jpeg)</x-metronic.label>
+                                                <div>
+                                                    <x-metronic.label for="banner_image" class="form-label">Banner image (Only *.png,, *.webp *.jpg and *.jpeg)</x-metronic.label>
+                                                </div>
                                                 <div class="image-input image-input-empty" data-kt-image-input="true"
                                                     style="width: auto;
                                                     background-size: contain;
                                                     border: 1px solid #e52a00;">
-                                                    <div class="image-input-wrapper w-100px h-70px"></div>
+                                                    <div class="image-input-wrapper w-150px h-150px"></div>
 
                                                     <label
                                                         class="shadow btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body"
@@ -206,7 +210,7 @@
                                                         data-bs-dismiss="click" title="Change avatar">
                                                         <i class="bi bi-pencil-fill fs-7"></i>
 
-                                                        <input type="file" name="banner_image"
+                                                        <input type="file" name="banner_image" id="banner_image"
                                                             accept=".png, .jpg, .jpeg, .webp" />
                                                         <input type="hidden" name="avatar_remove" />
                                                     </label>
@@ -400,6 +404,7 @@
                         </a>
                         <button type="submit" class="btn btn-primary">
                             <span class="indicator-label"> Save Changes </span>
+                            </span>
                         </button>
                     </div>
                 </div>
@@ -480,10 +485,27 @@
                 new Tagify(input3);
             });
 
+
             // news Multiimage Submit
             var uploadedDocumentMap = {}; // Assuming you have this variable defined somewhere
 
-
+            var myDropzone = new Dropzone("#news_multiimage", {
+                url: "{{ route('admin.news.store') }}",
+                paramName: "multi_image", // The name that will be used to transfer the file
+                uploadMultiple: true,
+                parallelUploads: 10,
+                maxFiles: 10,
+                maxFilesize: 10, // MB
+                addRemoveLinks: true,
+                accept: function(file, done) {
+                    console.log(file);
+                    $('#kt_ecommerce_add_news_form').append(
+                        '<input type="hidden" name="document[ value="{{ old('document') }}"]" value="' + file
+                        .file + '">');
+                    done();
+                },
+                method: "post",
+            });
 
             document.getElementById('kt_ecommerce_add_news_form').addEventListener('submit', function(event) {
                 var formData = new FormData(this);
@@ -514,5 +536,6 @@
             const ckEditorInitializer = new CKEditorInitializer('.ckeditor');
             ckEditorInitializer.initialize();
         </script>
+
     @endpush
 </x-admin-app-layout>
