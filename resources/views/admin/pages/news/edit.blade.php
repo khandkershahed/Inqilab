@@ -1,4 +1,4 @@
-<x-admin-app-layout :title="'News Add'">
+<x-admin-app-layout :title="'News Edit'">
     <style>
         .image-input-empty {
             background-image: url({{ asset('admin/assets/media/svg/files/blank-image.svg') }});
@@ -163,13 +163,15 @@
                                     <div class="py-4 mt-3 card-body">
                                         <div class="row">
                                             <div class="col-lg-6 mb-7">
-                                                <x-metronic.label for="" class="form-label">Thumbnail image
+                                                <div>
+                                                    <x-metronic.label for="" class="form-label">Thumbnail image
                                                     (Only *.png,, *.webp *.jpg and *.jpeg)</x-metronic.label>
+                                                </div>
                                                 <div class="image-input image-input-empty" data-kt-image-input="true"
                                                     style="background-image: url({{ asset('storage/' . $news->thumbnail) }}); width: auto; background-size: contain;
                                                     background-position: center;
                                                     border: 1px solid #009ae5;">
-                                                    <div class="image-input-wrapper w-100px h-70px"
+                                                    <div class="image-input-wrapper w-150px h-150px"
                                                         style="background-size: contain; background-position: center">
                                                     </div>
                                                     <label
@@ -198,13 +200,15 @@
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 mb-7">
-                                                <x-metronic.label for="" class="form-label">Banner image (Only
+                                                <div>
+                                                    <x-metronic.label for="" class="form-label">Banner image (Only
                                                     *.png,, *.webp *.jpg and *.jpeg)</x-metronic.label>
+                                                </div>
                                                 <div class="image-input image-input-empty" data-kt-image-input="true"
                                                     style="background-image: url({{ asset('storage/' . $news->banner_image) }}); width: auto; background-size: contain;
                                                     background-position: center;
                                                     border: 1px solid #009ae5;">
-                                                    <div class="image-input-wrapper w-100px h-70px"
+                                                    <div class="image-input-wrapper w-150px h-150px"
                                                         style="background-size: contain; background-position: center">
                                                     </div>
 
@@ -292,7 +296,7 @@
                                                 <div class="form-check form-check-custom form-check-solid mb-7">
                                                     <input class="form-check-input" type="checkbox"
                                                         name="is_featured" id="is_featured" value="1"
-                                                        {{ old('is_featured', $news->is_featured) ? 'checked' : 'checked' }}>
+                                                        @checked($news->is_featured == "1")>
                                                     <label class="form-check-label" for="is_featured">
                                                         Featured News
                                                     </label>
@@ -300,8 +304,7 @@
                                                 {{-- is_most_read --}}
                                                 <div class="form-check form-check-custom form-check-solid mb-7">
                                                     <input class="form-check-input" type="checkbox"
-                                                        name="is_most_read" id="is_most_read" value="1"
-                                                        {{ old('is_most_read', $news->is_most_read) ? 'checked' : '' }}>
+                                                        name="is_most_read" id="is_most_read" value="1" @checked($news->is_most_read == "1")>
                                                     <label class="form-check-label" for="is_most_read">
                                                         Most Read News
                                                     </label>
@@ -312,8 +315,7 @@
                                                 {{-- is_breaking --}}
                                                 <div class="form-check form-check-custom form-check-solid mb-7">
                                                     <input class="form-check-input" type="checkbox"
-                                                        name="is_breaking" id="is_breaking" value="1"
-                                                        {{ old('is_breaking', $news->is_breaking) ? 'checked' : '' }}>
+                                                        name="is_breaking" id="is_breaking" value="1" @checked($news->is_breaking == "1")>
                                                     <label class="form-check-label" for="is_breaking">
                                                         Breaking News
                                                     </label>
@@ -321,8 +323,7 @@
 
                                                 <div class="form-check form-check-custom form-check-solid mb-7">
                                                     <input class="form-check-input" type="checkbox"
-                                                        name="is_trending" id="is_trending" value="1"
-                                                        {{ old('is_trending', $news->is_trending) ? 'checked' : '' }}>
+                                                        name="is_trending" id="is_trending" value="1" @checked($news->is_trending == "1")>
                                                     <label class="form-check-label" for="is_trending">
                                                         Trending News
                                                     </label>

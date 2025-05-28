@@ -162,17 +162,19 @@
                                     <div class="py-4 mt-3 card-body">
                                         <div class="row">
                                             <div class="col-lg-6 mb-7">
-                                                <x-metronic.label for="" class="form-label">Thumbnail image (Only *.png,, *.webp *.jpg and *.jpeg)</x-metronic.label>
+                                                <div>
+                                                    <x-metronic.label for="thumbnail" class="form-label">Thumbnail image (Only *.png,, *.webp *.jpg and *.jpeg)</x-metronic.label>
+                                                </div>
                                                 <div class="image-input image-input-empty" data-kt-image-input="true"
                                                     style="width: auto;background-size: contain;
                                                     border: 1px solid #009ae5;">
-                                                    <div class="image-input-wrapper w-100px h-70px"></div>
+                                                    <div class="image-input-wrapper w-150px h-150px"></div>
                                                     <label
                                                         class="shadow btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body"
                                                         data-kt-image-input-action="change" data-bs-toggle="tooltip"
                                                         data-bs-dismiss="click" title="Change avatar">
                                                         <i class="bi bi-pencil-fill fs-7"></i>
-                                                        <input type="file" name="thumbnail"
+                                                        <input type="file" name="thumbnail" id="thumbnail"
                                                             accept=".png, .jpg, .jpeg, .webp" />
                                                         <input type="hidden" name="avatar_remove" />
                                                     </label>
@@ -193,12 +195,14 @@
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 mb-7">
-                                                <x-metronic.label for="" class="form-label">Banner image (Only *.png,, *.webp *.jpg and *.jpeg)</x-metronic.label>
+                                                <div>
+                                                    <x-metronic.label for="banner_image" class="form-label">Banner image (Only *.png,, *.webp *.jpg and *.jpeg)</x-metronic.label>
+                                                </div>
                                                 <div class="image-input image-input-empty" data-kt-image-input="true"
                                                     style="width: auto;
                                                     background-size: contain;
                                                     border: 1px solid #e52a00;">
-                                                    <div class="image-input-wrapper w-100px h-70px"></div>
+                                                    <div class="image-input-wrapper w-150px h-150px"></div>
 
                                                     <label
                                                         class="shadow btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body"
@@ -206,7 +210,7 @@
                                                         data-bs-dismiss="click" title="Change avatar">
                                                         <i class="bi bi-pencil-fill fs-7"></i>
 
-                                                        <input type="file" name="banner_image"
+                                                        <input type="file" name="banner_image" id="banner_image"
                                                             accept=".png, .jpg, .jpeg, .webp" />
                                                         <input type="hidden" name="avatar_remove" />
                                                     </label>
@@ -226,30 +230,7 @@
                                                     </span>
                                                 </div>
                                             </div>
-                                            {{-- news Mutli Image --}}
-                                            {{-- <div class="col-8">
-                                                <div class="pt-5 fv-row">
-                                                    <x-metronic.label for="" class="form-label">Add the
-                                                        news multi image</x-metronic.label>
-                                                    <div class="dropzone-field">
-                                                        <label for="files" class="custom-file-upload">
-                                                            <div class="d-flex align-items-center">
-                                                                <p class="mb-0"><i
-                                                                        class="bi bi-file-earmark-arrow-up text-primary fs-3x"></i>
-                                                                </p>
-                                                                <h5 class="mb-0">Drop files here or click to upload.
-                                                                    <br>
-                                                                    <span class="text-muted"
-                                                                        style="font-size: 10px">Upload 10 File</span>
-                                                                </h5>
-                                                            </div>
-                                                        </label>
-                                                        <input type="file" id="files" name="multi_images[]"
-                                                            multiple class="form-control" style="display: none;"
-                                                            onchange="console.log(this.selected.value)" />
-                                                    </div>
-                                                </div>
-                                            </div> --}}
+
                                             <div class="col-lg-12">
                                                 <div class="pt-5 fv-row">
                                                     <x-metronic.label for="video_url" class="form-label">News
@@ -384,7 +365,7 @@
                                                     Title</x-metronic.label>
                                                 <x-metronic.input type="text" name="meta_title"
                                                     class="mb-2 form-control" placeholder="News meta title"
-                                                    :value="old('meta_title')">
+                                                    :value="old('meta_title')"></x-metronic.input>
                                             </div>
                                             <div class="text-muted fs-7">
                                                 Add news Meta Title.
