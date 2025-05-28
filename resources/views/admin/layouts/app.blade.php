@@ -112,6 +112,7 @@
     {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js" async></script> --}}
     <script src="{{ asset('admin/assets/plugins/custom/tinymce/tinymce.bundle.js') }}"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/39.0.0/classic/ckeditor.js"></script>
+    <script src="{{ asset('vendor/laravel-filemanager/js/stand-alone-button.js') }}"></script>
     <script src="{{ asset('admin/js/custom.js') }}"></script>
 
     <script>
@@ -120,6 +121,66 @@
             new Tagify(input);
         });
     </script>
+    <script>
+        // Initialize the file manager button
+        document.addEventListener("DOMContentLoaded", function() {
+            lfm('lfm', 'image', {
+                prefix: '/laravel-filemanager'
+            });
+        });
+        //New folder create button in file manager pop up
+        document.addEventListener("DOMContentLoaded", function() {
+            var lfmButton = document.querySelector('.lfm');
+            if (lfmButton) {
+                lfmButton.addEventListener('click', function() {
+                    var route_prefix = lfmButton.getAttribute('data-input') || '/laravel-filemanager';
+                    window.open(route_prefix + '?type=' + (lfmButton.getAttribute('data-type') || 'file'),
+                        'FileManager', 'width=900,height=600');
+                });
+            }
+        });
+        $('#add-folder').click(function() {
+            alert('Clicked!');
+        });
+
+        var lfm = function(id, type, options) {
+            let button = document.getElementById(id);
+
+            button.addEventListener('click', function() {
+                var route_prefix = (options && options.prefix) ? options.prefix : '/laravel-filemanager';
+                var target_input = document.getElementById(button.getAttribute('data-input'));
+                var target_preview = document.getElementById(button.getAttribute('data-preview'));
+
+                window.open(route_prefix + '?type=' + (type || 'file'), 'FileManager',
+                    'width=900,height=600');
+
+                window.SetUrl = function(items) {
+                    var file_path = items.map(function(item) {
+                        return item.url;
+                    }).join(',');
+
+                    // set the value of the desired input to image url
+                    target_input.value = file_path;
+                    target_input.dispatchEvent(new Event('change'));
+
+                    // clear previous preview
+                    target_preview.innerHTML = '';
+
+                    // set or change the preview image src
+                    items.forEach(function(item) {
+                        let img = document.createElement('img')
+                        img.setAttribute('style', 'height: 5rem')
+                        img.setAttribute('src', item.thumb_url)
+                        target_preview.appendChild(img);
+                    });
+
+                    // trigger change event
+                    target_preview.dispatchEvent(new Event('change'));
+                };
+            });
+        };
+    </script>
+
 
     {{-- <script>
         document.addEventListener("DOMContentLoaded", function() {

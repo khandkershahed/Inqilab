@@ -30,6 +30,7 @@ Route::prefix('api/v1')->group(function () {
     Route::get('/trending-news', [HomeApiController::class, 'trendingNews']);
     Route::get('/news-details/{slug}', [HomeApiController::class, 'newsDetails']);
     Route::get('/search', [HomeApiController::class, 'globalSearch']);
+    Route::get('/search', [HomeApiController::class, 'globalSearch']);
     Route::get('/search-suggestions', [HomeApiController::class, 'searchSuggestions']);
     // Route::post('/register', [UserApiController::class, 'register']);
     // Route::post('/login', [UserApiController::class, 'login']);

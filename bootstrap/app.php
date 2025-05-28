@@ -1,11 +1,12 @@
 <?php
 
-use App\Http\Middleware\CheckRoleMiddleware;
 use Illuminate\Foundation\Application;
-use Illuminate\Foundation\Configuration\Exceptions;
-use Illuminate\Foundation\Configuration\Middleware;
+use App\Http\Middleware\CheckRoleMiddleware;
+use Illuminate\Auth\Middleware\Authenticate;
 // use Illuminate\Auth\Middleware\Authenticate;
 use App\Http\Middleware\RedirectIfAuthenticated;
+use Illuminate\Foundation\Configuration\Exceptions;
+use Illuminate\Foundation\Configuration\Middleware;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -15,7 +16,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
-            // 'auth' => Authenticate::class,
+            'auth' => Authenticate::class,
             'guest' => RedirectIfAuthenticated::class,
             // 'check_role' => CheckRoleMiddleware::class,
             'localize'                => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRoutes::class,

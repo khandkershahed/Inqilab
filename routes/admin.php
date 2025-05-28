@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\NewsController;
+use App\Http\Controllers\Admin\TermController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\StaffController;
 use App\Http\Controllers\Admin\ContactController;
@@ -51,13 +53,16 @@ Route::group(['middleware' => 'auth:admin', 'prefix' => 'admin', 'as' => 'admin.
 // All Controller
 Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function () {
 
+    
+
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
     Route::get('/profile', [AdminProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [AdminProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [AdminProfileController::class, 'destroy'])->name('profile.destroy');
 
     //Resource Controller
-    Route::resources([
+    Route::resources(
+        [
             'news'           => NewsController::class,
             'advertisement'  => AdvertisementController::class,
             'categories'     => CategoryController::class,

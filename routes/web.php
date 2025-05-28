@@ -1,13 +1,14 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\HomeController;
-use App\Http\Controllers\Frontend\ModeratorDashboardController;
 use App\Http\Controllers\Frontend\UserDashboardController;
 // use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Frontend\ModeratorDashboardController;
+use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController;
 
 
-Route::get('/', [HomeController::class, 'home'])->name('homepage');
+Route::get('/', [AuthenticatedSessionController::class, 'create'])->name('homepage');
 
 
 // Route::group(['middleware' => ['auth:web', 'verified', 'check_role:user'], 'prefix' => 'user', 'as' => 'user.'], function () {
@@ -21,6 +22,13 @@ Route::get('/', [HomeController::class, 'home'])->name('homepage');
 // Route::get('/admin/dashboard', function () {
 //     return view('admin.dashboard');
 // })->middleware(['auth:admin', 'verified'])->name('admin.dashboard');
+
+
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web']], function () {
+    \UniSharp\LaravelFilemanager\Lfm::routes();
+});
+
+
 
 require __DIR__ . '/api.php';
 require __DIR__ . '/auth.php';
