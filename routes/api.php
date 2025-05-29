@@ -24,7 +24,8 @@ Route::prefix('api/v1')->group(function () {
     Route::get('/categories/{slug}', [HomeApiController::class, 'categoryDetails']);
     Route::get('/category-news/{slug}', [HomeApiController::class, 'categoryWiseNews']);
     Route::get('/breaking-news', [HomeApiController::class, 'breakingNews']);
-    Route::get('/spotlight-news', [HomeApiController::class, 'spotlightNews']);
+    Route::get('/featured-news', [HomeApiController::class, 'featuredNews']);
+    Route::get('/slider-news', [HomeApiController::class, 'sliderNews']);
     Route::get('/latest-news', [HomeApiController::class, 'latestNews']);
     Route::get('/viewed-news', [HomeApiController::class, 'viewedNews']);
     Route::get('/trending-news', [HomeApiController::class, 'trendingNews']);

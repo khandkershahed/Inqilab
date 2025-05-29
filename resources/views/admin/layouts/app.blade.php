@@ -122,6 +122,18 @@
         });
     </script>
     <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            }
+        });
+        $(document).ready(function() {
+            // Initialize tooltips
+            $('[data-bs-toggle="tooltip"]').tooltip();
+
+            // Initialize popovers
+            $('[data-bs-toggle="popover"]').popover();
+        });
         // Initialize the file manager button
         document.addEventListener("DOMContentLoaded", function() {
             lfm('lfm', 'image', {

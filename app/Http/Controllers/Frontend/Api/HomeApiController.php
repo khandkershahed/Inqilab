@@ -266,7 +266,7 @@ class HomeApiController extends Controller
         }
     }
 
-    public function spotlightNews()
+    public function featuredNews()
     {
         try {
             $news = News::where('is_featured', 1)
@@ -276,15 +276,38 @@ class HomeApiController extends Controller
 
             return response()->json([
                 'success' => true,
-                'message' => 'Spotlight news retrieved successfully.',
+                'message' => 'featured news retrieved successfully.',
                 'data'    => NewsResource::collection($news),
             ], 200);
         } catch (\Exception $e) {
-            Log::error('Failed to fetch spotlight news: ' . $e->getMessage());
+            Log::error('Failed to fetch featured news: ' . $e->getMessage());
 
             return response()->json([
                 'success' => false,
-                'message' => 'Failed to retrieve spotlight news.',
+                'message' => 'Failed to retrieve featured news.',
+                'error'   => $e->getMessage(),
+            ], 500);
+        }
+    }
+    public function sliderNews()
+    {
+        try {
+            $news = News::where('show_in_slider', 1)
+                ->where('status', 'published')
+                ->orderByDesc('published_at')
+                ->get();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Slider news retrieved successfully.',
+                'data'    => NewsResource::collection($news),
+            ], 200);
+        } catch (\Exception $e) {
+            Log::error('Failed to fetch slider news: ' . $e->getMessage());
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to retrieve slider news.',
                 'error'   => $e->getMessage(),
             ], 500);
         }

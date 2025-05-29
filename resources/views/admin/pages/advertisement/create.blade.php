@@ -25,65 +25,169 @@
                 @csrf
                 <div class="row">
 
+                    <!-- Title -->
+                    <div class="col-lg-8 mb-3">
+                        <x-metronic.label for="title"
+                            class="col-form-label fw-bold fs-6">{{ __('Ad Title') }}</x-metronic.label>
+                        <x-metronic.input id="title" type="text" name="title" placeholder="Enter the title"
+                            :value="old('title')" />
+                    </div>
+
+                    <!-- Ad Type -->
                     <div class="col-lg-4 mb-3">
-                        <x-metronic.label for="status" class="col-form-label required fw-bold fs-6">
-                            {{ __('Select a Status ') }}</x-metronic.label>
-                        <x-metronic.select-option id="status" name="status" data-hide-search="true"
-                            data-placeholder="Select an option">
+                        <x-metronic.label for="ad_type"
+                            class="col-form-label fw-bold fs-6">{{ __('Ad Type') }}</x-metronic.label>
+                        <x-metronic.select-option id="ad_type" name="ad_type" data-hide-search="true"
+                            data-placeholder="Select Ad Type">
                             <option></option>
-                            <option value="active">Active</option>
-                            <option value="inactive">Inactive</option>
+                            <option value="image">Image</option>
+                            <option value="html">HTML</option>
+                            <option value="video">Video</option>
+                            <option value="script">Script</option>
                         </x-metronic.select-option>
                     </div>
 
-                    <div class="col-lg-4 mb-3">
-                        <x-metronic.label for="badge"
-                            class="col-form-label fw-bold fs-6">{{ __('Banner Badge') }}</x-metronic.label>
-                        <x-metronic.input id="badge" type="text" name="badge" placeholder="Enter the badge"
-                            :value="old('badge')"></x-metronic.input>
-                    </div>
-
-                    <div class="col-lg-4 mb-3">
-                        <x-metronic.label for="name"
-                            class="col-form-label required fw-bold fs-6">{{ __('Banner Title') }}</x-metronic.label>
-                        {{-- <x-metronic.input id="name" type="text" name="name" placeholder="Enter the name"
-                            :value="old('name')" required="true"></x-metronic.input> --}}
-                    </div>
-
+                    <!-- Image Path (File Manager) -->
                     <div class="col-lg-6 mb-3">
-                        <x-metronic.label for="url"
-                            class="col-form-label fw-bold fs-6">{{ __('Banner url') }}</x-metronic.label>
-                        <x-metronic.input id="url" type="text" name="url" placeholder="Enter the url"
-                            :value="old('url')"></x-metronic.input>
+                        <div>
+                            <x-metronic.label for="image" class="col-form-label fw-bold fs-6">{{ __('AD Image') }}
+                            </x-metronic.label>
+                        </div>
+                        <div class="row">
+                            <div class="col-8 d-flex align-items-center">
+                                <span class="input-group-btn">
+                                    <a id="lfm" data-input="thumbnail" data-preview="holder"
+                                        class="btn btn-primary d-flex align-items-center">
+                                        <i class="fas fa-image"></i> Choose
+                                    </a>
+                                </span>
+                                <input id="thumbnail" class="form-control" type="text" name="image_path"
+                                    value="{{ old('image_path') }}" placeholder="Image Path">
+                            </div>
+                            <div class="col-4">
+                                <div id="holder" style="margin-top:15px;max-height:100px;"></div>
+                            </div>
+                        </div>
                     </div>
 
+                    <!-- Video Path -->
                     <div class="col-lg-6 mb-3">
-                        <x-metronic.label for="button_name"
-                            class="col-form-label fw-bold fs-6">{{ __('Button Name') }}</x-metronic.label>
-                        <x-metronic.input id="button_name" type="text" name="button_name"
-                            placeholder="Enter the Button Name" :value="old('button_name')"></x-metronic.input>
+                        <x-metronic.label for="video_path"
+                            class="col-form-label fw-bold fs-6">{{ __('Video AD Path or Embed') }}</x-metronic.label>
+                        <x-metronic.textarea id="video_path" name="video_path" rows="3"
+                            placeholder="Enter video URL or embed code">{{ old('video_path') }}</x-metronic.textarea>
                     </div>
 
+                    <!-- HTML Code -->
+                    <div class="col-lg-6 mb-3">
+                        <x-metronic.label for="html_code"
+                            class="col-form-label fw-bold fs-6">{{ __('Custom HTML Code') }}</x-metronic.label>
+                        <x-metronic.textarea id="html_code" name="html_code" rows="3"
+                            placeholder="Enter custom HTML">{{ old('html_code') }}</x-metronic.textarea>
+                    </div>
 
+                    <!-- Link -->
+                    <div class="col-lg-6 mb-3">
+                        <x-metronic.label for="link"
+                            class="col-form-label fw-bold fs-6">{{ __('Link (Ad URL)') }}</x-metronic.label>
+                        <x-metronic.input id="link" type="url" name="link" placeholder="Enter link URL"
+                            :value="old('link')" />
+                    </div>
+
+                    <!-- Target Blank -->
+                    <div class="col-lg-2 col-4 mb-3">
+                        <x-metronic.label for="target_blank"
+                            class="col-form-label fw-bold fs-6">{{ __('Open in New Tab?') }}</x-metronic.label>
+                        <x-metronic.select-option id="target_blank" name="target_blank" data-hide-search="true">
+                            <option value="0" {{ old('target_blank') == '0' ? 'selected' : '' }}>No</option>
+                            <option value="1" {{ old('target_blank') == '1' ? 'selected' : '' }}>Yes</option>
+                        </x-metronic.select-option>
+                    </div>
+
+                    <!-- Position -->
+                    <div class="col-lg-4 col-8 mb-3">
+                        <x-metronic.label for="position"
+                            class="col-form-label fw-bold fs-6">{{ __('AD Position') }}</x-metronic.label>
+
+                        <x-metronic.select-option id="position" name="position" data-hide-search="true">
+                            <option value="0" {{ old('position') == '0' ? 'selected' : '' }}>No</option>
+                            <option value="1" {{ old('position') == '1' ? 'selected' : '' }}>Yes</option>
+                        </x-metronic.select-option>
+                    </div>
+
+                    <!-- Price -->
                     <div class="col-lg-4 mb-3">
-                        <x-metronic.label for="image" class="col-form-label fw-bold fs-6">{{ __('Thumbnail Image') }}
-                        </x-metronic.label>
-                        <x-metronic.file-input id="image" name="image" :value="old('image')"></x-metronic.file-input>
+                        <x-metronic.label for="price"
+                            class="col-form-label fw-bold fs-6">{{ __('Price ($)') }}</x-metronic.label>
+                        <x-metronic.input id="price" type="number" step="0.01" name="price"
+                            placeholder="Enter price" :value="old('price', 0.0)" />
                     </div>
-                    <!-- Filemanager -->
-                    <div class="col-lg-4 mb-3 input-group">
-                        <span class="input-group-btn">
-                            <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
-                                <i class="fa fa-picture-o"></i> Choose
-                            </a>
-                        </span>
-                        <input id="thumbnail" class="form-control" type="text" name="filepath">
+
+                    <!-- Priority -->
+                    <div class="col-lg-4 mb-3">
+                        <x-metronic.label for="priority"
+                            class="col-form-label fw-bold fs-6">{{ __('Priority') }}</x-metronic.label>
+                        <x-metronic.input id="priority" type="number" name="priority" placeholder="Enter priority"
+                            :value="old('priority', 0)" />
                     </div>
-                    <div id="holder" style="margin-top:15px;max-height:100px;"></div>
 
+                    <!-- Start Date -->
+                    <div class="col-lg-6 mb-3">
+                        <x-metronic.label for="start_date"
+                            class="col-form-label fw-bold fs-6">{{ __('Start Date') }}</x-metronic.label>
+                        <x-metronic.input id="start_date" type="date" name="start_date" :value="old('start_date')" />
+                    </div>
 
+                    <!-- End Date -->
+                    <div class="col-lg-6 mb-3">
+                        <x-metronic.label for="end_date"
+                            class="col-form-label fw-bold fs-6">{{ __('End Date') }}</x-metronic.label>
+                        <x-metronic.input id="end_date" type="date" name="end_date" :value="old('end_date')" />
+                    </div>
+
+                    <!-- Status -->
+                    <div class="col-lg-4 mb-3">
+                        <x-metronic.label for="status"
+                            class="col-form-label fw-bold fs-6">{{ __('Status') }}</x-metronic.label>
+                        <x-metronic.select-option id="status" name="status" data-hide-search="true">
+                            <option value="pending">Pending</option>
+                            <option value="approved" selected>Approved</option>
+                            <option value="rejected">Rejected</option>
+                            <option value="expired">Expired</option>
+                        </x-metronic.select-option>
+                    </div>
+
+                    <!-- Is Active -->
+                    <div class="col-lg-4 mb-3">
+                        <x-metronic.label for="is_active"
+                            class="col-form-label fw-bold fs-6">{{ __('Is Active?') }}</x-metronic.label>
+                        <x-metronic.select-option id="is_active" name="is_active" data-hide-search="true">
+                            <option value="1">Yes</option>
+                            <option value="0">No</option>
+                        </x-metronic.select-option>
+                    </div>
+
+                    <!-- Company Name -->
+                    <div class="col-lg-6 mb-3">
+                        <x-metronic.label for="company_name"
+                            class="col-form-label fw-bold fs-6">{{ __('Company Name') }}</x-metronic.label>
+                        <x-metronic.input id="company_name" type="text" name="company_name"
+                            placeholder="Enter company name" :value="old('company_name')" />
+                    </div>
+
+                    <!-- Company Website -->
+                    <div class="col-lg-6 mb-3">
+                        <x-metronic.label for="company_website"
+                            class="col-form-label fw-bold fs-6">{{ __('Company Website') }}</x-metronic.label>
+                        <x-metronic.input id="company_website" type="url" name="company_website"
+                            placeholder="https://example.com" :value="old('company_website')" />
+                    </div>
+
+                    <!-- Hidden user_id or dropdown for admin -->
+                    <input type="hidden" name="user_id" value="{{ auth()->id() }}">
 
                 </div>
+
 
                 <div class="text-end pt-15">
 
@@ -97,22 +201,5 @@
         </div>
     </div>
     @push('scripts')
-        <script src="{{ asset('vendor/file-manager/js/file-manager.js') }}"></script>
-
-        <script>
-            document.addEventListener("DOMContentLoaded", function() {
-
-                document.getElementById('button-image').addEventListener('click', (event) => {
-                    event.preventDefault();
-
-                    window.open('/file-manager/fm-button', 'fm', 'width=1400,height=800');
-                });
-            });
-
-            // set file link
-            function fmSetLink($url) {
-                document.getElementById('image_label').value = $url;
-            }
-        </script>
     @endpush
 </x-admin-app-layout>

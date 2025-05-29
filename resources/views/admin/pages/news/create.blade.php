@@ -133,12 +133,12 @@
                                             <input class="form-control" name="tags" id="news_Tags"
                                                 placeholder="Eg: tag1, tag2" value="{{ old('tags') }}" />
                                         </div>
-                                        <div class="mb-5 fv-row">
+                                        {{-- <div class="mb-5 fv-row">
                                             <x-metronic.label class="form-label">Summary</x-metronic.label>
                                             <x-metronic.textarea id="summary" name="summary"
                                                 placeholder="News Summary" class="mb-2 form-control" cols="30"
                                                 rows="3">{!! old('summary') !!}</x-metronic.textarea>
-                                        </div>
+                                        </div> --}}
                                         <div class="mb-5 fv-row">
                                             <x-metronic.label class="form-label">Summary Bangla</x-metronic.label>
                                             <x-metronic.textarea id="bangla_summary" name="bangla_summary"
@@ -163,7 +163,8 @@
                                         <div class="row">
                                             <div class="col-lg-6 mb-7">
                                                 <div>
-                                                    <x-metronic.label for="thumbnail" class="form-label">Thumbnail image (Only *.png,, *.webp *.jpg and *.jpeg)</x-metronic.label>
+                                                    <x-metronic.label for="thumbnail" class="form-label">Thumbnail image
+                                                        (Only *.png,, *.webp *.jpg and *.jpeg)</x-metronic.label>
                                                 </div>
                                                 <div class="image-input image-input-empty" data-kt-image-input="true"
                                                     style="width: auto;background-size: contain;
@@ -196,7 +197,8 @@
                                             </div>
                                             <div class="col-lg-6 mb-7">
                                                 <div>
-                                                    <x-metronic.label for="banner_image" class="form-label">Banner image (Only *.png,, *.webp *.jpg and *.jpeg)</x-metronic.label>
+                                                    <x-metronic.label for="banner_image" class="form-label">Banner
+                                                        image (Only *.png,, *.webp *.jpg and *.jpeg)</x-metronic.label>
                                                 </div>
                                                 <div class="image-input image-input-empty" data-kt-image-input="true"
                                                     style="width: auto;
@@ -255,13 +257,13 @@
                                         </div>
                                     </div>
                                     <div class="pt-0 card-body row">
-                                        <div class="mb-5 fv-row">
+                                        {{-- <div class="mb-5 fv-row">
                                             <x-metronic.label class="form-label">News Content</x-metronic.label>
                                             <textarea name="content" class="ckeditor">{!! old('content') !!}</textarea>
                                             <div class="text-muted fs-7">
                                                 Add News content here.
                                             </div>
-                                        </div>
+                                        </div> --}}
                                         <div class="mb-5 fv-row">
                                             <x-metronic.label class="form-label">News Content Bangla</x-metronic.label>
                                             <textarea name="bangla_content" class="ckeditor">{!! old('bangla_content') !!}</textarea>
@@ -302,7 +304,14 @@
                                                         Most Read News
                                                     </label>
                                                 </div>
-
+                                                <div class="form-check form-check-custom form-check-solid mb-7">
+                                                    <input class="form-check-input" type="checkbox"
+                                                        name="show_in_slider" id="show_in_slider" value="1"
+                                                        {{ old('show_in_slider') ? 'checked' : '' }}>
+                                                    <label class="form-check-label" for="show_in_slider">
+                                                        Show in Slider
+                                                    </label>
+                                                </div>
                                             </div>
                                             <div class="col-lg-6">
                                                 {{-- is_breaking --}}
@@ -322,17 +331,9 @@
                                                     <label class="form-check-label" for="show_on_homepage">
                                                         Show on Homepage
                                                     </label>
-                                                </div>
-                                                <!-- show_in_slider -->
-                                                <div
-                                                    class="form-check          form-check-custom form-check-solid mb-7">
-                                                    <input class="form-check-input" type="checkbox"
-                                                        name="show_in_slider" id="show_in_slider" value="1"
-                                                        {{ old('show_in_slider') ? 'checked' : '' }}>
-                                                    <label class="form-check-label" for="show_in_slider">
-                                                        Show in Slider
-                                                    </label>
                                                 </div> --}}
+                                                <!-- show_in_slider -->
+
                                                 {{-- is_trending --}}
                                                 <div class="form-check form-check-custom form-check-solid mb-7">
                                                     <input class="form-check-input" type="checkbox"
@@ -385,8 +386,9 @@
                                             <div class="mb-5 fv-row">
                                                 <x-metronic.label class="form-label">Meta
                                                     Keywords</x-metronic.label>
-                                                    <input class="form-control" name="meta_keywords" id="news_meta_keyword"
-                                                placeholder="Eg: tag1, tag2" value="{{ old('meta_keywords') }}" />
+                                                <input class="form-control" name="meta_keywords"
+                                                    id="news_meta_keyword" placeholder="Eg: tag1, tag2"
+                                                    value="{{ old('meta_keywords') }}" />
 
                                                 <div class="text-muted fs-7">
                                                     Add news Meta keywords.
@@ -417,14 +419,13 @@
                             </div>
                         </div>
                         <div class="pt-0 card-body">
-                            <x-metronic.select-option id="status"
-                                class="mb-2 form-select" data-control="select2" data-hide-search="true"
-                                name="status" data-placeholder="Select an option">
+                            <x-metronic.select-option id="status" class="mb-2 form-select" data-control="select2"
+                                data-hide-search="true" name="status" data-placeholder="Select an option">
                                 <option></option>
-                                <option value="draft" @selected(old('status') == "draft")>Draft</option>
-                                <option value="published" @selected(old('status') == "published")>Published</option>
-                                <option value="archived" @selected(old('status') == "archived")>Archived</option>
-                                <option value="unpublished" @selected(old('status') == "unpublished")>Unpublished</option>
+                                <option value="draft" @selected(old('status') == 'draft')>Draft</option>
+                                <option value="published" @selected(old('status') == 'published')>Published</option>
+                                <option value="archived" @selected(old('status') == 'archived')>Archived</option>
+                                <option value="unpublished" @selected(old('status') == 'unpublished')>Unpublished</option>
                             </x-metronic.select-option>
                             <div class="text-muted fs-7">Set the news status.</div>
                         </div>
@@ -446,7 +447,8 @@
                                     data-allow-clear="true">
                                     <option></option>
                                     @foreach ($categories as $category)
-                                        <option value="{{ $category->id }}" @selected(old('category_id') == $category->id)>{{ $category->name }}
+                                        <option value="{{ $category->id }}" @selected(old('category_id') == $category->id)>
+                                            {{ $category->name }}
                                             [{{ $category->bangla_name }}]
                                         </option>
                                     @endforeach
@@ -460,7 +462,8 @@
                                     data-allow-clear="true">
                                     <option></option>
                                     @foreach ($subCategories as $subCategory)
-                                        <option value="{{ $subCategory->id }}" @selected(old('sub_category_id') == $subCategory->id)>{{ $subCategory->name }}
+                                        <option value="{{ $subCategory->id }}" @selected(old('sub_category_id') == $subCategory->id)>
+                                            {{ $subCategory->name }}
                                             [{{ $subCategory->bangla_name }}]
                                         </option>
                                     @endforeach
@@ -536,6 +539,5 @@
             const ckEditorInitializer = new CKEditorInitializer('.ckeditor');
             ckEditorInitializer.initialize();
         </script>
-
     @endpush
 </x-admin-app-layout>

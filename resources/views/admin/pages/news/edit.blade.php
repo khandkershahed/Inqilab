@@ -165,7 +165,7 @@
                                             <div class="col-lg-6 mb-7">
                                                 <div>
                                                     <x-metronic.label for="" class="form-label">Thumbnail image
-                                                    (Only *.png,, *.webp *.jpg and *.jpeg)</x-metronic.label>
+                                                        (Only *.png,, *.webp *.jpg and *.jpeg)</x-metronic.label>
                                                 </div>
                                                 <div class="image-input image-input-empty" data-kt-image-input="true"
                                                     style="background-image: url({{ asset('storage/' . $news->thumbnail) }}); width: auto; background-size: contain;
@@ -201,8 +201,9 @@
                                             </div>
                                             <div class="col-lg-6 mb-7">
                                                 <div>
-                                                    <x-metronic.label for="" class="form-label">Banner image (Only
-                                                    *.png,, *.webp *.jpg and *.jpeg)</x-metronic.label>
+                                                    <x-metronic.label for="" class="form-label">Banner image
+                                                        (Only
+                                                        *.png,, *.webp *.jpg and *.jpeg)</x-metronic.label>
                                                 </div>
                                                 <div class="image-input image-input-empty" data-kt-image-input="true"
                                                     style="background-image: url({{ asset('storage/' . $news->banner_image) }}); width: auto; background-size: contain;
@@ -296,7 +297,7 @@
                                                 <div class="form-check form-check-custom form-check-solid mb-7">
                                                     <input class="form-check-input" type="checkbox"
                                                         name="is_featured" id="is_featured" value="1"
-                                                        @checked($news->is_featured == "1")>
+                                                        @checked($news->is_featured == '1')>
                                                     <label class="form-check-label" for="is_featured">
                                                         Featured News
                                                     </label>
@@ -304,18 +305,27 @@
                                                 {{-- is_most_read --}}
                                                 <div class="form-check form-check-custom form-check-solid mb-7">
                                                     <input class="form-check-input" type="checkbox"
-                                                        name="is_most_read" id="is_most_read" value="1" @checked($news->is_most_read == "1")>
+                                                        name="is_most_read" id="is_most_read" value="1"
+                                                        @checked($news->is_most_read == '1')>
                                                     <label class="form-check-label" for="is_most_read">
                                                         Most Read News
                                                     </label>
                                                 </div>
-
+                                                <div class="form-check form-check-custom form-check-solid mb-7">
+                                                    <input class="form-check-input" type="checkbox"
+                                                        name="show_in_slider" id="show_in_slider" value="1"
+                                                        @checked($news->show_in_slider == '1')>
+                                                    <label class="form-check-label" for="show_in_slider">
+                                                        Show in Slider
+                                                    </label>
+                                                </div>
                                             </div>
                                             <div class="col-lg-6">
                                                 {{-- is_breaking --}}
                                                 <div class="form-check form-check-custom form-check-solid mb-7">
                                                     <input class="form-check-input" type="checkbox"
-                                                        name="is_breaking" id="is_breaking" value="1" @checked($news->is_breaking == "1")>
+                                                        name="is_breaking" id="is_breaking" value="1"
+                                                        @checked($news->is_breaking == '1')>
                                                     <label class="form-check-label" for="is_breaking">
                                                         Breaking News
                                                     </label>
@@ -323,7 +333,8 @@
 
                                                 <div class="form-check form-check-custom form-check-solid mb-7">
                                                     <input class="form-check-input" type="checkbox"
-                                                        name="is_trending" id="is_trending" value="1" @checked($news->is_trending == "1")>
+                                                        name="is_trending" id="is_trending" value="1"
+                                                        @checked($news->is_trending == '1')>
                                                     <label class="form-check-label" for="is_trending">
                                                         Trending News
                                                     </label>
