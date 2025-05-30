@@ -521,10 +521,36 @@ class HomeApiController extends Controller
                 })->latest()
                 ->get();
 
+            if ($advertisements->isEmpty()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'No advertisements found.',
+                ], 404);
+            }
+            $data = $advertisements->map(function ($ad) {
+                return [
+                    'id'            => $ad->id,
+                    'title'         => $ad->title,
+                    'ad_type'       => $ad->ad_type,
+                    'image_path'    => $ad->image_path ?? null,
+                    'video_path'    => $ad->video_path,
+                    'html_code'     => $ad->html_code,
+                    'link'          => $ad->link,
+                    'target_blank'  => $ad->target_blank,
+                    'position'      => $ad->position,
+                    // 'price'         => $ad->price,
+                    'priority'      => $ad->priority,
+                    'start_date'    => $ad->start_date,
+                    'end_date'      => $ad->end_date,
+                    'status'        => $ad->status,
+                    'company_name'  => $ad->company_name,
+                    'company_website'=> $ad->company_website,
+                ];
+            });
             return response()->json([
                 'success' => true,
                 'message' => 'Advertisements retrieved successfully.',
-                'data'    => $advertisements,
+                'data'    => $data,
             ], 200);
         } catch (\Exception $e) {
             Log::error('Failed to fetch advertisements: ' . $e->getMessage());
