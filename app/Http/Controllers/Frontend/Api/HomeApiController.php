@@ -509,4 +509,31 @@ class HomeApiController extends Controller
             ], 500);
         }
     }
+
+    public function advertisements()
+    {
+        try {
+            $advertisements = \App\Models\Advertisement::where('status', 'approved')
+                ->where('start_date', '<=', now())
+                ->where(function ($query) {
+                    $query->whereNull('end_date')
+                        ->orWhere('end_date', '>=', now());
+                })->latest()
+                ->get();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Advertisements retrieved successfully.',
+                'data'    => $advertisements,
+            ], 200);
+        } catch (\Exception $e) {
+            Log::error('Failed to fetch advertisements: ' . $e->getMessage());
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to retrieve advertisements.',
+                'error'   => $e->getMessage(),
+            ], 500);
+        }
+    }
 }

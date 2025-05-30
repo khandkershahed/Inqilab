@@ -26,16 +26,16 @@
                 <thead class="bg-light-danger">
                     <tr class=" text-white fw-bolder fs-7 text-uppercase gs-0">
                         <th width="5%">Sl</th>
-                        <th width="15%" class="text-center">Thumbnail Image</th>
-                        <th width="15%" class="text-center">Background Image</th>
-                        <th width="20%">Page Name</th>
-                        <th width="15%">Creacted At</th>
+                        <th width="20%" class="text-center">AD Image</th>
+                        <th width="20%">AD Position</th>
+                        <th width="12%">Create Date</th>
+                        <th width="12%">Expired Date</th>
                         <th width="10%">Status</th>
-                        <th width="20%" class="text-end">Action</th>
+                        <th width="15%" class="text-end">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {{-- @if ($advertisements)
+                    @if ($advertisements)
                         @foreach ($advertisements as $advertisement)
                             <tr class="odd">
                                 <td>
@@ -43,30 +43,25 @@
                                 </td>
                                 <td class="text-center">
                                     <img class="w-50px h-50px"
-                                        src="{{ !empty(optional($advertisement)->image) ? asset('storage/' . optional($advertisement)->image) : asset('images/no_image.jpg') }}"
+                                        src="{{ !empty(optional($advertisement)->image_path) ? url(optional($advertisement)->image_path) : asset('images/no_image.jpg') }}"
                                         alt="{{ $advertisement->page_name }}">
                                 </td>
-                                <td class="text-center">
-                                    <img class="w-50px h-50px"
-                                        src="{{ !empty(optional($advertisement)->bg_image) ? asset('storage/' . optional($advertisement)->bg_image) : asset('images/no_image.jpg') }}"
-                                        alt="{{ $advertisement->page_name }}">
-                                </td>
-                                <td class="text-info">
-                                    {{ ucwords(str_replace(['_', '-', ',', '.', ';'], ' ', $advertisement->page_name)) }}
+                                <td>
+                                    <p class="text-info">
+                                        {{ ucwords(str_replace(['_', '-', ',', '.', ';'], ' ', $advertisement->position)) }}
+                                    </p>
                                 </td>
                                 <td>
-                                    {{ $advertisement->created_at->format('d F Y') }}
+                                    {{ \Carbon\Carbon::parse($advertisement->start_date)->format('d F Y') }}
                                 </td>
                                 <td>
-                                    <span class="badge {{ $advertisement->status == 'active' ? 'bg-success' : 'bg-danger' }}">
-                                        {{ $advertisement->status == 'active' ? 'Active' : 'InActive' }}</span>
+                                    {{ \Carbon\Carbon::parse($advertisement->end_date)->format('d F Y') }}
+                                </td>
+                                <td>
+                                    <span class="badge {{ $advertisement->status == 'approved' ? 'bg-success' : 'bg-danger' }}">
+                                        {{ ucfirst($advertisement->status) }}</span>
                                 </td>
                                 <td class="text-end">
-                                    <a href="#"
-                                        class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1"
-                                        data-bs-toggle="modal" data-bs-target="#faqViewModal_{{ $advertisement->id }}">
-                                        <i class="fa-solid fa-expand"></i>
-                                    </a>
                                     <a href="{{ route('admin.advertisement.edit', $advertisement->id) }}"
                                         class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                                         <i class="fa-solid fa-pen"></i>
@@ -79,7 +74,7 @@
                                 </td>
                             </tr>
                         @endforeach
-                    @endif --}}
+                    @endif
                 </tbody>
             </table>
         </div>

@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Advertisement extends Model
 {
-    use HasFactory, HasSlug;
-    protected $slugSourceColumn = 'name';
+    use HasFactory;
+    // protected $slugSourceColumn = 'title';
     /**
      * The attributes that aren't mass assignable.
      *

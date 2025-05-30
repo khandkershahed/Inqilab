@@ -27,7 +27,6 @@ return new class extends Migration
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
             $table->enum('status', ['pending', 'approved', 'rejected', 'expired'])->default('approved');
-            $table->boolean('is_active')->default(true);
             $table->unsignedBigInteger('views')->default(0);
             $table->unsignedBigInteger('clicks')->default(0);
             $table->string('company_name')->nullable();
