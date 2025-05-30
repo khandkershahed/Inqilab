@@ -249,7 +249,12 @@ class HomeApiController extends Controller
                 ->where('status', 'published')
                 ->orderByDesc('published_at')
                 ->get();
-
+            if ($news->isEmpty()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'No breaking news found.',
+                ], 404);
+            }
             return response()->json([
                 'success' => true,
                 'message' => 'Breaking news retrieved successfully.',
@@ -273,7 +278,12 @@ class HomeApiController extends Controller
                 ->where('status', 'published')
                 ->orderByDesc('published_at')
                 ->get();
-
+            if ($news->isEmpty()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'No featured news found.',
+                ], 404);
+            }
             return response()->json([
                 'success' => true,
                 'message' => 'featured news retrieved successfully.',
@@ -325,7 +335,12 @@ class HomeApiController extends Controller
             $news = News::where('status', 'published')
                 ->orderByDesc('published_at')
                 ->get();
-
+            if ($news->isEmpty()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'No latest news found.',
+                ], 404);
+            }
             return response()->json([
                 'success' => true,
                 'message' => 'Latest news retrieved successfully.',
@@ -349,6 +364,12 @@ class HomeApiController extends Controller
                 ->where('status', 'published')
                 ->get();
 
+            if ($news->isEmpty()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'No most viewed news found.',
+                ], 404);
+            }
             return response()->json([
                 'success' => true,
                 'message' => 'Most viewed news retrieved successfully.',
@@ -373,6 +394,12 @@ class HomeApiController extends Controller
                 ->orderByDesc('published_at')
                 ->get();
 
+            if ($news->isEmpty()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'No trending news found.',
+                ], 404);
+            }
             return response()->json([
                 'success' => true,
                 'message' => 'Trending news retrieved successfully.',
