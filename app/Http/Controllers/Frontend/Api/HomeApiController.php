@@ -297,6 +297,12 @@ class HomeApiController extends Controller
                 ->orderByDesc('published_at')
                 ->get();
 
+            if ($news->isEmpty()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'No slider news found.',
+                ], 404);
+            }
             return response()->json([
                 'success' => true,
                 'message' => 'Slider news retrieved successfully.',
