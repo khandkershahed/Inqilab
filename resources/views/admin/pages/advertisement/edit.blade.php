@@ -1,4 +1,4 @@
-<x-admin-app-layout :title="'Advertisement Add'">
+<x-admin-app-layout :title="'Advertisement Edit'">
     <div class="card card-flash">
         <div class="card-header">
             <div class="card-title"></div>
@@ -21,8 +21,9 @@
         </div>
         <div class="card-body pt-0">
 
-            <form method="POST" action="{{ route('admin.advertisement.store') }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('admin.advertisement.update',$advertisement->id) }}" enctype="multipart/form-data">
                 @csrf
+                @method('PUT')
                 <div class="row">
 
                     <!-- Title -->
@@ -30,7 +31,7 @@
                         <x-metronic.label for="title"
                             class="col-form-label fw-bold fs-6">{{ __('Ad Title') }}</x-metronic.label>
                         <x-metronic.input id="title" type="text" name="title" placeholder="Enter the title"
-                            :value="old('title')" />
+                            :value="old('title',$advertisement->title)" />
                     </div>
 
                     <!-- Ad Type -->
@@ -40,10 +41,10 @@
                         <x-metronic.select-option id="ad_type" name="ad_type" data-hide-search="true"
                             data-placeholder="Select Ad Type">
                             <option></option>
-                            <option value="image" @selected(old('ad_type') == 'image') >Image</option>
-                            <option value="html" @selected(old('ad_type') == 'html') >HTML</option>
-                            <option value="video" @selected(old('ad_type') == 'video') >Video</option>
-                            <option value="script" @selected(old('ad_type') == 'script') >Script</option>
+                            <option value="image" @selected(old('ad_type',$advertisement->ad_type) == 'image') >Image</option>
+                            <option value="html" @selected(old('ad_type',$advertisement->ad_type) == 'html') >HTML</option>
+                            <option value="video" @selected(old('ad_type',$advertisement->ad_type) == 'video') >Video</option>
+                            <option value="script" @selected(old('ad_type',$advertisement->ad_type) == 'script') >Script</option>
                         </x-metronic.select-option>
                     </div>
 
@@ -62,10 +63,12 @@
                                     </a>
                                 </span>
                                 <input id="thumbnail" class="form-control" type="text" name="image_path"
-                                    value="" placeholder="Image Path">
+                                    value="{{ $advertisement->image_path }}" placeholder="Image Path">
                             </div>
                             <div class="col-4">
-                                <div id="holder" style="margin-top:15px;max-height:100px;"></div>
+                                <div id="holder" style="margin-top:15px;max-height:100px;">
+                                    <img width="150px" src="{{ $advertisement->image_path }}" alt="">
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -75,7 +78,7 @@
                         <x-metronic.label for="video_path"
                             class="col-form-label fw-bold fs-6">{{ __('Video AD Path or Embed') }}</x-metronic.label>
                         <x-metronic.textarea id="video_path" name="video_path" rows="2"
-                            placeholder="Enter video URL or embed code">{{ old('video_path') }}</x-metronic.textarea>
+                            placeholder="Enter video URL or embed code">{{ old('video_path',$advertisement->video_path) }}</x-metronic.textarea>
                     </div>
 
                     <!-- HTML Code -->
@@ -83,7 +86,7 @@
                         <x-metronic.label for="html_code"
                             class="col-form-label fw-bold fs-6">{{ __('Custom HTML Code') }}</x-metronic.label>
                         <x-metronic.textarea id="html_code" name="html_code" rows="2"
-                            placeholder="Enter custom HTML">{{ old('html_code') }}</x-metronic.textarea>
+                            placeholder="Enter custom HTML">{{ old('html_code',$advertisement->html_code) }}</x-metronic.textarea>
                     </div>
 
                     <!-- Link -->
@@ -91,7 +94,7 @@
                         <x-metronic.label for="link"
                             class="col-form-label fw-bold fs-6">{{ __('Link (Ad URL)') }}</x-metronic.label>
                         <x-metronic.input id="link" type="url" name="link" placeholder="Enter link URL"
-                            :value="old('link')" />
+                            :value="old('link',$advertisement->link)" />
                     </div>
 
                     <!-- Position -->
@@ -102,29 +105,29 @@
                         <x-metronic.select-option id="position" name="position" data-hide-search="true"
                             data-placeholder="Select AD Position">
                             {{-- 📍 Global Placements --}}
-                            <option value="header_right" @selected(old('position') == 'header_right')>Global - Header (Right Side)
+                            <option value="header_right" @selected(old('position',$advertisement->position) == 'header_right')>Global - Header (Right Side)
                                 [915×85]</option>
 
                             {{-- 🏠 Homepage Placements --}}
-                            <option value="home_middle" @selected(old('position') == 'home_middle')>Homepage - Middle Section
+                            <option value="home_middle" @selected(old('position',$advertisement->position) == 'home_middle')>Homepage - Middle Section
                                 [1185×340]</option>
-                            <option value="home_bottom" @selected(old('position') == 'home_bottom')>Homepage - Bottom (Above Footer)
+                            <option value="home_bottom" @selected(old('position',$advertisement->position) == 'home_bottom')>Homepage - Bottom (Above Footer)
                                 [1185×340]</option>
 
                             {{-- 📂 Category Page Placements --}}
-                            <option value="category_middle" @selected(old('position') == 'category_middle')>Category Page - Middle Section
+                            <option value="category_middle" @selected(old('position',$advertisement->position) == 'category_middle')>Category Page - Middle Section
                                 [500×500]</option>
-                            <option value="category_featured" @selected(old('position') == 'category_featured')>Category Page - Featured
+                            <option value="category_featured" @selected(old('position',$advertisement->position) == 'category_featured')>Category Page - Featured
                                 Section [728×90]</option>
 
                             {{-- 📰 News Details Page Placements --}}
-                            <option value="news_below_image" @selected(old('position') == 'news_below_image')>News Article - Below Main
+                            <option value="news_below_image" @selected(old('position',$advertisement->position) == 'news_below_image')>News Article - Below Main
                                 Image [500×300]</option>
-                            <option value="news_bottom" @selected(old('position') == 'news_bottom')>News Article - Bottom of the Page
+                            <option value="news_bottom" @selected(old('position',$advertisement->position) == 'news_bottom')>News Article - Bottom of the Page
                                 [300×250]</option>
 
                             {{-- 📦 Sidebar Placement --}}
-                            <option value="sidebar_random" @selected(old('position') == 'sidebar_random')>Sidebar - Random [340×280]
+                            <option value="sidebar_random" @selected(old('position',$advertisement->position) == 'sidebar_random')>Sidebar - Random [340×280]
                             </option>
                         </x-metronic.select-option>
                     </div>
@@ -134,8 +137,8 @@
                             class="col-form-label fw-bold fs-6">{{ __('Open in New Tab?') }}</x-metronic.label>
                         <x-metronic.select-option id="target_blank" name="target_blank" data-hide-search="true"
                             data-placeholder="Select an Option">
-                            <option value="0" {{ old('target_blank') == '0' ? 'selected' : '' }}>No</option>
-                            <option value="1" {{ old('target_blank') == '1' ? 'selected' : '' }}>Yes</option>
+                            <option value="0" {{ old('target_blank',$advertisement->target_blank) == '0' ? 'selected' : '' }}>No</option>
+                            <option value="1" {{ old('target_blank',$advertisement->target_blank) == '1' ? 'selected' : '' }}>Yes</option>
                         </x-metronic.select-option>
                     </div>
 
@@ -146,7 +149,7 @@
                         <x-metronic.label for="price"
                             class="col-form-label fw-bold fs-6">{{ __('Price ($)') }}</x-metronic.label>
                         <x-metronic.input id="price" type="number" step="0.01" name="price"
-                            placeholder="Enter price" :value="old('price', 0.0)" />
+                            placeholder="Enter price" :value="old('price',$advertisement->price, 0.0)" />
                     </div>
 
                     <!-- Priority -->
@@ -154,7 +157,7 @@
                         <x-metronic.label for="priority"
                             class="col-form-label fw-bold fs-6">{{ __('Priority') }}</x-metronic.label>
                         <x-metronic.input id="priority" type="number" name="priority" placeholder="Enter priority"
-                            :value="old('priority', 0)" />
+                            :value="old('priority',$advertisement->priority, 0)" />
                     </div>
 
                     @php
@@ -166,7 +169,7 @@
                         <x-metronic.label for="start_date"
                             class="col-form-label fw-bold fs-6">{{ __('Start Date') }}</x-metronic.label>
                             <input type="date" id="start_date" name="start_date" class="form-control"
-                            value="{{ old('start_date', $today) }}" min="{{ $today }}" />
+                            value="{{ old('start_date',$advertisement->start_date, $today) }}" min="{{ $today }}" />
                     </div>
 
                     <!-- End Date -->
@@ -174,7 +177,7 @@
                         <x-metronic.label for="end_date"
                             class="col-form-label fw-bold fs-6">{{ __('End Date') }}</x-metronic.label>
                         <input type="date" id="end_date" name="end_date" class="form-control"
-                            value="{{ old('end_date', $today) }}" min="{{ $today }}" />
+                            value="{{ old('end_date',$advertisement->end_date, $today) }}" min="{{ $today }}" />
                     </div>
 
                     <!-- Status -->
@@ -182,10 +185,10 @@
                         <x-metronic.label for="status"
                             class="col-form-label fw-bold fs-6">{{ __('Status') }}</x-metronic.label>
                         <x-metronic.select-option id="status" name="status" data-hide-search="true">
-                            <option value="pending" @selected(old('status') == 'pending' )>Pending</option>
-                            <option value="approved" @selected(old('status') == 'approved' )>Approved</option>
-                            <option value="rejected" @selected(old('status') == 'rejected' )>Rejected</option>
-                            <option value="expired" @selected(old('status') == 'expired' )>Expired</option>
+                            <option value="pending" @selected(old('status',$advertisement->status) == 'pending' )>Pending</option>
+                            <option value="approved" @selected(old('status',$advertisement->status) == 'approved' )>Approved</option>
+                            <option value="rejected" @selected(old('status',$advertisement->status) == 'rejected' )>Rejected</option>
+                            <option value="expired" @selected(old('status',$advertisement->status) == 'expired' )>Expired</option>
                         </x-metronic.select-option>
                     </div>
 
@@ -197,7 +200,7 @@
                         <x-metronic.label for="company_name"
                             class="col-form-label fw-bold fs-6">{{ __('Company Name') }}</x-metronic.label>
                         <x-metronic.input id="company_name" type="text" name="company_name"
-                            placeholder="Enter company name" :value="old('company_name')" />
+                            placeholder="Enter company name" :value="old('company_name',$advertisement->company_name)" />
                     </div>
 
                     <!-- Company Website -->
@@ -205,7 +208,7 @@
                         <x-metronic.label for="company_website"
                             class="col-form-label fw-bold fs-6">{{ __('Company Website') }}</x-metronic.label>
                         <x-metronic.input id="company_website" type="url" name="company_website"
-                            placeholder="https://example.com" :value="old('company_website')" />
+                            placeholder="https://example.com" :value="old('company_website',$advertisement->company_website)" />
                     </div>
 
                     <!-- Hidden user_id or dropdown for admin -->
