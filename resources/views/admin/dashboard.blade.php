@@ -116,8 +116,141 @@
 
         </div>
     @else
-        <p class="text-danger">Admin is not approved yet.</p>
-        <span class="text-danger">Please wait. Super admin will approve your account as soon as possible.</span>
+        {{-- <p class="text-danger">Admin is not approved yet.</p>
+        <span class="text-danger">Please wait. Super admin will approve your account as soon as possible.</span> --}}
     @endif
+    {{-- New Design Emplement --}}
+    <section class="mt-2">
+        <div class="row gx-5 gx-xl-10">
+            <div class="col-lg-3">
+                <div class="card card-flush">
+                    <div>
+                        <p class="px-10 py-10 bg-primary rounded-2 d-flex align-items-center justify-content-center">
+                            <i class="text-white fas fa-newspaper fs-1"></i><span class="text-white fs-1 ps-4">
+                                News Available</span>
+                        </p>
+                        <div class="text-center ps-5">
+                            <span style="font-size: 60px">
+                                60
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="card card-flush">
+                    <div>
+                        <p class="px-10 py-10 bg-primary rounded-2 d-flex align-items-center justify-content-center">
+                            <i class="text-white fas fa-newspaper fs-1"></i><span class="text-white fs-1 ps-4">
+                                Category</span>
+                        </p>
+                        <div class="text-center ps-5">
+                            <span style="font-size: 60px">
+                                60
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="card card-flush">
+                    <div>
+                        <p class="px-10 py-10 bg-primary rounded-2 d-flex align-items-center justify-content-center">
+                            <i class="text-white fas fa-newspaper fs-1"></i><span class="text-white fs-1 ps-4">Pending
+                                News</span>
+                        </p>
+                        <div class="text-center ps-5">
+                            <span style="font-size: 60px">
+                                60
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="card card-flush">
+                    <div>
+                        <p class="px-10 py-10 bg-primary rounded-2 d-flex align-items-center justify-content-center">
+                            <i class="text-white fas fa-newspaper fs-1"></i><span class="text-white fs-1 ps-4">Rejected
+                                News</span>
+                        </p>
+                        <div class="text-center ps-5">
+                            <span style="font-size: 60px">
+                                60
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="p-2 mt-10 card">
+                    <div class="p-0 card-body">
+                        <table id="allNewsList" class="table border rounded table-striped table-row-bordered gy-5 gs-7">
+                            <thead>
+                                <tr class="text-gray-800 fw-bold fs-6 px-7">
+                                    <th>Sl</th>
+                                    <th>Image</th>
+                                    <th>Title</th>
+                                    <th>Category</th>
+                                    <th>Status</th>
+                                    <th>Date</th>
+                                    <th>Author</th>
+                                    <th class="text-end">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>
+                                        <div>
+                                            <img width="70" height="70" class="img-fluid rounded-2"
+                                            src="https://weekly-inqilab.vercel.app/_next/image?url=https%3A%2F%2Fv2.weeklyinqilab.com%2Fstorage%2Fnews%2Fthumbnail%2F54a94bb2360a30b3c42f614b8ab5c3761a864a7b87a4f1bf_LiFbnwaFrw1748495386.png&w=640&q=75"
+                                            alt="">
+                                        </div>
+                                    </td>
+                                    <td>Omnis sit rerum qui veniam doloribus ist</td>
+                                    <td>National</td>
+                                    <td>Approved</td>
+                                    <td>Feb 13 , 2025</td>
+                                    <td>Inqilab</td>
+                                    <td class="text-end">
+                                        <div>
+                                            <a href="" class="text-center rounded-pill btn btn-primary btn-sm">
+                                                <i class="text-white fs-6 fas fa-pen-to-square ps-2"></i>
+                                            </a>
+                                            <a href="" class="text-center rounded-pill btn btn-primary btn-sm">
+                                                <i class="text-white fs-6 fas fa-trash ps-2"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    @push('scripts')
+        <script>
+            $("#allNewsList").DataTable({
+                "language": {
+                    "lengthMenu": "Show _MENU_",
+                },
+                "dom": "<'row mb-2'" +
+                    "<'col-sm-6 d-flex align-items-center justify-conten-start dt-toolbar'l>" +
+                    "<'col-sm-6 d-flex align-items-center justify-content-end dt-toolbar'f>" +
+                    ">" +
 
+                    "<'table-responsive'tr>" +
+
+                    "<'row'" +
+                    "<'col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start'i>" +
+                    "<'col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end'p>" +
+                    ">"
+            });
+        </script>
+    @endpush
 </x-admin-app-layout>

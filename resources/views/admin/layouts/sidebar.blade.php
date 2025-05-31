@@ -2,8 +2,9 @@
     data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true"
     data-kt-drawer-width="{default:'200px', '300px': '250px'}" data-kt-drawer-direction="start"
     data-kt-drawer-toggle="#kt_aside_mobile_toggle">
-    <div class="aside-logo flex-column-auto" id="kt_aside_logo">
 
+    {{-- Logo --}}
+    <div class="aside-logo flex-column-auto" id="kt_aside_logo">
         <a href="{{ route('admin.dashboard') }}">
             <img alt="Logo"
                 src="{{ !empty($site->site_logo) && file_exists(public_path('storage/settings/' . $site->site_logo))
@@ -11,360 +12,172 @@
                     : asset('images/logo.webp') }}"
                 class="h-60px logo w-200px">
         </a>
+
         <div id="kt_aside_toggle" class="w-auto px-0 btn btn-icon btn-active-color-primary aside-toggle active"
             data-kt-toggle="true" data-kt-toggle-state="active" data-kt-toggle-target="body"
             data-kt-toggle-name="aside-minimize">
-
             <span class="rotate-180 svg-icon svg-icon-1">
-
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                    fill="none">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                    viewBox="0 0 24 24">
                     <path opacity="0.5"
-                        d="M14.2657 11.4343L18.45 7.25C18.8642 6.83579 18.8642 6.16421 18.45 5.75C18.0358 5.33579 17.3642 5.33579 16.95 5.75L11.4071 11.2929C11.0166 11.6834 11.0166 12.3166 11.4071 12.7071L16.95 18.25C17.3642 18.6642 18.0358 18.6642 18.45 18.25C18.8642 17.8358 18.8642 17.1642 18.45 16.75L14.2657 12.5657C13.9533 12.2533 13.9533 11.7467 14.2657 11.4343Z"
-                        fill="currentColor"></path>
+                        d="M14.27 11.43L18.45 7.25a1 1 0 0 0-1.5-1.5L11.41 11.29a1 1 0 0 0 0 1.42l5.54 5.54a1 1 0 1 0 1.5-1.5L14.27 12.57a1 1 0 0 1 0-1.14Z"
+                        fill="currentColor" />
                     <path
-                        d="M8.2657 11.4343L12.45 7.25C12.8642 6.83579 12.8642 6.16421 12.45 5.75C12.0358 5.33579 11.3642 5.33579 10.95 5.75L5.40712 11.2929C5.01659 11.6834 5.01659 12.3166 5.40712 12.7071L10.95 18.25C11.3642 18.6642 12.0358 18.6642 12.45 18.25C12.8642 17.8358 12.8642 17.1642 12.45 16.75L8.2657 12.5657C7.95328 12.2533 7.95328 11.7467 8.2657 11.4343Z"
-                        fill="currentColor"></path>
+                        d="M8.27 11.43L12.45 7.25a1 1 0 0 0-1.5-1.5L5.41 11.29a1 1 0 0 0 0 1.42l5.54 5.54a1 1 0 1 0 1.5-1.5L8.27 12.57a1 1 0 0 1 0-1.14Z"
+                        fill="currentColor" />
                 </svg>
-
             </span>
-
         </div>
     </div>
+
+    {{-- Menu --}}
     <div class="aside-menu flex-column-fluid">
         <div class="my-5 hover-scroll-overlay-y my-lg-5" id="kt_aside_menu_wrapper" data-kt-scroll="true"
             data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-height="auto"
             data-kt-scroll-dependencies="#kt_aside_logo, #kt_aside_footer" data-kt-scroll-wrappers="#kt_aside_menu"
-            data-kt-scroll-offset="0" style="height: 318px;">
+            data-kt-scroll-offset="0">
+
             <div class="menu menu-column menu-title-gray-800 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500"
                 id="#kt_aside_menu" data-kt-menu="true" data-kt-menu-expand="false">
+
+                {{-- Dashboard --}}
                 <div class="menu-item">
                     <a class="menu-link {{ Route::is('admin.dashboard') ? 'active' : '' }}"
                         href="{{ route('admin.dashboard') }}">
-
                         <span class="menu-icon">
                             <span class="svg-icon svg-icon-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                    viewBox="0 0 24 24" fill="none">
-                                    <rect x="2" y="2" width="9" height="9" rx="2" fill="currentColor">
-                                    </rect>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                    viewBox="0 0 24 24">
+                                    <rect x="2" y="2" width="9" height="9" rx="2"
+                                        fill="currentColor" />
                                     <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2"
-                                        fill="currentColor"></rect>
+                                        fill="currentColor" />
                                     <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2"
-                                        fill="currentColor"></rect>
+                                        fill="currentColor" />
                                     <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2"
-                                        fill="currentColor"></rect>
+                                        fill="currentColor" />
                                 </svg>
                             </span>
                         </span>
-
                         <span class="menu-title">Dashboard</span>
                     </a>
                 </div>
 
-                {{-- Site Content  --}}
+                {{-- Dynamic Menu Items --}}
                 @php
                     $menuItems = [
-                        //====================== Frontend Management Start ============
                         [
-                            'title' => 'Frontend Management',
-                            'icon' => 'icons/duotune/ecommerce/ecm002.svg',
-
+                            'title' => 'News',
+                            'icon' =>
+                                '<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="100" height="100" x="0" y="0" viewBox="0 0 64 64" style="enable-background:new 0 0 512 512" xml:space="preserve" class=""><g><path fill="#ade8e6" d="M55 32c0 2.266-4.261 3.829-4.925 5.873-.688 2.119 1.815 5.885.532 7.648-1.296 1.78-5.659.556-7.44 1.852-1.764 1.284-1.939 5.818-4.058 6.507C37.065 54.544 34.266 51 32 51s-5.065 3.544-7.109 2.88c-2.119-.688-2.295-5.224-4.059-6.507-1.78-1.296-6.144-.071-7.439-1.853-1.284-1.764 1.221-5.529.532-7.647C13.261 35.829 9 34.266 9 32s4.261-3.829 4.925-5.873c.688-2.119-1.815-5.885-.532-7.648 1.296-1.78 5.659-.556 7.44-1.852 1.764-1.284 1.939-5.818 4.058-6.507C26.935 9.456 29.734 13 32 13s5.065-3.544 7.109-2.88c2.119.688 2.295 5.224 4.059 6.507 1.78 1.296 6.144.071 7.439 1.853 1.284 1.764-1.221 5.529-.532 7.647C50.739 28.171 55 29.734 55 32z" opacity="1" data-original="#ade8e6"></path><g fill="#134151"><path d="M24 19a1 1 0 0 0 1-1v-3.238l3.231 3.879a1.004 1.004 0 0 0 1.11.299A1 1 0 0 0 30 18v-6a1 1 0 1 0-2 0v3.238l-3.231-3.879A1.002 1.002 0 0 0 23 12v6a1 1 0 0 0 1 1zM39.79 18.978a.992.992 0 0 0 1.042-.423L42 16.803l1.168 1.752a.998.998 0 0 0 1.042.423.998.998 0 0 0 .776-.813l1-6a.999.999 0 0 0-.822-1.15.995.995 0 0 0-1.15.822l-.584 3.505-.598-.896c-.371-.557-1.293-.557-1.664 0l-.598.896-.584-3.505a1 1 0 1 0-1.972.328l1 6a1 1 0 0 0 .776.813zM52 13a1 1 0 1 0 0-2h-4a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h3v1h-3a1 1 0 1 0 0 2h4a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1h-3v-1zM32 19h4a1 1 0 1 0 0-2h-3v-1h3a1 1 0 1 0 0-2h-3v-1h3a1 1 0 1 0 0-2h-4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1zM52 21H24a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h28a1 1 0 0 0 1-1V22a1 1 0 0 0-1-1zm-1 14H25V23h26z" fill="#134151" opacity="1" data-original="#134151"></path><path d="M58 4H18a1 1 0 0 0-1 1v7H9c-2.206 0-4 1.794-4 4v36a1 1 0 0 0 1 1h5v3c0 2.206 1.794 4 4 4h40c2.206 0 4-1.794 4-4V5a1 1 0 0 0-1-1zM7 51V16c0-1.103.897-2 2-2s2 .897 2 2v35zm6 5V16c0-.731-.212-1.409-.557-2H17v42c0 1.103-.897 2-2 2s-2-.897-2-2zm42 2H18.443A3.953 3.953 0 0 0 19 56V6h38v50c0 1.103-.897 2-2 2z" fill="#134151" opacity="1" data-original="#134151"></path><path d="M52 40H24a1 1 0 1 0 0 2h28a1 1 0 1 0 0-2zM52 44H24a1 1 0 1 0 0 2h28a1 1 0 1 0 0-2zM52 48H24a1 1 0 1 0 0 2h28a1 1 0 1 0 0-2zM27.001 34a.994.994 0 0 0 .514-.143l4.529-2.718 3.509 1.755a1 1 0 0 0 1.154-.188l3.49-3.49 3.355 1.678a1 1 0 0 0 1.154-.188l5-5a.999.999 0 1 0-1.414-1.414l-4.49 4.49-3.355-1.678a.996.996 0 0 0-1.154.188l-3.49 3.49-3.355-1.678a1 1 0 0 0-.962.037l-5 3A1 1 0 0 0 27.001 34z" fill="#134151" opacity="1" data-original="#134151"></path></g></g></svg>',
+                            'routes' => ['admin.news.index', 'admin.news.create', 'admin.news.edit'],
+                            'route' => 'admin.news.index',
+                        ],
+                        [
+                            'title' => 'Advertisement',
+                            'icon' =>
+                                '<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="100" height="100" x="0" y="0" viewBox="0 0 96 96" style="enable-background:new 0 0 512 512" xml:space="preserve" class=""><g><g data-name="Marketing Management"><path fill="#535f8e" d="M83.71 40.45h-5.58a1.69 1.69 0 0 1-1.61-1.2 29 29 0 0 0-1.91-4.59 1.73 1.73 0 0 1 .33-2l3.92-3.92a1.7 1.7 0 0 0 0-2.41l-8.26-8.27a1.7 1.7 0 0 0-2.41 0L64.27 22a1.73 1.73 0 0 1-2 .33 29 29 0 0 0-4.59-1.91 1.69 1.69 0 0 1-1.2-1.61v-5.6a1.71 1.71 0 0 0-1.71-1.71H43.08a1.71 1.71 0 0 0-1.71 1.71v5.58a1.69 1.69 0 0 1-1.2 1.61 29 29 0 0 0-4.59 1.91 1.73 1.73 0 0 1-2-.33l-3.92-3.92a1.7 1.7 0 0 0-2.41 0L19 26.32a1.7 1.7 0 0 0 0 2.41l3.92 3.92a1.73 1.73 0 0 1 .33 2 29 29 0 0 0-1.91 4.59 1.7 1.7 0 0 1-1.61 1.2h-5.61a1.71 1.71 0 0 0-1.7 1.71v11.69a1.71 1.71 0 0 0 1.7 1.71h5.59a1.7 1.7 0 0 1 1.61 1.2 29 29 0 0 0 1.91 4.59 1.73 1.73 0 0 1-.33 2L19 67.27a1.7 1.7 0 0 0 0 2.41l8.26 8.26a1.7 1.7 0 0 0 2.41 0l3.9-3.94a1.73 1.73 0 0 1 2-.33 29 29 0 0 0 4.59 1.91 1.7 1.7 0 0 1 1.2 1.61v5.61a1.71 1.71 0 0 0 1.71 1.7h11.69a1.71 1.71 0 0 0 1.71-1.7v-5.59a1.7 1.7 0 0 1 1.2-1.61 29 29 0 0 0 4.59-1.91 1.73 1.73 0 0 1 2 .33l3.92 3.92a1.7 1.7 0 0 0 2.41 0l8.26-8.26a1.7 1.7 0 0 0 0-2.41l-3.92-3.92a1.73 1.73 0 0 1-.33-2 29 29 0 0 0 1.91-4.59 1.69 1.69 0 0 1 1.61-1.2h5.58a1.71 1.71 0 0 0 1.71-1.71V42.16a1.71 1.71 0 0 0-1.7-1.71zM48.93 63.08A15.08 15.08 0 1 1 64 48a15.08 15.08 0 0 1-15.07 15.08z" opacity="1" data-original="#535f8e"></path><path fill="#44467a" d="M45.37 80.5v-3.29a5.71 5.71 0 0 0-4-5.42c-3.84-1.22-4.31-2.29-6.6-2.29a5.79 5.79 0 0 0-4.06 1.69l-2.3 2.3-5-5 2.3-2.29a5.72 5.72 0 0 0 1.06-6.65 25.49 25.49 0 0 1-1.66-4 5.7 5.7 0 0 0-5.42-4h-3.27v-7.1h3.29a5.68 5.68 0 0 0 5.41-4 25.43 25.43 0 0 1 1.65-4 5.73 5.73 0 0 0-1-6.69l-2.3-2.29 5-5 2.3 2.3a5.73 5.73 0 0 0 6.65 1.06 25.49 25.49 0 0 1 4-1.66 5.67 5.67 0 0 0 4-5.42V15.5h7.1v3.29a5.67 5.67 0 0 0 4 5.43c3.68 1.17 4.29 2.28 6.55 2.28a5.79 5.79 0 0 0 4.06-1.69l2.3-2.3 5 5-2.29 2.29A5.72 5.72 0 0 0 71 36.47a24.57 24.57 0 0 1 1.66 4 5.66 5.66 0 0 0 5.43 4h3.29v7.1h-3.25a5.65 5.65 0 0 0-5.43 4 24.91 24.91 0 0 1-1.64 3.93 5.74 5.74 0 0 0 1 6.69l2.29 2.29-5 5-2.29-2.3a5.77 5.77 0 0 0-6.66-1.07 24.62 24.62 0 0 1-4 1.67 5.7 5.7 0 0 0-4 5.42v3.3zM50.88 29a19.08 19.08 0 1 0 17 17 19.1 19.1 0 0 0-17-17z" opacity="1" data-original="#44467a"></path><path fill="#6783b1" d="M48.93 26.39A21.61 21.61 0 1 0 70.54 48a21.62 21.62 0 0 0-21.61-21.61zm0 36.69A15.08 15.08 0 1 1 64 48a15.08 15.08 0 0 1-15.07 15.08z" opacity="1" data-original="#6783b1"></path><g fill="#809ccf"><path d="M43.55 66.45c.18-1.4.42-2.77.63-4.15a15.08 15.08 0 0 1-8.7-7.52q-3.24.78-6.53 1.35a21.63 21.63 0 0 0 14.3 12.71c.11-.79.2-1.59.3-2.39zM41.63 27.67A21.68 21.68 0 0 0 28.39 41.3c2.28.16 4.57.3 6.85.39a15.19 15.19 0 0 1 7.62-7.49c-.42-2.2-.86-4.35-1.23-6.53zM52.33 26.68c.23 2.26.41 4.53.6 6.8A15 15 0 0 1 64 47.94c2.18.24 4.35.54 6.49.94a21.55 21.55 0 0 0-18.16-22.2z" fill="#809ccf" opacity="1" data-original="#809ccf"></path></g><path fill="#ff7d3f" d="M57.27 16.4 74.38 41a2.11 2.11 0 0 1-1.49 3.3c-6 .68-10 1-16.09 3.06-6.43 2.2-6.13 2.28-15.31 8.66a3.57 3.57 0 0 1-5-.89L30.85 47a3.57 3.57 0 0 1 .89-5c8.6-6 9-5.84 13.45-11.34 4.07-5 5.8-8.73 8.47-14a2.1 2.1 0 0 1 3.61-.26z" opacity="1" data-original="#ff7d3f"></path><path fill="#ffba4e" d="m57.27 16.4 13.15 18.92a2.11 2.11 0 0 1-1.49 3.31c-6 .67-10 1-16.08 3l-.28.1a2.4 2.4 0 0 1-2.75-.9l-5.29-7.62a1.55 1.55 0 0 1 .07-1.87c4.56-5.56 5.82-8.32 9.06-14.73a2.1 2.1 0 0 1 3.61-.21z" opacity="1" data-original="#ffba4e"></path><path fill="#ffdd67" d="M49.38 29.73c-1.05 1.46-2 2.64-2.77 3.57a1.13 1.13 0 0 0-.06 1.36l.64.92a1.19 1.19 0 0 0 1.67.41l3.52-2.45a.88.88 0 0 0 .22-1.22l-1.8-2.58a.87.87 0 0 0-1.42-.01zM51.48 27.37l2.8 4a.69.69 0 0 0 .95.17l1-.68a.68.68 0 0 0 .17-.94l-3.1-4.45a.67.67 0 0 0-1.14 0c-.22.37-.45.74-.67 1.09a.7.7 0 0 0-.01.81z" opacity="1" data-original="#ffdd67"></path><path fill="#ffffff" d="m50.61 29.46.31.45a.65.65 0 0 1 0 .73c-1.24 1.77-2.37 3.16-3.25 4.23a.62.62 0 0 1-1 0c-.94-1.35-.65-.38 2.91-5.37a.63.63 0 0 1 1.03-.04z" opacity="1" data-original="#ffffff"></path><path fill="#64a6ee" d="m39.9 36.23 9.85 14.16c-1.17.67-1.12.67-8.26 5.64a3.57 3.57 0 0 1-5-.89L30.85 47a3.57 3.57 0 0 1 .89-5c7.46-5.18 7.15-4.94 8.16-5.77z" opacity="1" data-original="#64a6ee"></path><path fill="#87ceff" d="M31.91 41.89a3.59 3.59 0 0 0-1.53 2L33.27 48A2.14 2.14 0 0 0 35 49a1 1 0 0 0 .82-1.54z" opacity="1" data-original="#87ceff"></path><rect width="2.39" height="1.88" x="31.15" y="43.68" fill="#ffffff" rx=".57" transform="rotate(-34.81 32.34 44.604)" opacity="1" data-original="#ffffff"></rect><path fill="#64a6ee" d="M36.78 48.26 38.65 47l-1.87 1.31z" opacity="1" data-original="#64a6ee"></path><path fill="#4b79df" d="m45.94 44.91 3.81 5.48c-1.17.67-1.12.67-8.26 5.64a3.57 3.57 0 0 1-5-.89l-3.81-5.47a3.56 3.56 0 0 0 5 .88c7.46-5.18 7.12-4.97 8.26-5.64z" opacity="1" data-original="#4b79df"></path><path fill="#ffba4e" d="M60.09 43.31c-.35.24-1.53.27-5.27 1.55-1.71.58-2.49.83-3.41 1.21a.69.69 0 0 1-.52-1.28 69.84 69.84 0 0 1 8.65-2.72.69.69 0 0 1 .55 1.24z" opacity="1" data-original="#ffba4e"></path><rect width="3.96" height="20.34" x="44.47" y="32.01" fill="#352d5b" rx="1.77" transform="rotate(-34.81 46.445 42.178)" opacity="1" data-original="#352d5b"></rect><rect width="3.96" height="16.61" x="43.4" y="32.34" fill="#3f416a" rx="1.77" transform="rotate(-34.81 45.37 40.633)" opacity="1" data-original="#3f416a"></rect><rect width="1.73" height="6.16" x="42.76" y="35.04" fill="#536997" rx=".78" transform="rotate(-34.81 43.618 38.122)" opacity="1" data-original="#536997"></rect><rect width="1.73" height="2.63" x="42.69" y="36.7" fill="#6291c9" rx=".78" transform="rotate(-34.81 43.548 38.012)" opacity="1" data-original="#6291c9"></rect><path fill="#8c97e4" d="m32.914 41.186 3.703-2.575 9.752 14.022-3.702 2.576z" opacity="1" data-original="#8c97e4"></path><path fill="#e1e7f8" d="m32.833 41.19 3.698-2.57 5.98 8.601-3.699 2.571z" opacity="1" data-original="#e1e7f8"></path><path fill="#ff7d3f" d="m40.208 51.788 3.698-2.57.786 1.131-3.698 2.571zM38.366 49.018l3.703-2.575.788 1.133-3.703 2.575z" opacity="1" data-original="#ff7d3f"></path><path fill="#ffba4e" d="m36.434 46.238 3.703-2.575.788 1.133-3.703 2.575zM34.508 43.476l3.703-2.576.788 1.133-3.703 2.576z" opacity="1" data-original="#ffba4e"></path><path fill="#ffdd67" d="m52.37 19.21 2.53 3.63a.69.69 0 0 1-.17 1 .68.68 0 0 1-1-.17l-2.11-3z" opacity="1" data-original="#ffdd67"></path><path fill="#ff7d3f" d="M64.49 37.84a.69.69 0 0 1-1-.17L56 26.88a.69.69 0 1 1 1.13-.78l7.5 10.78a.69.69 0 0 1-.14.96z" opacity="1" data-original="#ff7d3f"></path><path fill="#ff4b26" d="m67.45 40.9 2.6 3.73-1.56.18-2.17-3.12a.69.69 0 0 1 1.13-.79z" opacity="1" data-original="#ff4b26"></path><path fill="#ff7d3f" d="m30.85 47 5.68 8.17-3.89.78a1.28 1.28 0 0 1-1.33-.53l-2.52-3.62a1.3 1.3 0 0 1 0-1.43z" opacity="1" data-original="#ff7d3f"></path><path fill="#ffba4e" d="m30.09 48.19-1.33 2.15a1.3 1.3 0 0 0 0 1.43l.54.78a1.29 1.29 0 0 0 1.33.53l.85-.17a1.09 1.09 0 0 0 .68-1.7z" opacity="1" data-original="#ffba4e"></path><path fill="#4e5fb6" d="m44.826 43.306 3.251-2.26 2.227 3.201-3.251 2.261z" opacity="1" data-original="#4e5fb6"></path><path fill="#6782cf" d="m44.82 43.305 3.252-2.262 1.187 1.708-3.25 2.261z" opacity="1" data-original="#6782cf"></path><path fill="#ff2353" d="m69.81 30.68-1.38 1.77L63.22 25l2.14-.68a1.77 1.77 0 0 1 2 .68l2.52 3.62a1.77 1.77 0 0 1-.07 2.06z" opacity="1" data-original="#ff2353"></path><path fill="#3f416a" d="m41.96 55.705 6.076-4.226 1.285 1.847a1.46 1.46 0 0 1-.34 2.052l-3.686 2.563a1.46 1.46 0 0 1-2.032-.365l-1.302-1.871z" opacity="1" data-original="#3f416a"></path><path fill="#3a3256" d="m41.957 55.694 6.076-4.226.953 1.371-6.075 4.226z" opacity="1" data-original="#3a3256"></path><path fill="#4e5fb6" d="M57.76 61.24a2.27 2.27 0 0 1-2.32 3.53 17.13 17.13 0 0 1-10.13-6.86l3.69-2.6a12.56 12.56 0 0 0 7.43 5 2.22 2.22 0 0 1 1.33.93z" opacity="1" data-original="#4e5fb6"></path><path fill="#e1e7f8" d="M57.76 61.24a2.27 2.27 0 0 1-2.32 3.53 17.13 17.13 0 0 1-10.13-6.86l3.69-2.6a12.56 12.56 0 0 0 7.43 5 2.22 2.22 0 0 1 1.33.93z" opacity="1" data-original="#e1e7f8"></path><path fill="#c8cef8" d="M56.57 62.36a2.15 2.15 0 0 1-1.33.11 17 17 0 0 1-8.88-5.3L49 55.31a12.56 12.56 0 0 0 7.43 5 1.06 1.06 0 0 1 .14 2.05z" opacity="1" data-original="#c8cef8"></path><rect width="2.85" height="9.12" x="62.09" y="25.75" fill="#ffd36c" rx="1.27" transform="rotate(-34.81 63.51 30.312)" opacity="1" data-original="#ffd36c"></rect><path fill="#87ceff" d="m37.552 37.964 1.436-.999L43.185 43a.66.66 0 0 1-.165.918l-.345.24a.66.66 0 0 1-.918-.165L37.56 37.96l-.008.005z" opacity="1" data-original="#87ceff"></path><path fill="#ffffff" d="m39.07 38.803.189-.132a.76.76 0 0 1 1.058.19l.508.731a.66.66 0 0 1-.165.919l-.353.245a.66.66 0 0 1-.919-.165l-.508-.73a.76.76 0 0 1 .19-1.058z" opacity="1" data-original="#ffffff"></path><path fill="#ff2353" d="M29 81.46a13.54 13.54 0 1 1-13.55-13.54A13.55 13.55 0 0 1 29 81.46z" opacity="1" data-original="#ff2353"></path><path fill="#64a6ee" d="M29 81.46H15.45V67.92A13.55 13.55 0 0 1 29 81.46z" opacity="1" data-original="#64a6ee"></path><path fill="#ffba4e" d="M15.45 67.92v13.54L8.89 69.62a13.49 13.49 0 0 1 6.56-1.7z" opacity="1" data-original="#ffba4e"></path><path fill="#ffffff" d="M14.74 88.48h-2.88a1 1 0 0 1 0-2h2.88a1 1 0 0 1 0 2zM22.23 76.77h-1.81a1 1 0 0 1 0-2h1.81a1 1 0 1 1 0 2z" opacity="1" data-original="#ffffff"></path><path fill="#ffba4e" d="M79.92 80.29h4.83v11.83h-4.83z" opacity="1" data-original="#ffba4e"></path><path fill="#ff2353" d="M89.25 74.21h4.83v17.92h-4.83z" opacity="1" data-original="#ff2353"></path><path fill="#64a6ee" d="M70.54 84.37h4.83v7.75h-4.83z" opacity="1" data-original="#64a6ee"></path><path fill="#00a98c" d="m77 18.87-4.62 4.61a1.67 1.67 0 0 1-2.85-1.18v-3.43h-.67a3.09 3.09 0 0 1-3.09-3.09V4.09A3.09 3.09 0 0 1 68.81 1h15a3.09 3.09 0 0 1 3.09 3.09v11.69a3.09 3.09 0 0 1-3.09 3.09z" opacity="1" data-original="#00a98c"></path><rect width="14.77" height="5.38" x="68.92" y="2.95" fill="#14cc8c" rx=".8" opacity="1" data-original="#14cc8c"></rect><path fill="#008182" d="M69.48 19.56v2.74a1.67 1.67 0 0 0 2.85 1.19L77 18.87h6.8a3.1 3.1 0 0 0 3.09-3.09V13a3.09 3.09 0 0 1-3.09 3.09H77l-4.62 4.61a1.67 1.67 0 0 1-2.9-1.14zM65.72 13v2.74a3.09 3.09 0 0 0 3.09 3.09h.67v-2.7h-.67A3.09 3.09 0 0 1 65.72 13z" opacity="1" data-original="#008182"></path><path fill="#ffffff" d="M71.25 6.44h10.11a.8.8 0 0 0 0-1.6H71.25a.8.8 0 1 0 0 1.6zM71.25 10.55h10.11a.8.8 0 0 0 0-1.6H71.25a.8.8 0 1 0 0 1.6zM71.25 14.66h10.11a.8.8 0 0 0 0-1.6H71.25a.8.8 0 1 0 0 1.6z" opacity="1" data-original="#ffffff"></path></g></g></svg> ',
                             'routes' => [
-                                'admin.news.index',
-                                'admin.news.create',
-                                'admin.news.edit',
-
                                 'admin.advertisement.index',
                                 'admin.advertisement.create',
                                 'admin.advertisement.edit',
-
-                                'admin.categories.index',
-                                'admin.categories.create',
-                                'admin.categories.edit',
-
-                                'admin.blog_category.index',
-                                'admin.blog_category.create',
-                                'admin.blog_category.edit',
-
-                                'admin.blog.index',
-                                'admin.blog.create',
-                                'admin.blog.edit',
-
-                                'admin.coupon.index',
-                                'admin.coupon.create',
-                                'admin.coupon.edit',
-
-                                'admin.contact.index',
-                                'admin.contact.create',
-                                'admin.contact.edit',
-
-                                'admin.subscription.index',
-                                'admin.subscription.create',
-                                'admin.subscription.edit',
                             ],
-
-                            'subMenu' => [
-                                [
-                                    'title' => 'Category',
-                                    'routes' => [
-                                        'admin.categories.index',
-                                        'admin.categories.create',
-                                        'admin.categories.edit',
-                                    ],
-                                    'route' => 'admin.categories.index',
-                                ],
-                                [
-                                    'title' => 'News',
-                                    'routes' => ['admin.news.index', 'admin.news.create', 'admin.news.edit'],
-                                    'route' => 'admin.news.index',
-                                ],
-
-                                [
-                                    'title' => 'Advertisement',
-                                    'routes' => [
-                                        'admin.advertisement.index',
-                                        'admin.advertisement.create',
-                                        'admin.advertisement.edit',
-                                    ],
-                                    'route' => 'admin.advertisement.index',
-                                ],
-
-                                [
-                                    'title' => 'Contact',
-                                    'routes' => ['admin.contact.index', 'admin.contact.create', 'admin.contact.edit'],
-                                    'route' => 'admin.contact.index',
-                                ],
-
-                                [
-                                    'title' => 'Subscription',
-
-                                    'routes' => [
-                                        'admin.subscription.index',
-                                        'admin.subscription.create',
-                                        'admin.subscription.edit',
-                                    ],
-
-                                    'route' => 'admin.subscription.index',
-                                ],
-                            ],
+                            'route' => 'admin.advertisement.index',
                         ],
-                        //====================== Frontend Management End ==============
-
-                        // ========================= Setting Start ====================
                         [
-                            'title' => 'Web Settings',
-
-                            'icon' => 'icons/duotune/ecommerce/ecm002.svg',
-
+                            'title' => 'Category',
+                            'icon' => '
+                            <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="100" height="100" x="0" y="0" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve" class=""><g><g fill-rule="evenodd" clip-rule="evenodd"><path fill="#ffe177" d="M386.466 391.803h32.638c4.648 0 8.64 2.302 10.967 6.327l14.319 24.764h48.464c6.142 0 11.151 5.01 11.151 11.151v54.839c0 6.141-5.01 11.151-11.151 11.151H386.466c-6.141 0-11.151-5.009-11.151-11.151v-85.93c0-6.142 5.01-11.151 11.151-11.151z" opacity="1" data-original="#ffe177"></path><g fill="#ffd064"><path d="M489.004 422.894h3.85a11.14 11.14 0 0 1 8.767 4.274 11.095 11.095 0 0 1 2.384 6.877v54.839c0 6.141-5.01 11.151-11.151 11.151h-9.647c3.45-1.9 5.798-5.573 5.798-9.776v-67.215l-.001-.15zM444.39 422.894l-14.318-24.764c-2.327-4.025-6.318-6.327-10.967-6.327h-32.638c-6.141 0-11.151 5.01-11.151 11.152v19.94z" fill="#ffd064" opacity="1" data-original="#ffd064"></path></g><path fill="#ffe177" d="M202.809 391.802h32.638c4.649 0 8.64 2.302 10.967 6.327l14.319 24.764h48.464c6.142 0 11.151 5.01 11.151 11.151v54.839c0 6.141-5.01 11.151-11.151 11.151H202.809c-6.142 0-11.151-5.009-11.151-11.151v-85.93c0-6.141 5.009-11.151 11.151-11.151z" opacity="1" data-original="#ffe177"></path><g fill="#ffd064"><path d="M305.346 422.893h3.85c3.436 0 6.644 1.579 8.768 4.274a11.095 11.095 0 0 1 2.384 6.877v54.839c0 6.141-5.01 11.152-11.151 11.152h-9.647c3.45-1.9 5.798-5.573 5.798-9.776v-67.215l-.002-.151zM260.733 422.893l-14.318-24.764c-2.327-4.025-6.318-6.327-10.967-6.327H202.81c-6.142 0-11.151 5.01-11.151 11.151v19.94z" fill="#ffd064" opacity="1" data-original="#ffd064"></path></g><path fill="#ffe177" d="M19.152 391.803H51.79c4.648 0 8.64 2.302 10.967 6.327l14.319 24.764h48.464c6.142 0 11.151 5.01 11.151 11.151v54.839c0 6.141-5.01 11.151-11.151 11.151H19.152c-6.142 0-11.151-5.009-11.151-11.151v-85.93c0-6.142 5.009-11.151 11.151-11.151z" opacity="1" data-original="#ffe177"></path><g fill="#ffd064"><path d="M121.689 422.894h3.85c3.436 0 6.644 1.579 8.768 4.274a11.095 11.095 0 0 1 2.384 6.877v54.839c0 6.141-5.01 11.151-11.151 11.151h-9.647c3.45-1.9 5.798-5.573 5.798-9.776v-67.215l-.002-.15zM77.075 422.894 62.757 398.13c-2.327-4.025-6.318-6.327-10.967-6.327H19.152c-6.141 0-11.151 5.01-11.151 11.152v19.94z" fill="#ffd064" opacity="1" data-original="#ffd064"></path></g><path fill="#ffe177" d="M143.986 11.966h68.73c9.789 0 18.194 4.849 23.094 13.324l30.153 52.149H368.02c12.934 0 23.483 10.551 23.483 23.482v115.483c0 12.932-10.55 23.482-23.483 23.482H143.986c-12.933 0-23.483-10.549-23.483-23.482V35.449c0-12.934 10.55-23.483 23.483-23.483z" opacity="1" data-original="#ffe177"></path><g fill="#ffd064"><path d="M359.912 77.439h8.108c7.236 0 13.991 3.325 18.463 9.001a23.359 23.359 0 0 1 5.02 14.481v115.483c0 12.932-10.551 23.483-23.483 23.483h-20.315c7.266-4.001 12.209-11.736 12.209-20.586V77.756c.001-.105 0-.212-.002-.317zM265.963 77.439 235.811 25.29c-4.9-8.475-13.305-13.324-23.095-13.324h-68.73c-12.933 0-23.482 10.549-23.482 23.484l-.001 41.99z" fill="#ffd064" opacity="1" data-original="#ffd064"></path></g><path d="M128.688 488.881a3.155 3.155 0 0 1-3.161 3.151H19.157a3.156 3.156 0 0 1-3.161-3.151v-57.989h109.531a3.161 3.161 0 0 1 3.161 3.149zm-109.531-89.08h32.642c1.792 0 3.16.791 4.01 2.329l7.406 12.76H15.996v-11.929a3.165 3.165 0 0 1 3.161-3.16zm106.37 15.09H81.705l-12.028-20.759c-3.726-6.469-10.425-10.33-17.878-10.33H19.157c-10.566 0-19.151 8.6-19.151 19.16v85.92c0 10.56 8.585 19.151 19.151 19.151h106.371c10.567 0 19.151-8.59 19.151-19.151v-54.84c0-10.55-8.585-19.151-19.152-19.151zm186.798 73.99c0 1.71-1.415 3.151-3.113 3.151H202.794c-1.745 0-3.113-1.41-3.113-3.151v-57.989h109.532c1.698 0 3.113 1.419 3.113 3.149v54.84zm-109.531-89.08h32.643c1.792 0 3.16.791 4.057 2.329l7.359 12.76H199.68v-11.929c0-1.739 1.368-3.16 3.114-3.16zm106.418 15.09h-43.869l-11.982-20.759c-3.774-6.469-10.472-10.33-17.925-10.33h-32.643c-10.566 0-19.151 8.6-19.151 19.16v85.92c0 10.56 8.585 19.151 19.151 19.151h106.418c10.519 0 19.151-8.59 19.151-19.151v-54.84c.001-10.55-8.631-19.151-19.15-19.151zm186.797 73.99c0 1.71-1.462 3.151-3.161 3.151h-106.37a3.156 3.156 0 0 1-3.161-3.151v-57.989h109.531c1.698 0 3.161 1.45 3.161 3.149zm-109.531-89.08h32.642c1.792 0 3.113.791 4.01 2.34l7.406 12.749h-47.218v-11.929a3.164 3.164 0 0 1 3.16-3.16zm106.371 15.09H448.98l-11.982-20.759c-3.726-6.469-10.425-10.33-17.878-10.33h-32.642c-10.566 0-19.151 8.6-19.151 19.16v85.92c0 10.56 8.585 19.151 19.151 19.151h106.371c10.566 0 19.152-8.59 19.152-19.151v-54.84c-.001-10.55-8.586-19.151-19.152-19.151zm-430.106-67.68v-32.279c0-4.42 3.585-8.001 8.019-8.001h177.222v-22.45c0-4.419 3.585-7.999 8.019-7.999s8.019 3.58 8.019 7.999v22.45h177.222c4.434 0 8.019 3.58 8.019 8.001v32.279c0 4.42-3.585 8-8.019 8s-8.019-3.58-8.019-8v-24.28H264.022v24.28c0 4.42-3.585 8-8.019 8s-8.019-3.58-8.019-8v-24.28H78.781v24.28c0 4.42-3.585 8-8.019 8-4.434.001-8.019-3.579-8.019-8zM143.971 19.97H212.7c6.981 0 12.689 3.311 16.18 9.321l23.208 40.151H128.499v-33.99c0-8.539 6.934-15.482 15.472-15.482zm224.063 65.471c8.538 0 15.472 6.941 15.472 15.48v115.48c0 8.541-6.934 15.489-15.472 15.489H143.971c-8.538 0-15.472-6.948-15.472-15.489V85.441zM143.971 247.892h224.063c17.359 0 31.463-14.131 31.463-31.491v-115.48c0-17.36-14.104-31.48-31.463-31.48h-97.456L242.747 21.29C236.38 10.281 225.436 3.97 212.7 3.97h-68.728c-17.359 0-31.463 14.123-31.463 31.482v180.95c-.001 17.359 14.104 31.49 31.462 31.49z" fill="#000000" opacity="1" data-original="#000000"></path></g></g></svg>',
+                            'routes' => ['admin.categories.index', 'admin.categories.create', 'admin.categories.edit'],
+                            'route' => 'admin.categories.index',
+                        ],
+                        [
+                            'title' => 'Contact',
+                            'icon' =>
+                                '<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="100" height="100" x="0" y="0" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve" class=""><g><linearGradient id="a" x1="208.353" x2="433.613" y1="210.176" y2="210.176" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ffc538"></stop><stop offset=".349" stop-color="#f7e041"></stop><stop offset="1" stop-color="#fcf3b3"></stop></linearGradient><linearGradient id="b" x1="324.458" x2="237.297" y1="135.233" y2="135.233" gradientUnits="userSpaceOnUse"><stop offset=".032" stop-color="#8b451c"></stop><stop offset="1" stop-color="#8b451c" stop-opacity="0"></stop></linearGradient><radialGradient id="c" cx="336.574" cy="58.299" r="102.354" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#fcf3b3"></stop><stop offset=".171" stop-color="#fbf1a6"></stop><stop offset=".488" stop-color="#faeb84"></stop><stop offset=".912" stop-color="#f8e24d"></stop><stop offset="1" stop-color="#f7e041"></stop></radialGradient><linearGradient id="d" x1="53.931" x2="279.191" y1="299.2" y2="299.2" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ff4757"></stop><stop offset=".476" stop-color="#ff7a85"></stop><stop offset="1" stop-color="#ff959d"></stop></linearGradient><linearGradient id="e" x1="170.035" x2="82.874" y1="224.257" y2="224.257" gradientUnits="userSpaceOnUse"><stop offset=".032" stop-color="#5d3645"></stop><stop offset="1" stop-color="#5d3645" stop-opacity="0"></stop></linearGradient><radialGradient id="f" cx="182.151" cy="147.322" r="102.354" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ff959d"></stop><stop offset=".233" stop-color="#ff8891"></stop><stop offset=".661" stop-color="#ff6673"></stop><stop offset="1" stop-color="#ff4757"></stop></radialGradient><linearGradient id="g" x1="252.931" x2="478.191" y1="322.322" y2="322.322" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#2f878a"></stop><stop offset=".349" stop-color="#06daae"></stop><stop offset="1" stop-color="#9bf0df"></stop></linearGradient><linearGradient id="h" x1="369.036" x2="281.875" y1="247.379" y2="247.379" gradientUnits="userSpaceOnUse"><stop offset=".032" stop-color="#1a4c4e"></stop><stop offset="1" stop-color="#1a4c4e" stop-opacity="0"></stop></linearGradient><radialGradient id="i" cx="381.152" cy="170.444" r="102.354" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#9bf0df"></stop><stop offset=".138" stop-color="#8eeedb"></stop><stop offset=".393" stop-color="#6ce9d0"></stop><stop offset=".734" stop-color="#35e1be"></stop><stop offset="1" stop-color="#06daae"></stop></radialGradient><path fill="url(#a)" d="M320.983 113.448c-62.204 0-112.63 50.426-112.63 112.63v25.095l.032-.003c-.009 14.94 9.001 29.206 27.459 39.863 40.721 23.511 111.851 20.562 158.872-6.585 25.717-14.847 38.864-33.856 38.865-51.881l.032-.003v-6.485c0-62.205-50.426-112.631-112.63-112.631z" opacity="1" data-original="url(#a)"></path><path fill="url(#b)" d="M232.542 156.334h88.441l-12.416-42.202c-30.77 3.375-57.812 19.139-76.025 42.202z" opacity="1" data-original="url(#b)"></path><circle cx="320.983" cy="84.24" r="72.079" fill="url(#c)" opacity="1" data-original="url(#c)"></circle><path fill="url(#d)" d="M166.561 202.471c-62.204 0-112.63 50.426-112.63 112.63v25.095l.032-.003c-.009 14.94 9.001 29.206 27.459 39.862 40.721 23.511 111.851 20.562 158.872-6.585 25.717-14.847 38.864-33.856 38.865-51.881l.032-.003v-6.485c0-62.204-50.427-112.63-112.63-112.63z" opacity="1" data-original="url(#d)"></path><path fill="url(#e)" d="M78.12 245.358h88.441l-12.416-42.202c-30.77 3.374-57.812 19.138-76.025 42.202z" opacity="1" data-original="url(#e)"></path><circle cx="166.56" cy="173.263" r="72.079" fill="url(#f)" opacity="1" data-original="url(#f)" class=""></circle><path fill="url(#g)" d="M365.561 225.594c-62.204 0-112.63 50.426-112.63 112.63v25.095l.032-.003c-.009 14.94 9.001 29.206 27.459 39.862 40.721 23.511 111.851 20.562 158.872-6.585 25.717-14.847 38.864-33.856 38.865-51.881l.032-.003v-6.485c0-62.204-50.426-112.63-112.63-112.63z" opacity="1" data-original="url(#g)"></path><path fill="url(#h)" d="M277.12 268.48h88.441l-12.416-42.202c-30.77 3.375-57.812 19.138-76.025 42.202z" opacity="1" data-original="url(#h)"></path><circle cx="365.561" cy="196.386" r="72.079" fill="url(#i)" opacity="1" data-original="url(#i)"></circle><path fill="#43386b" d="M31.481 171.47 2.902 114.19a8.4 8.4 0 0 1 3.766-11.266 8.398 8.398 0 0 1 11.266 3.766l21.079 42.248 42.249-21.079a8.397 8.397 0 0 1 11.266 3.766 8.4 8.4 0 0 1-3.766 11.266z" opacity="1" data-original="#43386b" class=""></path><path fill="#43386b" d="M35.244 168.607a8.407 8.407 0 0 1-2.34-.334 8.398 8.398 0 0 1-5.732-10.404C47.583 87.378 97.822 30.094 165.008.706a8.4 8.4 0 0 1 6.732 15.392C109.139 43.48 62.328 96.857 43.309 162.541a8.404 8.404 0 0 1-8.065 6.066zM290.02 512a8.4 8.4 0 0 1-6.998-13.034l26.049-39.379-39.379-26.049a8.4 8.4 0 0 1 9.269-14.01l53.39 35.317-35.319 53.39A8.391 8.391 0 0 1 290.02 512z" opacity="1" data-original="#43386b" class=""></path><path fill="#43386b" d="M263.492 472.591c-51.974 0-103.001-16.485-145.792-48.004a8.4 8.4 0 1 1 9.964-13.526c55.015 40.523 124.641 54.375 191.04 38.004 4.498-1.112 9.055 1.64 10.166 6.145a8.398 8.398 0 0 1-6.145 10.166 247.3 247.3 0 0 1-59.233 7.215zM431.825 125.402a8.4 8.4 0 0 1-8.392-8.911l3.893-63.896 63.895 3.89a8.4 8.4 0 0 1 7.875 8.895c-.282 4.629-4.269 8.163-8.895 7.873l-47.128-2.869-2.87 47.128a8.403 8.403 0 0 1-8.378 7.89z" opacity="1" data-original="#43386b" class=""></path><path fill="#43386b" d="M500.11 261.084a8.4 8.4 0 0 1-8.358-9.333c7.587-67.906-15.233-135.135-62.608-184.448a8.401 8.401 0 0 1 .238-11.877 8.402 8.402 0 0 1 11.877.238c50.841 52.922 75.331 125.073 67.188 197.951a8.4 8.4 0 0 1-8.337 7.469z" opacity="1" data-original="#43386b" class=""></path></g></svg>',
+                            'routes' => ['admin.contact.index', 'admin.contact.create', 'admin.contact.edit'],
+                            'route' => 'admin.contact.index',
+                        ],
+                        [
+                            'title' => 'Setting',
+                            'icon' =>
+                                '<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="100" height="100" x="0" y="0" viewBox="0 0 64 64" style="enable-background:new 0 0 512 512" xml:space="preserve" class=""><g><path fill="#ed1c24" d="M53.65 21a3.228 3.228 0 0 1-.24.58l2.37 2.37-.05.05H40.27l-.05-.05 2.37-2.37a3.228 3.228 0 0 1-.24-.58H39v-4h3.35a3.228 3.228 0 0 1 .24-.58l-2.37-2.37 2.83-2.83 2.37 2.37a3.228 3.228 0 0 1 .58-.24V10h4v3.35a3.228 3.228 0 0 1 .58.24l2.37-2.37 2.83 2.83-2.37 2.37a3.228 3.228 0 0 1 .24.58H57v4z" opacity="1" data-original="#ed1c24" class=""></path><circle cx="48" cy="19" r="3" fill="#e6e7e8" opacity="1" data-original="#e6e7e8"></circle><path fill="#c49a6c" d="M23 23h17v27H23z" opacity="1" data-original="#c49a6c" class=""></path><path fill="#a97c50" d="M40 23h17v27H40z" opacity="1" data-original="#a97c50" class=""></path><path fill="#8b5e3c" d="M40 48v3l17-1V31a17 17 0 0 1-17 17z" opacity="1" data-original="#8b5e3c" class=""></path><path fill="#ffbcab" d="M60.28 45.4a2.994 2.994 0 0 0-4.09-1.1l-10.67 6.16h-.005a2.989 2.989 0 0 0-2.094-2.06l-14.92-4a6 6 0 0 0-3.008-.025L19 46v12l2.733 1.367a6.007 6.007 0 0 0 2.683.633h14.977a5.993 5.993 0 0 0 3-.8l16.8-9.7a3 3 0 0 0 1.087-4.1z" opacity="1" data-original="#ffbcab"></path><path fill="#ff9478" d="M45.515 50.46c-.018-.059-.031-.12-.052-.178a2.63 2.63 0 0 1-.069.182 2.99 2.99 0 0 1-3.526 1.736l-5.317-1.424-5.161-1.388a.967.967 0 0 0-1.193.724.967.967 0 0 0 .693 1.142l10.814 2.9a3.13 3.13 0 0 0 3.629-1.526 2.948 2.948 0 0 0 .182-2.168z" opacity="1" data-original="#ff9478"></path><path fill="#ff9811" d="M32 3.58V11l-3 2-3-2V3.58a8 8 0 0 0-2.32 13.39A3.935 3.935 0 0 1 25 19.93V23h8v-3.07a3.935 3.935 0 0 1 1.32-2.96A8 8 0 0 0 32 3.58z" opacity="1" data-original="#ff9811" class=""></path><path fill="#006df0" d="M11 43v18h8V43z" opacity="1" data-original="#006df0"></path><path fill="#005ece" d="M3 45h8v14H3z" opacity="1" data-original="#005ece"></path><path fill="#a97c50" d="M29 23h-6l-4 8h17l4-8h-7z" opacity="1" data-original="#a97c50" class=""></path><path fill="#8b5e3c" d="M55.73 23H40l4 8h17l-4-8z" opacity="1" data-original="#8b5e3c" class=""></path><path fill="#004fac" d="M9 45h2v14H9z" opacity="1" data-original="#004fac"></path></g></svg>',
+                            'routes' => ['admin.settings.index'],
+                            'route' => 'admin.settings.index',
+                        ],
+                        [
+                            'title' => 'FAQ',
+                            'icon' =>
+                                '<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="100" height="100" x="0" y="0" viewBox="0 0 511.997 511.997" style="enable-background:new 0 0 512 512" xml:space="preserve" class=""><g><path fill="#9dc6fb" d="M453.545 18.12H326.893c-26.887 0-48.682 21.796-48.682 48.682v63.215c0 26.887 21.796 48.682 48.682 48.682h63.644l30.466 34.813c9.037 10.326 26.044 3.935 26.044-9.787V178.7h6.498c26.887 0 48.682-21.796 48.682-48.682V66.802c.001-26.886-21.795-48.682-48.682-48.682z" opacity="1" data-original="#9dc6fb"></path><path fill="#80b4fb" d="M350.027 178.699h-23.135c-26.884 0-48.682-21.798-48.682-48.682V66.8c0-26.884 21.798-48.682 48.682-48.682h23.135c-26.884 0-48.682 21.798-48.682 48.682v63.218c0 26.883 21.798 48.681 48.682 48.681z" opacity="1" data-original="#80b4fb"></path><path fill="#e27a66" d="M69.61 238.091h161.585c34.302 0 62.11 27.807 62.11 62.11v80.651c0 34.302-27.807 62.11-62.11 62.11h-81.198l-38.869 44.415c-11.529 13.174-33.228 5.02-33.228-12.486v-31.928h-8.291c-34.302 0-62.11-27.807-62.11-62.11V300.2c.001-34.302 27.808-62.109 62.111-62.109z" opacity="1" data-original="#e27a66"></path><path fill="#dd636e" d="M110.389 488.18c-11.697 12.015-32.487 3.845-32.487-13.289V442.96h-8.293C35.31 442.96 7.5 415.15 7.5 380.851v-80.654c0-34.299 27.81-62.109 62.109-62.109h27.116c-34.307 0-62.109 27.81-62.109 62.109v80.654c0 34.299 27.802 62.109 62.109 62.109h8.293v31.932c0 5.46 2.114 10.015 5.371 13.288z" opacity="1" data-original="#dd636e"></path><path fill="#ffe07d" d="M360.757 277.144h103.832c22.042 0 39.911 17.869 39.911 39.911v51.825c0 22.042-17.869 39.911-39.911 39.911h-52.177l-24.977 28.54c-7.408 8.465-21.352 3.226-21.352-8.024V408.79h-5.327c-22.042 0-39.911-17.869-39.911-39.911v-51.825c.001-22.041 17.87-39.91 39.912-39.91z" opacity="1" data-original="#ffe07d"></path><path fill="#ffd064" d="M386.961 437.848c-7.516 7.721-20.876 2.47-20.876-8.539V408.79h-5.329c-22.04 0-39.91-17.87-39.91-39.91v-51.827c0-22.04 17.87-39.91 39.91-39.91h17.424c-22.045 0-39.91 17.87-39.91 39.91v51.827c0 22.04 17.865 39.91 39.91 39.91h5.329v20.519c.001 3.509 1.359 6.436 3.452 8.539z" opacity="1" data-original="#ffd064"></path><path fill="#f9f6f9" d="M339.134 118.087H160.006c-38.026 0-68.853 30.827-68.853 68.853v89.407c0 38.026 30.827 68.853 68.853 68.853h90.013l43.089 49.237c12.781 14.604 36.835 5.565 36.835-13.842V345.2h9.191c38.026 0 68.853-30.827 68.853-68.853V186.94c0-38.027-30.826-68.853-68.853-68.853z" opacity="1" data-original="#f9f6f9"></path><path fill="#dddaec" d="M192.725 345.199h-32.72c-38.023 0-68.852-30.829-68.852-68.852v-89.411c0-38.023 30.829-68.852 68.852-68.852h32.72c-38.023 0-68.852 30.829-68.852 68.852v89.411c0 38.023 30.829 68.852 68.852 68.852z" opacity="1" data-original="#dddaec"></path><path fill="#b3e59f" d="M157.509 18.119H57.342c-21.264 0-38.502 17.238-38.502 38.502v49.996c0 21.264 17.238 38.502 38.502 38.502h50.335l24.095 27.533c7.147 8.166 20.598 3.112 20.598-7.74V145.12h5.139c21.264 0 38.502-17.238 38.502-38.502V56.621c0-21.264-17.238-38.502-38.502-38.502z" opacity="1" data-original="#b3e59f"></path><path fill="#95d6a4" d="M75.638 145.118H57.341c-21.262 0-38.501-17.239-38.501-38.501V56.619c0-21.262 17.239-38.501 38.501-38.501h18.297c-21.262 0-38.501 17.239-38.501 38.501v49.997c0 21.263 17.239 38.502 38.501 38.502z" opacity="1" data-original="#95d6a4"></path><path d="M464.591 269.641H415.49v-51.045c4.35 4.885 10.378 7.517 16.611 7.517 2.653 0 5.344-.477 7.956-1.458 8.805-3.31 14.493-11.524 14.493-20.927v-17.534c30.519-.54 55.177-25.533 55.177-56.178V66.807c0-30.981-25.205-56.187-56.187-56.187H326.893c-30.98 0-56.186 25.205-56.186 56.187v43.785H203.33c.113-1.312.181-2.635.181-3.976V56.621c0-25.366-20.637-46.002-46.002-46.002H57.342c-25.365 0-46.002 20.636-46.002 46.002v49.996c0 25.366 20.637 46.002 46.002 46.002h34.446c-5.337 10.561-8.127 22.207-8.127 34.314v43.66H69.6c-38.377 0-69.6 31.227-69.6 69.61v80.65c0 38.383 31.223 69.61 69.6 69.61h.8v24.43c0 11.128 6.732 20.848 17.152 24.762a26.714 26.714 0 0 0 9.405 1.723c7.447 0 14.651-3.173 19.805-9.065l36.64-41.851h32.527c4.143 0 7.5-3.358 7.5-7.5s-3.357-7.5-7.5-7.5H150a7.5 7.5 0 0 0-5.643 2.56l-38.883 44.413c-4.843 5.537-10.904 3.833-12.647 3.178-1.742-.655-7.427-3.362-7.427-10.72v-31.93a7.5 7.5 0 0 0-7.5-7.5h-8.3c-30.106 0-54.6-24.498-54.6-54.61v-80.65c0-30.112 24.493-54.61 54.6-54.61h14.06v30.75c0 42.105 34.25 76.36 76.35 76.36h86.606l37.257 42.571c-6.411 23.488-28.007 40.188-52.683 40.188h-15.68c-4.143 0-7.5 3.358-7.5 7.5s3.357 7.5 7.5 7.5h15.681c28.979 0 54.634-18.076 64.882-44.347a27.707 27.707 0 0 0 12.65 3.041 28.87 28.87 0 0 0 3.138-.172 29.066 29.066 0 0 0 15.446-6.535 47.22 47.22 0 0 0 31.277 13.787v13.075c0 8.279 5.008 15.51 12.759 18.423a19.872 19.872 0 0 0 7 1.283c5.54 0 10.901-2.361 14.737-6.744l22.734-25.987h48.777c26.14 0 47.406-21.267 47.406-47.407v-51.822c0-26.145-21.267-47.416-47.406-47.416zM26.34 106.617V56.621c0-17.095 13.907-31.002 31.002-31.002h100.167c17.095 0 31.002 13.907 31.002 31.002v49.996c0 17.095-13.907 31.002-31.002 31.002h-5.14a7.5 7.5 0 0 0-7.5 7.5v19.792c0 2.658-1.928 3.67-2.757 3.981s-2.945.821-4.697-1.18L113.32 140.18a7.5 7.5 0 0 0-5.644-2.561H57.342c-17.095 0-31.002-13.908-31.002-31.002zm283.89 287.456c-2.545.277-7.424.053-11.493-4.599l-43.074-49.211a7.5 7.5 0 0 0-5.644-2.561h-90.01c-33.828 0-61.35-27.526-61.35-61.36v-89.41c0-11.092 2.899-21.705 8.439-31.085l19.029 21.743c3.752 4.289 8.996 6.598 14.415 6.598 2.283 0 4.599-.41 6.846-1.254 7.581-2.849 12.48-9.923 12.48-18.023v-12.353c17.593-.893 32.602-11.72 39.535-26.966H339.14c.708 0 1.415.007 2.115.042a7.5 7.5 0 1 0 .73-14.982 57.143 57.143 0 0 0-2.846-.059h-53.433V66.807c0-22.71 18.476-41.187 41.186-41.187H453.54c22.71 0 41.187 18.476 41.187 41.187v63.209c0 22.71-18.477 41.187-41.187 41.187h-6.49a7.5 7.5 0 0 0-7.5 7.5v25.025c0 4.725-3.652 6.465-4.771 6.886-1.12.421-5.018 1.52-8.134-2.039l-11.155-12.751v-8.891c0-29.171-16.234-55.371-42.369-68.375a7.501 7.501 0 0 0-6.682 13.43c21.003 10.451 34.051 31.505 34.051 54.945v89.41c0 .179.002.351-.005.529a5.833 5.833 0 0 0-.004.187c-.374 33.439-27.892 60.644-61.342 60.644h-9.199a7.5 7.5 0 0 0-7.5 7.5v35.39c0 2.405-.545 4.611-1.629 6.578-2.064 3.769-6.119 6.414-10.581 6.902zm186.767-25.194c0 17.869-14.537 32.407-32.406 32.407H412.41a7.5 7.5 0 0 0-5.645 2.562l-24.975 28.548c-1.927 2.202-4.259 1.641-5.173 1.298-.912-.343-3.035-1.457-3.035-4.381v-20.526a7.5 7.5 0 0 0-7.5-7.5h-5.325a32.31 32.31 0 0 1-24.777-11.527c.966-2.899 1.46-5.964 1.46-9.167v-27.89h1.699c20.237 0 39.306-7.84 53.694-22.076 12.604-12.471 20.336-28.585 22.205-45.985h49.552c17.869 0 32.406 14.542 32.406 32.417v51.82z" fill="#000000" opacity="1" data-original="#000000" class=""></path><path d="M232.573 191.765a5.173 5.173 0 0 0-.081-.206c-1.452-3.531-4.878-5.846-8.678-5.807a9.343 9.343 0 0 0-8.667 5.825c-.023.057-.046.114-.067.171l-31.05 81.524a7.5 7.5 0 1 0 14.018 5.339l5.893-15.473h39.535l5.832 15.452a7.503 7.503 0 0 0 7.018 4.854 7.5 7.5 0 0 0 7.015-10.15zm-22.919 56.372 14.145-37.139 14.016 37.139zM175.785 186.832h-33.269a7.5 7.5 0 0 0-7.5 7.5v82.083c0 4.142 3.357 7.5 7.5 7.5s7.5-3.358 7.5-7.5v-34.319h23.126c4.143 0 7.5-3.358 7.5-7.5s-3.357-7.5-7.5-7.5h-23.126v-25.265h25.769a7.5 7.5 0 1 0 0-14.999zM351.319 281.688a7.476 7.476 0 0 0 5.304 2.197 7.474 7.474 0 0 0 5.303-2.197 7.498 7.498 0 0 0 .001-10.606l-7.282-7.283c5.757-8.014 9.16-17.826 9.16-28.424 0-26.933-21.912-48.845-48.845-48.845s-48.845 21.912-48.845 48.845 21.912 48.844 48.845 48.844a48.587 48.587 0 0 0 29.187-9.703zm-36.359-12.47c-18.662 0-33.845-15.183-33.845-33.844 0-18.662 15.183-33.845 33.845-33.845s33.845 15.183 33.845 33.845a33.63 33.63 0 0 1-4.962 17.622l-8.368-8.368a7.5 7.5 0 0 0-10.606 0 7.498 7.498 0 0 0-.001 10.606l8.511 8.511a33.637 33.637 0 0 1-18.419 5.473z" fill="#000000" opacity="1" data-original="#000000" class=""></path></g></svg>',
+                            'routes' => ['admin.faq.index', 'admin.faq.create', 'admin.faq.edit'],
+                            'route' => 'admin.faq.index',
+                        ],
+                        [
+                            'title' => 'Term & Condition',
+                            'icon' =>
+                                '<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="100" height="100" x="0" y="0" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve" class=""><g><path fill="#edd4c2" d="M33.672 0C15.07 0 0 15.07 0 33.672v59.004h67.34V33.672C67.34 15.07 52.262 0 33.672 0zm0 0" opacity="1" data-original="#edd4c2"></path><path fill="#ffefe4" d="M409.852 0H33.664c18.602 0 33.672 15.074 33.672 33.672V512h376.187V33.672C443.523 15.074 428.437 0 409.852 0zm0 0" opacity="1" data-original="#ffefe4" class=""></path><path fill="#edd4c2" d="M67.336 492h376.187v20H67.336zm0 0" opacity="1" data-original="#edd4c2"></path><path fill="#fff7f2" d="M409.852 0H33.664c13.73 0 25.531 8.219 30.773 20h345.415c18.586 0 33.671 15.074 33.671 33.672v-20C443.523 15.074 428.437 0 409.852 0zm0 0" opacity="1" data-original="#fff7f2"></path><path fill="#ff8354" d="M512 454.984h-45.273V140.926H512zm0 0" opacity="1" data-original="#ff8354"></path><path fill="#ffefe4" d="M512 466.652h-45.273v-11.664H512zm0 0" opacity="1" data-original="#ffefe4" class=""></path><path fill="#6770e6" d="M466.727 466.648H512v22.715C512 501.867 501.867 512 489.363 512c-12.5 0-22.636-10.133-22.636-22.637zm0 0" opacity="1" data-original="#6770e6" class=""></path><path fill="#5861c7" d="M489.363 492c-12.5 0-22.636-10.133-22.636-22.637v20c0 12.504 10.136 22.637 22.636 22.637C501.867 512 512 501.867 512 489.363v-20C512 481.867 501.867 492 489.363 492zm0 0" opacity="1" data-original="#5861c7"></path><path fill="#edd4c2" d="m466.727 140.906 20.964-58.492c.563-1.57 2.782-1.57 3.344 0L512 140.906zm0 0" opacity="1" data-original="#edd4c2"></path><path fill="#5861c7" d="M478.043 109.328h22.637l-9.645-26.914c-.562-1.57-2.785-1.57-3.347 0zm0 0" opacity="1" data-original="#5861c7"></path><path fill="#5861c7" d="M478.043 109.328h22.637l-9.645-26.914c-.562-1.57-2.785-1.57-3.347 0zm0 0" opacity="1" data-original="#5861c7"></path><path fill="#8f95e6" d="M486.883 92.414c.836-1.57 4.125-1.57 4.957 0l8.558 16.121-9.363-26.12c-.562-1.571-2.781-1.571-3.344 0l-9.359 26.112zm0 0" opacity="1" data-original="#8f95e6"></path><g fill="#6770e6"><path d="M374.832 203.375H176.027c-5.078 0-9.199-4.117-9.199-9.195 0-5.082 4.121-9.2 9.2-9.2h198.8c5.082 0 9.2 4.118 9.2 9.2.003 5.078-4.118 9.195-9.196 9.195zM374.832 251.578H176.027c-5.078 0-9.199-4.117-9.199-9.2 0-5.077 4.121-9.194 9.2-9.194h198.8c5.082 0 9.2 4.117 9.2 9.195.003 5.082-4.118 9.2-9.196 9.2zM374.832 299.781H176.027c-5.078 0-9.199-4.117-9.199-9.199 0-5.078 4.121-9.2 9.2-9.2h198.8c5.082 0 9.2 4.122 9.2 9.2.003 5.082-4.118 9.2-9.196 9.2zM374.832 347.98H176.027c-5.078 0-9.199-4.117-9.199-9.195 0-5.082 4.121-9.2 9.2-9.2h198.8c5.082 0 9.2 4.118 9.2 9.2.003 5.078-4.118 9.195-9.196 9.195zM145.23 194.176c0 5.082-4.12 9.199-9.199 9.199-5.082 0-9.203-4.117-9.203-9.2s4.121-9.198 9.203-9.198c5.078 0 9.2 4.117 9.2 9.199zM145.23 242.379c0 5.082-4.12 9.203-9.199 9.203a9.204 9.204 0 0 1-9.203-9.203c0-5.078 4.121-9.2 9.203-9.2 5.078 0 9.2 4.122 9.2 9.2zM145.23 290.582c0 5.082-4.12 9.2-9.199 9.2-5.082 0-9.203-4.118-9.203-9.2s4.121-9.2 9.203-9.2c5.078 0 9.2 4.118 9.2 9.2zM145.23 338.785c0 5.078-4.12 9.2-9.199 9.2-5.082 0-9.203-4.122-9.203-9.2 0-5.082 4.121-9.2 9.203-9.2 5.078 0 9.2 4.118 9.2 9.2zM165.215 128.004V65.035h-16.348a7.691 7.691 0 1 1 0-15.383h48.91a7.691 7.691 0 0 1 7.692 7.692 7.689 7.689 0 0 1-7.692 7.691H181.43v62.969a7.691 7.691 0 0 1-7.692 7.691h-.832a7.691 7.691 0 0 1-7.691-7.691zM276.645 118.035l4.234 5.078a7.174 7.174 0 0 1-1.145 10.285 7.17 7.17 0 0 1-9.906-1.125l-1.84-2.23c-5.691 5.059-12.535 7.582-20.547 7.582-4.488 0-8.671-.746-12.558-2.23-3.89-1.477-7.274-3.56-10.153-6.25-2.882-2.68-5.152-5.868-6.796-9.555-1.645-3.68-2.465-7.727-2.465-12.137 0-4.805 1.183-9.371 3.55-13.703 2.356-4.32 5.665-8.012 9.918-11.05-1.527-2.087-2.769-4.247-3.726-6.497-.969-2.238-1.45-4.605-1.45-7.09 0-2.965.548-5.738 1.626-8.351a19.998 19.998 0 0 1 4.625-6.79c2.004-1.913 4.37-3.44 7.09-4.566 2.726-1.113 5.734-1.683 9.02-1.683 5.769 0 10.394 1.34 13.874 4.03a23.45 23.45 0 0 1 2.652 2.372c3.297 3.434 2.454 9.05-1.753 11.273l-.754.399c-2.59 1.371-5.649.61-7.664-1.516-1.997-2.097-4.625-2.738-6.125-2.738-2.317 0-4.165.684-5.528 2.043-1.36 1.371-2.043 3.09-2.043 5.176 0 1.281.285 2.453.844 3.539.559 1.086 1.32 2.219 2.285 3.422l25.84 31.492 3.54-5.762a6.7 6.7 0 0 1 9.284-2.156 6.698 6.698 0 0 1 2.082 9.254zm-28.48 5.406c4.48 0 8.167-1.328 11.054-3.968l-21.75-26.32c-2.242 1.683-3.961 3.745-5.164 6.19-1.203 2.446-1.813 4.95-1.813 7.512 0 2.567.488 4.872 1.45 6.907.956 2.043 2.261 3.793 3.902 5.23a17.497 17.497 0 0 0 5.652 3.305c2.121.766 4.344 1.144 6.668 1.144zM367.215 116.266c3.523 3.34 3.219 8.992-.567 12.027a41.63 41.63 0 0 1-8.53 5.3c-5.77 2.68-12.22 4.028-19.345 4.028-6.418 0-12.363-1.164-17.847-3.492-5.488-2.316-10.242-5.484-14.242-9.484-4.008-4.012-7.168-8.754-9.496-14.25-2.329-5.489-3.481-11.395-3.481-17.723s1.152-12.234 3.48-17.73c2.329-5.489 5.489-10.231 9.497-14.243 4-4 8.753-7.168 14.242-9.484 5.484-2.328 11.43-3.492 17.847-3.492 6.883 0 12.957 1.203 18.2 3.609a40.973 40.973 0 0 1 7.847 4.723c3.567 2.73 3.739 8.07.516 11.191l-.688.664c-2.699 2.613-6.855 2.723-9.847.45a30.12 30.12 0 0 0-4.078-2.614c-3.325-1.762-7.266-2.64-11.832-2.64-4.012 0-7.778.703-11.297 2.101-3.532 1.41-6.59 3.387-9.196 5.945-2.601 2.575-4.664 5.676-6.187 9.32-1.527 3.65-2.277 7.708-2.277 12.2 0 4.488.753 8.547 2.277 12.195 1.523 3.649 3.59 6.746 6.187 9.309 2.606 2.574 5.664 4.547 9.196 5.957 3.52 1.398 7.285 2.101 11.297 2.101 4.8 0 9.074-.976 12.8-2.945a29.126 29.126 0 0 0 4.965-3.309c3.121-2.562 7.63-2.492 10.559.286zm0 0" fill="#6770e6" opacity="1" data-original="#6770e6" class=""></path></g><path fill="#edd4c2" d="M182.992 454.984h-48.094a8.069 8.069 0 0 1-8.066-8.066V398.82a8.066 8.066 0 0 1 8.066-8.066h48.098a8.064 8.064 0 0 1 8.066 8.066v48.098a8.07 8.07 0 0 1-8.07 8.066zm0 0" opacity="1" data-original="#edd4c2"></path><path fill="#6770e6" d="M155.273 441.023a7.685 7.685 0 0 1-4.77-1.66l-9.487-7.504a7.7 7.7 0 0 1-1.262-10.812 7.695 7.695 0 0 1 10.809-1.262l3.539 2.797 14.628-17.953a7.697 7.697 0 1 1 11.934 9.727l-19.418 23.831a7.689 7.689 0 0 1-5.973 2.836zM374.832 432.066h-144.57c-5.078 0-9.2-4.117-9.2-9.199 0-5.078 4.122-9.195 9.2-9.195h144.57c5.078 0 9.2 4.117 9.2 9.195 0 5.082-4.122 9.2-9.2 9.2zm0 0" opacity="1" data-original="#6770e6" class=""></path></g></svg>',
+                            'routes' => ['admin.term.index', 'admin.term.create', 'admin.term.edit'],
+                            'route' => 'admin.term.index',
+                        ],
+                        [
+                            'title' => 'Support & Policy',
+                            'icon' => '
+                            <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="100" height="100" x="0" y="0" viewBox="0 0 442 442.88" style="enable-background:new 0 0 512 512" xml:space="preserve" class=""><g><path fill="#3c51d1" d="M62.98 9.762h330.38v433.117H62.98zm0 0" opacity="1" data-original="#3c51d1"></path><path fill="#2044b4" d="M80.04 51.691h276.5V423.88H120.44c-22.316 0-40.406-18.094-40.402-40.41zm0 0" opacity="1" data-original="#2044b4"></path><path fill="#ffffff" d="M365.2 42.91v372.192H123.44c-.628 0-1.257-.02-1.89-.063-18.399-.96-32.828-16.148-32.852-34.57V42.91zm0 0" opacity="1" data-original="#ffffff"></path><path fill="#0c1e88" d="M393.36 184.012v59.777l-28.16 28.16v-59.777zm0 0" opacity="1" data-original="#0c1e88"></path><path fill="#fed5c5" d="M365.2 212.172v59.777L352.647 284.5l-2.726 2.719-2.774 2.77-6.546 6.55-14.84 33.293-54.211 11.406-.75.16-6.23 1.313 1.32-6.3.148-.7 11.39-54.191 33.31-14.848 6.55-6.543-.027-.027 2.047-2.051 16.421-16.422 3.45-3.438zm0 0" opacity="1" data-original="#fed5c5"></path><path fill="#6175e9" d="M54.77 9.762h8.21v433.117h-8.21zm0 0" opacity="1" data-original="#6175e9"></path><path fill="#0c1e88" d="M164.61 9.762h115.949V34.84h-115.95zm0 0" opacity="1" data-original="#0c1e88"></path><path fill="#ff8c5f" d="M175.352 0h100.18a5 5 0 0 1 5 5v21.34H170.32V5.03A5.004 5.004 0 0 1 175.352 0zm0 0" opacity="1" data-original="#ff8c5f"></path><path fill="#fed5c5" d="M175.352 4.738h100.18c2.761 0 5 2.242 5 5V29.59H170.32V9.762a5.014 5.014 0 0 1 1.47-3.563 5.007 5.007 0 0 1 3.562-1.46zM365.2 368.922v46.18H123.44c-.628 0-1.257-.02-1.89-.063 19.52-6.934 32.558-25.402 32.558-46.117zm0 0" opacity="1" data-original="#fed5c5"></path><path fill="#ff8c5f" d="M349.191 415.102h31.329c20.472 0 37.07-16.598 37.07-37.07H162.07c0 20.468-16.59 37.062-37.058 37.07" opacity="1" data-original="#ff8c5f"></path><path fill="#030303" d="M251.059 16.469c.007.601-.114 1.199-.348 1.75a4.52 4.52 0 0 1-1 1.43 4.421 4.421 0 0 1-3.172 1.32h-42.23a4.486 4.486 0 0 1-4.137-2.75 4.338 4.338 0 0 1-.352-1.75 4.511 4.511 0 0 1 4.489-4.5h42.261a4.501 4.501 0 0 1 4.489 4.5zm0 0" opacity="1" data-original="#030303"></path><path fill="#2044b4" d="M250.71 18.172a4.61 4.61 0 0 1-1 1.43 4.437 4.437 0 0 1-3.17 1.32h-42.231a4.492 4.492 0 0 1-4.137-2.75 4.457 4.457 0 0 1 1-1.434 4.472 4.472 0 0 1 3.137-1.27h42.261a4.505 4.505 0 0 1 4.14 2.704zm0 0" opacity="1" data-original="#2044b4"></path><g fill="#383838"><path d="M185.191 126.27h-9.48a5 5 0 1 1 0-10h9.48a5 5 0 1 1 0 10zM326.531 126.27h-121a5 5 0 1 1 0-10h121a5 5 0 1 1 0 10zM185.191 182.531h-9.48a5 5 0 1 1 0-10h9.48a5 5 0 1 1 0 10zM326.531 182.531h-121a5 5 0 1 1 0-10h121a5 5 0 1 1 0 10zM326.531 154.93h-15.82a5 5 0 1 1 0-10h15.82a5 5 0 1 1 0 10zM292.77 154.93H175.71a5 5 0 1 1 0-10h117.06a5 5 0 1 1 0 10zM293.77 210.8H176.04a5 5 0 1 1 0-10h117.73a5 5 0 1 1 0 10zm0 0" fill="#383838" opacity="1" data-original="#383838"></path></g><path fill="#fcc924" d="M120.621 326.559a4.997 4.997 0 0 1-4.05-7.938l22.359-30.82a4.25 4.25 0 0 0 .34-4.422 4.25 4.25 0 0 0-3.782-2.32h-14.867a5 5 0 1 1 0-10h14.867c5.36-.004 10.262 3 12.696 7.773a14.242 14.242 0 0 1-1.164 14.84l-6.88 9.488 60.79-38.82a5.006 5.006 0 0 1 6.906 1.523 5.003 5.003 0 0 1-1.527 6.907l-83 53c-.801.515-1.735.789-2.688.789zm0 0" opacity="1" data-original="#fcc924"></path><path fill="#383838" d="M197.11 344.969H120.62a5 5 0 1 1 0-10h76.488a5 5 0 1 1 0 10zm0 0" opacity="1" data-original="#383838"></path><path fill="#ff8c5f" d="M340.89 278.441 311 248.551l-2.781 2.77.031.019-6.55 6.55-33.31 14.848-11.12 52.922-.27 1.27-.148.699-1.32 6.3 6.23-1.308.75-.16 54.207-11.41 14.84-33.29 6.55-6.55.012.008zm0 0" opacity="1" data-original="#ff8c5f"></path><path fill="#ffb69f" d="m334.23 271.941-9.32 9.32-14.84 33.29-52.8 11.11 11.12-52.923 33.31-14.847 9.241-9.243zm0 0" opacity="1" data-original="#ffb69f"></path><path fill="#3c51d1" d="M441.441 169.172a21.02 21.02 0 0 1-6.191 14.93l-78.64 78.636-29.891-29.886 78.64-78.641c7.371-7.371 19.012-8.266 27.422-2.11.34.239.668.5 1 .77a21.076 21.076 0 0 1 7.66 16.3zm0 0" opacity="1" data-original="#3c51d1"></path><path fill="#6175e9" d="M435.078 161.75a21.01 21.01 0 0 1-6.187 14.941l-78.63 78.641-23-23 78.098-78.102c7.371-7.37 19.012-8.265 27.422-2.109a21.2 21.2 0 0 1 2.297 9.629zm0 0" opacity="1" data-original="#6175e9"></path><path fill="#0c1e88" d="m343.617 275.719-29.887-29.89 16.418-16.419 29.891 29.89zM282.11 311.79l-21 21-5.61 1.179 1.191-5.68 20.93-20.918a3.145 3.145 0 0 1 4.457 0 3.15 3.15 0 0 1 0 4.461zm0 0" opacity="1" data-original="#0c1e88"></path><path fill="#eaae06" d="m356.59 262.738-16.418 16.422-6.73-6.73h-.012l-23.149-23.16 16.418-16.418zm0 0" opacity="1" data-original="#eaae06"></path><path fill="#fcc924" d="M349.86 256.012 333.44 272.43h-.011l-23.149-23.16 16.418-16.418zm0 0" opacity="1" data-original="#fcc924"></path><path fill="#0c1e88" d="M300.059 297.898c0 4.704-3.809 8.512-8.508 8.512s-8.512-3.808-8.512-8.512c0-4.699 3.813-8.507 8.512-8.507s8.508 3.808 8.508 8.507zm0 0" opacity="1" data-original="#0c1e88"></path><path fill="#fcc924" d="M295.012 297.898a3.46 3.46 0 0 1-3.461 3.461 3.46 3.46 0 1 1 3.46-3.46zm0 0" opacity="1" data-original="#fcc924"></path><path fill="#fe5e22" d="M129.77 92.61v58.859c.011 34.77-20.172 66.383-51.72 81l-10 4.633a7.008 7.008 0 0 1-5.921 0l-3.559-1.633-6.441-3C20.594 217.844.422 186.234.44 151.469v-58.86a7.05 7.05 0 0 1 7-7h26.48A32.856 32.856 0 0 0 63.54 66.98a1.702 1.702 0 0 1 1.547-.992c.664 0 1.266.387 1.543.992a32.885 32.885 0 0 0 29.61 18.57h26.472a7.058 7.058 0 0 1 7.059 7.06zm0 0" opacity="1" data-original="#fe5e22"></path><path fill="#ff8c5f" d="M129.77 92.61v58.859c.011 34.77-20.172 66.383-51.72 81l-10 4.633a7.008 7.008 0 0 1-5.921 0l-3.559-1.633 6.43-3c31.55-14.614 51.738-46.227 51.73-81v-65.91h6a7.06 7.06 0 0 1 7.04 7.05zm0 0" opacity="1" data-original="#ff8c5f"></path><path fill="#030303" d="M101.09 153.18c0 23.484-19.035 42.52-42.52 42.52-1.843 0-3.683-.118-5.511-.348-21.172-2.774-37.008-20.817-37.008-42.172 0-21.356 15.836-39.399 37.008-42.168a41.952 41.952 0 0 1 5.511-.364c23.485.008 42.52 19.047 42.52 42.532zm0 0" opacity="1" data-original="#030303"></path><path fill="#ffffff" d="M107.61 153.18c0 23.484-19.036 42.52-42.52 42.52-1.844 0-3.684-.118-5.512-.348-21.172-2.774-37.008-20.817-37.008-42.172 0-21.356 15.836-39.399 37.008-42.168a41.952 41.952 0 0 1 5.512-.364c23.484.008 42.52 19.047 42.52 42.532zm0 0" opacity="1" data-original="#ffffff"></path><path fill="#fcc924" d="M97.34 153.18c0 17.82-14.445 32.261-32.262 32.261-17.82-.004-32.262-14.449-32.258-32.27.004-17.816 14.453-32.257 32.27-32.25 17.816 0 32.254 14.442 32.25 32.259zm0 0" opacity="1" data-original="#fcc924"></path><path fill="#060b6f" d="M64.75 177.21a5.002 5.002 0 0 1-3.54-1.46l-22-22a5.003 5.003 0 1 1 7.071-7.078L64.77 165.16l49.07-49.07a4.998 4.998 0 0 1 7.008.062 4.998 4.998 0 0 1 .062 7.008l-52.629 52.59a5.007 5.007 0 0 1-3.531 1.46zm0 0" opacity="1" data-original="#060b6f"></path></g></svg>',
                             'routes' => [
-                                'admin.settings.index',
-
-                                'admin.faq.index',
-                                'admin.faq.create',
-                                'admin.faq.edit',
-
-                                'admin.term.index',
-                                'admin.term.create',
-                                'admin.term.edit',
-
                                 'admin.support-policy.index',
                                 'admin.support-policy.create',
                                 'admin.support-policy.edit',
                             ],
-
-                            'subMenu' => [
-                                [
-                                    'title' => 'Setting',
-                                    'routes' => ['admin.settings.index'],
-                                    'route' => 'admin.settings.index',
-                                ],
-
-                                [
-                                    'title' => 'Faq',
-                                    'routes' => ['admin.faq.index', 'admin.faq.create', 'admin.faq.edit'],
-                                    'route' => 'admin.faq.index',
-                                ],
-
-                                [
-                                    'title' => 'Term & Condition',
-                                    'routes' => ['admin.term.index', 'admin.term.create', 'admin.term.edit'],
-                                    'route' => 'admin.term.index',
-                                ],
-
-                                [
-                                    'title' => 'Support & Policy',
-                                    'routes' => [
-                                        'admin.support-policy.index',
-                                        'admin.support-policy.create',
-                                        'admin.support-policy.edit',
-                                    ],
-                                    'route' => 'admin.support-policy.index',
-                                ],
-                            ],
+                            'route' => 'admin.support-policy.index',
                         ],
-                        // ========================= Setting End ======================
-
-                        // =================== Management Section Start ===============
                         [
-                            'title' => 'Management',
-                            'icon' => 'icons/duotune/ecommerce/ecm002.svg',
-
-                            'routes' => [
-                                'admin.user.index',
-                                'admin.user.create',
-                                'admin.user.edit',
-
-                                'admin.staff.index',
-                                'admin.staff.create',
-                                'admin.staff.edit',
-                            ],
-
-                            'subMenu' => [
-                                [
-                                    'title' => 'Staff',
-                                    'routes' => ['admin.staff.index', 'admin.staff.create', 'admin.staff.edit'],
-                                    'route' => 'admin.staff.index',
-                                ],
-
-                                [
-                                    'title' => 'User',
-                                    'routes' => ['admin.user.index', 'admin.user.create', 'admin.user.edit'],
-                                    'route' => 'admin.user.index',
-                                ],
-                            ],
+                            'title' => 'Staff',
+                            'icon' =>
+                                '<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="100" height="100" x="0" y="0" viewBox="0 0 96 96" style="enable-background:new 0 0 512 512" xml:space="preserve"><g><path fill="#ffb53b" d="M21.811 60.674h27.354c3.997 0 7.653 1.645 10.318 4.31a14.57 14.57 0 0 1 4.281 10.317v13.012a4.027 4.027 0 0 1-1.163 2.834 4.05 4.05 0 0 1-2.863 1.19H11.209a3.983 3.983 0 0 1-2.834-1.19 3.934 3.934 0 0 1-1.19-2.834V75.301c0-4.024 1.644-7.682 4.309-10.317a14.468 14.468 0 0 1 10.317-4.31z" opacity="1" data-original="#ffb53b"></path><path fill="#24d1af" d="M9.764 19.686h15.023c2.268 0 4.337.935 5.839 2.409a8.23 8.23 0 0 1 2.41 5.839v7.172c0 .652-.255 1.275-.709 1.701-.454.454-1.049.737-1.729.737H3.924a2.357 2.357 0 0 1-1.701-.737 2.355 2.355 0 0 1-.737-1.701v-7.172c0-2.268.936-4.337 2.438-5.839 1.503-1.474 3.572-2.409 5.84-2.409z" opacity="1" data-original="#24d1af"></path><path fill="#58ed9b" d="M17.276 1.487a9.578 9.578 0 0 1 6.774 2.806c1.729 1.758 2.807 4.139 2.807 6.803a9.578 9.578 0 0 1-9.581 9.581 9.529 9.529 0 0 1-6.775-2.806 9.489 9.489 0 0 1-2.834-6.775c0-2.665 1.077-5.045 2.834-6.803a9.529 9.529 0 0 1 6.775-2.806z" opacity="1" data-original="#58ed9b"></path><path fill="#24d1af" d="M47.465 19.686h15.023c2.268 0 4.337.935 5.839 2.409a8.23 8.23 0 0 1 2.41 5.839v7.172c0 .652-.255 1.275-.709 1.701-.454.454-1.049.737-1.729.737H41.625a2.355 2.355 0 0 1-1.701-.737 2.359 2.359 0 0 1-.737-1.701v-7.172c0-2.268.936-4.337 2.438-5.839 1.503-1.474 3.572-2.409 5.84-2.409z" opacity="1" data-original="#24d1af"></path><path fill="#58ed9b" d="M54.977 1.487a9.582 9.582 0 0 1 6.775 2.806c1.729 1.758 2.806 4.139 2.806 6.803a9.58 9.58 0 0 1-9.581 9.581 9.529 9.529 0 0 1-6.775-2.806 9.489 9.489 0 0 1-2.834-6.775c0-2.665 1.077-5.045 2.834-6.803a9.529 9.529 0 0 1 6.775-2.806z" opacity="1" data-original="#58ed9b"></path><path fill="#fedf5b" d="M35.474 27.594c4.706 0 8.986 1.928 12.047 4.989 3.09 3.09 4.989 7.342 4.989 12.047a17.034 17.034 0 0 1-17.036 17.064c-4.705 0-8.958-1.927-12.047-4.988-3.089-3.09-4.989-7.37-4.989-12.076s1.899-8.958 4.989-12.047c3.09-3.062 7.342-4.989 12.047-4.989z" opacity="1" data-original="#fedf5b"></path><path fill="#7676ff" d="M88.992 38.082c3.657 3.685 5.5 8.476 5.5 13.295 0 4.818-1.843 9.638-5.5 13.294-3.685 3.686-8.476 5.527-13.294 5.527s-9.638-1.842-13.294-5.527a18.67 18.67 0 0 1-5.528-13.294c0-4.819 1.843-9.61 5.528-13.295 3.657-3.657 8.476-5.499 13.294-5.499s9.609 1.814 13.294 5.499z" opacity="1" data-original="#7676ff"></path><path fill="#7676ff" d="m61.156 69.632-3.713-3.714a.494.494 0 0 1 0-.708l3.231-3.231c.028 0 .028-.028.057-.028a.525.525 0 0 1 .708.085c.227.34.51.68.794.992.255.312.567.623.878.936.312.312.624.623.907.878.34.284.652.539.964.766.057.028.085.057.113.085.17.198.17.511 0 .709l-3.231 3.231c-.197.197-.538.197-.708-.001z" opacity="1" data-original="#7676ff"></path><path fill="#dfe7f4" d="M85.931 41.144c2.835 2.806 4.252 6.52 4.252 10.233s-1.417 7.427-4.252 10.261c-2.806 2.835-6.52 4.252-10.233 4.252s-7.427-1.417-10.261-4.252a14.464 14.464 0 0 1-4.252-10.261c0-3.714 1.417-7.427 4.252-10.233 2.834-2.834 6.548-4.252 10.261-4.252s7.427 1.417 10.233 4.252z" opacity="1" data-original="#dfe7f4"></path><path fill="#9595fc" d="M33.972 93.103a4.742 4.742 0 0 1-1.389-3.373c0-1.219.454-2.409 1.36-3.345l.028-.028L56.28 64.048a.496.496 0 0 1 .709 0l6.038 6.037a.497.497 0 0 1 0 .709L40.718 93.103a4.738 4.738 0 0 1-3.373 1.389 4.745 4.745 0 0 1-3.373-1.389z" opacity="1" data-original="#9595fc"></path><path fill="#ffb53b" d="M7.695 77.938h37.53c1.333 0 2.608.368 3.686 1.021a7.587 7.587 0 0 1 2.664 2.777c.255.539.482 1.077.624 1.645.142.566.227 1.162.227 1.758 0 1.983-.822 3.77-2.126 5.073-1.304 1.305-3.118 2.126-5.074 2.126H11.125a4.025 4.025 0 0 1-2.75-1.19l-.028-.028a3.962 3.962 0 0 1-1.162-2.806V78.42c0-.256.226-.482.51-.482z" opacity="1" data-original="#ffb53b"></path><path d="M86.298 40.777c-2.835-2.835-6.603-4.396-10.611-4.396s-7.77 1.562-10.589 4.396c-5.845 5.845-5.845 15.355-.002 21.198 2.822 2.836 6.583 4.398 10.591 4.398s7.776-1.562 10.611-4.396c5.845-5.845 5.845-15.355 0-21.2zm-1.414 19.786a12.924 12.924 0 0 1-9.197 3.811 12.85 12.85 0 0 1-9.175-3.811c-5.065-5.065-5.065-13.307.002-18.374a12.849 12.849 0 0 1 9.173-3.809c3.474 0 6.739 1.354 9.197 3.811 5.065 5.065 5.065 13.306 0 18.372zm4.447-22.848a19.17 19.17 0 0 0-13.647-5.65c-1.512 0-2.992.193-4.428.528v-4.659c0-4.818-3.933-8.739-8.767-8.739h-1.504c2.477-1.842 4.092-4.782 4.092-8.099 0-5.569-4.53-10.099-10.099-10.099s-10.099 4.53-10.099 10.099c0 3.317 1.615 6.257 4.092 8.099h-1.504c-4.659 0-8.47 3.645-8.741 8.222a17.589 17.589 0 0 0-3.25-.313c-.662 0-1.313.044-1.956.116-.367-4.485-4.139-8.025-8.731-8.025h-1.504c2.477-1.842 4.092-4.782 4.092-8.099 0-5.569-4.53-10.099-10.099-10.099s-10.1 4.53-10.1 10.099c0 3.317 1.615 6.257 4.092 8.099H9.764c-4.834 0-8.767 3.92-8.767 8.739v7.172a2.93 2.93 0 0 0 2.927 2.927h15.323a17.415 17.415 0 0 0-1.299 6.597c0 6.754 3.834 12.62 9.431 15.554h-5.568c-8.335 0-15.116 6.781-15.116 15.116v13.012a4.52 4.52 0 0 0 4.515 4.515h21.864c.158.228.333.445.537.648a5.299 5.299 0 0 0 3.727 1.521 5.256 5.256 0 0 0 3.73-1.538l.613-.632H59.74c2.505 0 4.543-2.025 4.543-4.515v-13.01c0-1.537-.252-3.025-.704-4.461a.998.998 0 0 0-.213-1.093l-.308-.308c-.032-.075-.064-.15-.098-.225l1.87-1.87a19.157 19.157 0 0 0 10.855 3.344 19.177 19.177 0 0 0 13.646-5.648 19.146 19.146 0 0 0 5.673-13.634c.003-5.166-2.011-10.029-5.673-13.691zM46.877 11.096c0-4.466 3.633-8.099 8.099-8.099s8.099 3.633 8.099 8.099-3.633 8.099-8.099 8.099-8.099-3.633-8.099-8.099zm.588 10.099h15.023c3.731 0 6.767 3.023 6.767 6.739v5.246a19.068 19.068 0 0 0-5.268 2.854H50.754c-2.179-3.844-5.76-6.796-10.055-8.136.021-3.699 3.047-6.703 6.766-6.703zm4.262 16.838H61.75c-6.368 6.679-7.042 16.815-2.016 24.207l-1.225 1.226c-2.669-2.114-5.947-3.281-9.344-3.281h-5.583c5.606-2.935 9.446-8.8 9.446-15.554 0-2.335-.468-4.559-1.301-6.598zM9.176 11.096c0-4.466 3.633-8.099 8.1-8.099 4.466 0 8.099 3.633 8.099 8.099s-3.633 8.099-8.099 8.099-8.1-3.633-8.1-8.099zM3.924 36.033a.951.951 0 0 1-.927-.927v-7.172c0-3.716 3.036-6.739 6.767-6.739h15.023c3.607 0 6.555 2.827 6.749 6.371a17.572 17.572 0 0 0-11.317 8.467zm16.024 8.597c0-8.561 6.965-15.526 15.526-15.526 5.967 0 11.153 3.376 13.761 8.311l.009.019a15.403 15.403 0 0 1 1.784 7.197c0 8.577-6.978 15.554-15.554 15.554-8.561 0-15.526-6.978-15.526-15.555zm16.371 48.197h2.037a3.297 3.297 0 0 1-2.037 0zm8.906-2H11.209a2.518 2.518 0 0 1-2.515-2.515V75.301c0-7.232 5.884-13.116 13.116-13.116h27.354c2.299 0 4.536.621 6.51 1.763l-13.47 13.471H22.662a1 1 0 1 0 0 2h22.563a5.69 5.69 0 0 1 4.968 2.938c.009.023.027.042.038.064a5.697 5.697 0 0 1-5.006 8.406zm17.057-2.514c0 1.387-1.141 2.515-2.543 2.515H50.38a7.662 7.662 0 0 0 1.952-8.631l3.919-3.92a.999.999 0 1 0-1.414-1.414l-3.547 3.548c-1.408-1.815-3.6-2.99-6.064-2.99h-.193L56.621 65.83l4.624 4.624-3.687 3.687a.999.999 0 1 0 1.414 1.414l3.005-3.006c.195.896.305 1.813.305 2.752zm-.786-20.463-2.271-2.271 1.733-1.733c.344.406.695.81 1.078 1.193.382.382.784.734 1.191 1.08zm26.421-4.226c-3.266 3.266-7.61 5.064-12.233 5.064s-8.967-1.799-12.233-5.064c-6.74-6.74-6.739-17.729 0-24.495a17.201 17.201 0 0 1 7.178-4.318l.021-.007a17.376 17.376 0 0 1 5.034-.739c4.623 0 8.967 1.798 12.233 5.064a17.228 17.228 0 0 1 5.086 12.275 17.164 17.164 0 0 1-5.086 12.22z" fill="#000000" opacity="1" data-original="#000000"></path></g></svg>',
+                            'routes' => ['admin.staff.index', 'admin.staff.create', 'admin.staff.edit'],
+                            'route' => 'admin.staff.index',
                         ],
-                        // =================== Management Section End =================
-
-                        // =================== Role & Permission Start ================
-                        // [
-                        //     'title' => 'Role & Permission',
-                        //     'icon' => 'icons/duotune/ecommerce/ecm002.svg',
-
-                        //     'routes' => [
-                        //         'all.role',
-                        //         'all.permission',
-                        //         'all.admin.permission',
-                        //         'add.roles.permission',
-                        //         'all.roles.permission',
-                        //     ],
-
-                        //     'subMenu' => [
-                        //         [
-                        //             'title' => 'All Admin',
-                        //             'routes' => ['all.admin.permission'],
-                        //             'route' => 'all.admin.permission',
-                        //         ],
-                        //         [
-                        //             'title' => 'Role',
-                        //             'routes' => ['all.role'],
-                        //             'route' => 'all.role',
-                        //         ],
-                        //         [
-                        //             'title' => 'Permission',
-                        //             'routes' => ['all.permission'],
-                        //             'route' => 'all.permission',
-                        //         ],
-                        //     ],
-                        // ],
-                        // ================== Role & Permission End ===================
+                        [
+                            'title' => 'User',
+                            'icon' =>
+                                '<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="100" height="100" x="0" y="0" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve" class=""><g><path d="M371.613 227.096v5.795a66.072 66.072 0 0 0 3.39 20.891l13.126 39.378h24.774v-90.839h-16.516c-13.682.001-24.774 11.092-24.774 24.775z" style="" fill="#5a4146" data-original="#5a4146"></path><path d="m484.684 244.251-13.974 48.91-66.065-57.806c-9.122 0-16.516-7.395-16.516-16.516 0-13.682 11.092-24.774 24.774-24.774h57.806c9.122 0 16.516 7.395 16.516 16.516v15.522a66.042 66.042 0 0 1-2.541 18.148z" style="" fill="#694b4b" data-original="#694b4b"></path><path d="M404.64 317.94h49.548v36.549H404.64z" style="" fill="#e6af78" data-original="#e6af78"></path><path d="M404.645 333.104c7.659 3.112 16.011 4.864 24.774 4.864s17.115-1.752 24.774-4.864v-15.169h-49.548v15.169z" style="" fill="#d29b6e" data-original="#d29b6e"></path><path d="m494.031 349.351-39.84-11.382-24.772 16.439-24.774-16.44-39.838 11.383a24.774 24.774 0 0 0-17.968 23.821v60.376a8.258 8.258 0 0 0 8.258 8.258h148.645a8.258 8.258 0 0 0 8.258-8.258v-60.376a24.774 24.774 0 0 0-17.969-23.821z" style="" fill="#d5dced" data-original="#d5dced"></path><path d="M437.677 441.805h-16.516l4.129-87.321h8.258z" style="" fill="#afb9d2" data-original="#afb9d2"></path><path d="M429.419 326.193c-27.365 0-49.548-22.184-49.548-49.548v-9.675c0-4.38 1.74-8.581 4.837-11.679l14.975-14.975c3.171-3.171 7.507-4.994 11.989-4.853 26.398.833 49.764 6.488 62.537 18.963 3.127 3.054 4.759 7.326 4.759 11.696v10.523c0 27.365-22.184 49.548-49.549 49.548z" style="" fill="#f0c087" data-original="#f0c087"></path><path d="M404.645 269.018c0-9.526 8-17.098 17.507-16.492 16.671 1.064 41.409 3.85 56.586 11.15-.495-3.484-1.992-6.773-4.529-9.251-12.773-12.475-36.139-18.13-62.537-18.963l-.001.001v-.001c-4.481-.141-8.818 1.683-11.988 4.853l-14.974 14.974a16.513 16.513 0 0 0-4.838 11.679v9.675c0 22.596 15.141 41.621 35.82 47.579-6.883-8.492-11.045-19.272-11.045-31.063l-.001-24.141z" style="" fill="#e6af78" data-original="#e6af78"></path><path d="M478.968 397.779c0-6.571 2.61-12.872 7.256-17.518l21.257-21.257c2.841 4.061 4.519 8.95 4.519 14.169v60.376a8.258 8.258 0 0 1-8.258 8.258h-24.774v-44.028z" style="" fill="#c7cfe2" data-original="#c7cfe2"></path><path d="M433.548 371h-8.258a4.13 4.13 0 0 1-4.129-4.129v-12.387h16.516v12.387a4.129 4.129 0 0 1-4.129 4.129z" style="" fill="#959cb5" data-original="#959cb5"></path><path d="M429.419 354.409 415.422 365.1a4.955 4.955 0 0 1-7.354-1.558l-12.556-22.93 5.054-7.709a3.303 3.303 0 0 1 5.009-.611l23.844 22.117zM429.419 354.409l13.997 10.692a4.955 4.955 0 0 0 7.354-1.558l12.556-22.93-5.054-7.709a3.303 3.303 0 0 0-5.009-.611l-23.844 22.116z" style="" fill="#c7cfe2" data-original="#c7cfe2"></path><path d="M147.822 322.745c-7.057-18.698-12.654-50.841-13.863-67.576-2.3-31.846-26.299-57.806-58.741-57.806s-56.441 25.961-58.741 57.806c-1.209 16.734-6.806 48.878-13.863 67.576-1.555 4.122.24 8.667 4.299 10.507 7.562 3.427 23.685 10.141 43.13 12.756h50.349c19.354-2.621 35.59-9.339 43.13-12.756 4.06-1.84 5.855-6.385 4.3-10.507z" style="" fill="#5a4146" data-original="#5a4146"></path><path d="M143.523 333.253c4.058-1.84 5.854-6.385 4.298-10.507-7.056-18.698-12.654-50.841-13.862-67.576-2.299-31.846-26.299-57.806-58.74-57.806l-.245.001c-24.893.101-33.69 34.05-12.261 46.717 1.287.761 2.112 1.127 2.112 1.127l18.769 100.8h16.799c19.354-2.623 35.59-9.34 43.13-12.756z" style="" fill="#694b4b" data-original="#694b4b"></path><path d="m134.95 362.588-26.724-13.361a16.516 16.516 0 0 1-9.13-14.774l.002-24.775h-49.55v24.776a16.515 16.515 0 0 1-9.13 14.772l-26.724 13.362A24.771 24.771 0 0 0 0 384.745v48.802a8.258 8.258 0 0 0 8.258 8.258h132.129a8.258 8.258 0 0 0 8.258-8.258v-48.801a24.773 24.773 0 0 0-13.695-22.158z" style="" fill="#e6af78" data-original="#e6af78"></path><path d="M74.323 342.709c8.892 0 17.409-1.833 25.217-5.096-.205-1.041-.444-2.076-.444-3.161l.002-24.775h-49.55v24.776c0 1.091-.239 2.131-.446 3.176 7.813 3.246 16.326 5.08 25.221 5.08z" style="" fill="#d29b6e" data-original="#d29b6e"></path><path d="m134.95 362.588-19.038-9.519c-8.828 13.632-24.139 22.673-41.589 22.673s-32.762-9.041-41.59-22.674l-19.038 9.52A24.772 24.772 0 0 0 0 384.745v48.802a8.258 8.258 0 0 0 8.258 8.258h132.129a8.258 8.258 0 0 0 8.258-8.258v-48.801a24.773 24.773 0 0 0-13.695-22.158z" style="" fill="#d5dced" data-original="#d5dced"></path><path d="M74.323 326.193c-25.192 0-45.992-18.8-49.137-43.135-.456-3.526 1.239-6.983 4.413-8.584 3.802-1.918 9.327-5.152 14.617-9.872 5.891-5.256 9.347-10.799 11.299-14.868 1.681-3.504 5.545-5.486 9.311-4.525 29.076 7.416 48.871 22.543 56.053 28.719 1.928 1.658 3.039 4.103 2.841 6.639-2.001 25.53-23.352 45.626-49.397 45.626z" style="" fill="#f0c087" data-original="#f0c087"></path><path d="M120.878 273.927c-7.181-6.176-26.977-21.303-56.053-28.719-3.766-.961-7.63 1.021-9.311 4.525-1.478 3.082-3.921 7.008-7.546 11.016l-.005.028c-1.125 1.275-2.323 2.553-3.747 3.825-5.29 4.721-10.815 7.954-14.617 9.872-3.174 1.601-4.868 5.059-4.413 8.585 2.825 21.855 19.927 39.251 41.625 42.569-9.887-6.726-17.262-15.976-17.262-32.466v-11.776c1.876-1.385 3.765-2.766 5.663-4.46a65.745 65.745 0 0 0 11.81-13.933c22.243 6.941 37.323 18.502 43.04 23.418 1.565 1.372 5.449 4.952 9.993 9.215 1.955-4.705 3.248-9.753 3.663-15.058.199-2.537-.912-4.982-2.84-6.641z" style="" fill="#e6af78" data-original="#e6af78"></path><path d="M5.034 369.859C1.853 374.081 0 379.26 0 384.745v48.802a8.258 8.258 0 0 0 8.258 8.258h24.774v-41.61c0-5.017-2.281-9.763-6.199-12.897L5.034 369.859z" style="" fill="#c7cfe2" data-original="#c7cfe2"></path><path d="m374.643 351.318-69.095-25.126L256 342.709l-49.548-16.516-69.095 25.126a33.032 33.032 0 0 0-21.744 31.043v51.186a8.258 8.258 0 0 0 8.258 8.258h264.258a8.258 8.258 0 0 0 8.258-8.258v-51.186a33.031 33.031 0 0 0-21.744-31.044z" style="" fill="#ff507d" data-original="#ff507d"></path><path d="m247.349 359.226-7.865 82.579h33.032l-7.865-82.579z" style="" fill="#707487" data-original="#707487"></path><path d="M264.67 370.571h-17.34a5.78 5.78 0 0 1-5.781-5.781v-22.081h28.901v22.081a5.78 5.78 0 0 1-5.78 5.781z" style="" fill="#5b5d6e" data-original="#5b5d6e"></path><path d="M387.498 359.855c5.576 5.985 8.889 13.956 8.889 22.506v51.186a8.258 8.258 0 0 1-8.258 8.258h-41.29v-27.608c0-8.761 3.48-17.163 9.675-23.357l30.984-30.985z" style="" fill="#d23c69" data-original="#d23c69"></path><path d="M346.839 155.889v-69.18c0-9.122-7.395-16.516-16.516-16.516h-99.097c-36.486 0-66.065 29.578-66.065 66.065v19.631a82.572 82.572 0 0 0 4.238 26.114l2.749 8.247a24.772 24.772 0 0 1 1.271 7.834v4.238H338.58v-4.238c0-2.663.429-5.308 1.271-7.834l2.749-8.247a82.553 82.553 0 0 0 4.239-26.114z" style="" fill="#5a4146" data-original="#5a4146"></path><path d="M206.452 103.741c0 18.528 15.02 33.548 33.548 33.548h4.645l2.242 65.032h91.693v-4.238c0-2.663.429-5.308 1.271-7.834l2.749-8.247a82.572 82.572 0 0 0 4.238-26.114V86.709c0-9.122-7.395-16.516-16.516-16.516H240c-18.528 0-33.548 15.02-33.548 33.548z" style="" fill="#694b4b" data-original="#694b4b"></path><path d="M206.45 268.39h99.1v74.32h-99.1z" style="" fill="#e6af78" data-original="#e6af78"></path><path d="M206.452 296.31c14.588 8.451 31.477 13.366 49.548 13.366s34.961-4.915 49.548-13.366v-27.924h-99.097l.001 27.924z" style="" fill="#d29b6e" data-original="#d29b6e"></path><path d="m256 342.709-26.338 26.338c-3.54 3.54-9.391 3.141-12.417-.847l-27.309-35.984 7.143-15.053c2.108-4.442 7.606-6.07 11.792-3.49L256 342.709zM256 342.709l26.338 26.338c3.54 3.54 9.391 3.141 12.417-.847l27.309-35.984-7.143-15.053c-2.108-4.442-7.606-6.07-11.792-3.49L256 342.709z" style="" fill="#d23c69" data-original="#d23c69"></path><path d="M256 293.161c-45.608 0-82.581-36.973-82.581-82.581v-9.675c0-4.38 1.74-8.581 4.837-11.679l6.841-6.841a16.516 16.516 0 0 0 4.837-11.679V150.91c0-3.824 2.568-7.146 6.289-8.025 19.531-4.613 80.308-15.54 121.669 14.88 2.686 1.975 4.171 5.22 4.171 8.554v4.387c0 4.38 1.74 8.581 4.837 11.679l6.841 6.841a16.516 16.516 0 0 1 4.837 11.679v9.675c.003 45.608-36.97 82.581-82.578 82.581z" style="" fill="#f0c087" data-original="#f0c087"></path><path d="M317.893 157.766c-29.09-21.395-67.731-22.321-94.925-19.392-11.471 1.235-20.949 3.144-26.743 4.512-3.721.879-6.289 4.201-6.289 8.025v19.795c0 4.381-1.74 8.582-4.838 11.68l-6.841 6.841a16.517 16.517 0 0 0-4.838 11.68v9.674c0 42.224 31.71 76.985 72.602 81.92-14.249-14.839-23.054-34.948-23.054-57.146v-60.361c0-8.369 6.223-15.363 14.526-16.404 19.818-2.485 56.116-3.979 84.57 12.118v-4.388c.002-3.334-1.486-6.58-4.17-8.554z" style="" fill="#e6af78" data-original="#e6af78"></path><path d="M124.502 359.855c-5.576 5.985-8.889 13.956-8.889 22.506v51.186a8.258 8.258 0 0 0 8.258 8.258h41.29v-27.608c0-8.761-3.48-17.163-9.675-23.357l-30.984-30.985z" style="" fill="#d23c69" data-original="#d23c69"></path></g></svg>',
+                            'routes' => ['admin.user.index', 'admin.user.create', 'admin.user.edit'],
+                            'route' => 'admin.user.index',
+                        ],
                     ];
                 @endphp
 
-                {{-- @if (Auth::guard('admin')->user()->can('brand.menu') || Auth::guard('admin')->user()->can('permission.menu') || Auth::guard('admin')->user()->can('role.menu') || Auth::guard('admin')->user()->can('admin.menu') || Auth::guard('admin')->user()->can('web_setting.menu')) --}}
-
                 @foreach ($menuItems as $item)
-                    <div data-kt-menu-trigger="click"
-                        class="menu-item menu-accordion {{ Route::is(...$item['routes'] ?? []) ? 'here show' : '' }}">
-                        <span class="menu-link">
+                    <div class="menu-item {{ Route::is(...$item['routes']) ? 'here show' : '' }}">
+                        <a class="menu-link" href="{{ route($item['route']) }}">
                             <span class="menu-icon">
-
                                 <span class="svg-icon svg-icon-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100"
-                                        height="100" viewBox="0 0 48 48">
-                                        <path fill="#4caf50"
-                                            d="M44,24c0,11.045-8.955,20-20,20S4,35.045,4,24S12.955,4,24,4S44,12.955,44,24z">
-                                        </path>
-                                        <path fill="#ccff90"
-                                            d="M34.602,14.602L21,28.199l-5.602-5.598l-2.797,2.797L21,33.801l16.398-16.402L34.602,14.602z">
-                                        </path>
-                                    </svg>
+                                    @if (str_starts_with(trim($item['icon']), '<svg'))
+                                        {{-- Raw SVG string: render as HTML --}}
+                                        {!! $item['icon'] !!}
+                                    @else
+                                        {{-- Assume file path, render as image --}}
+                                        <img src="{{ asset($item['icon']) }}" alt="{{ $item['title'] }} icon"
+                                            style="width: 48px; height: 48px;" />
+                                    @endif
                                 </span>
-
                             </span>
                             <span class="menu-title">{{ $item['title'] }}</span>
-                            <span class="menu-arrow"></span>
-                        </span>
-                        @if (!empty($item['subMenu']))
-                            <div
-                                class="menu-sub menu-sub-accordion {{ Route::is(...$item['routes'] ?? []) ? 'menu-active-bg' : '' }}">
-                                @foreach ($item['subMenu'] as $subItem)
-                                    @if (isset($subItem['subMenu']))
-                                        <div data-kt-menu-trigger="click" class="mb-1 menu-item menu-accordion">
-                                            <span class="menu-link">
-                                                <span class="menu-bullet">
-                                                    <span class="bullet bullet-dot"></span>
-                                                </span>
-                                                <span class="menu-title">{{ $subItem['title'] }}</span>
-                                                <span class="menu-arrow"></span>
-                                            </span>
-                                            <div
-                                                class="menu-sub menu-sub-accordion {{ Route::is(...array_column($subItem['subMenu'], 'route') ?? []) ? 'here show' : '' }}">
-                                                @foreach ($subItem['subMenu'] as $subSubItem)
-                                                    <div class="menu-item">
-                                                        @if (isset($subSubItem['route']))
-                                                            <a class="menu-link {{ Route::is($subSubItem['route']) ? 'active' : '' }}"
-                                                                href="{{ route($subSubItem['route']) }}">
-                                                                <span class="menu-bullet">
-                                                                    <span class="bullet bullet-dot"></span>
-                                                                </span>
-                                                                <span
-                                                                    class="menu-title">{{ $subSubItem['title'] }}</span>
-                                                            </a>
-                                                        @else
-                                                            <span class="menu-title">{{ $subSubItem['title'] }}</span>
-                                                        @endif
-                                                    </div>
-                                                @endforeach
-                                            </div>
-                                        </div>
-                                    @else
-                                        <div class="menu-item">
-                                            @if (isset($subItem['route']))
-                                                <a class="menu-link {{ Route::is($subItem['routes']) ? 'active' : '' }}"
-                                                    href="{{ route($subItem['route']) }}">
-                                                    <span class="menu-bullet">
-                                                        <span class="bullet bullet-dot"></span>
-                                                    </span>
-                                                    <span class="menu-title">{{ $subItem['title'] }}</span>
-                                                </a>
-                                            @else
-                                                <span class="menu-title">{{ $subItem['title'] }}</span>
-                                            @endif
-                                        </div>
-                                    @endif
-                                @endforeach
-                            </div>
-                        @endif
+                        </a>
                     </div>
                 @endforeach
-
-                {{-- @endif --}}
-
             </div>
         </div>
     </div>
 
+    {{-- Footer --}}
     <div class="px-5 pt-5 aside-footer flex-column-auto pb-7" id="kt_aside_footer">
         <form method="POST" action="{{ route('admin.logout') }}">
+            @csrf
             <a href="{{ route('admin.logout') }}" class="btn btn-custom btn-primary w-100"
-                onclick="event.preventDefault();this.closest('form').submit();">
-                <span class="btn-label">
-                    @csrf
-                    {{ __('Log Out') }}
-                </span>
+                onclick="event.preventDefault(); this.closest('form').submit();">
+                <span class="btn-label">{{ __('Log Out') }}</span>
             </a>
         </form>
     </div>
-
 </div>
