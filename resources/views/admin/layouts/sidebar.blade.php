@@ -6,11 +6,11 @@
 
         <a href="{{ route('admin.dashboard') }}">
 
-            {{-- <img alt="Logo"
+            <img alt="Logo"
                 src="{{ !empty($site->site_logo) && file_exists(public_path('storage/settings/' . $site->site_logo)) ? asset('storage/settings/' . $site->site_logo) : asset('') }}"
-                class="h-60px logo w-200px"> --}}
+                class="h-60px logo w-200px">
 
-            <h3 class="text-black fw-bold">New Site</h3>
+            {{-- <h3 class="text-black fw-bold">New Site</h3> --}}
 
         </a>
         <div id="kt_aside_toggle" class="btn btn-icon w-auto px-0 btn-active-color-primary aside-toggle active"
@@ -85,13 +85,9 @@
                                 'admin.categories.create',
                                 'admin.categories.edit',
 
-                                'admin.blog_category.index',
-                                'admin.blog_category.create',
-                                'admin.blog_category.edit',
-
-                                'admin.blog.index',
-                                'admin.blog.create',
-                                'admin.blog.edit',
+                                'admin.epaper.index',
+                                'admin.epaper.create',
+                                'admin.epaper.edit',
 
                                 'admin.coupon.index',
                                 'admin.coupon.create',
@@ -121,7 +117,12 @@
                                     'routes' => ['admin.news.index', 'admin.news.create', 'admin.news.edit'],
                                     'route' => 'admin.news.index',
                                 ],
-
+                                [
+                                    'title' => 'E-Paper',
+                                    'routes' => ['admin.epaper.index', 'admin.epaper.create', 'admin.epaper.edit'],
+                                    'route' => 'admin.epaper.index',
+                                ],
+                                
                                 [
                                     'title' => 'Advertisement',
                                     'routes' => ['admin.advertisement.index', 'admin.advertisement.create', 'admin.advertisement.edit'],

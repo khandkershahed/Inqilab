@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\Auth\NewPasswordController;
 use App\Http\Controllers\Admin\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Admin\Auth\ConfirmablePasswordController;
 use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Admin\EpaperController;
 
 Route::group(['middleware' => 'guest:admin', 'prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::get('login', [AuthenticatedSessionController::class, 'create'])
@@ -53,7 +54,7 @@ Route::group(['middleware' => 'auth:admin', 'prefix' => 'admin', 'as' => 'admin.
 // All Controller
 Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function () {
 
-    
+
 
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
     Route::get('/profile', [AdminProfileController::class, 'edit'])->name('profile.edit');
@@ -68,6 +69,7 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
             'categories'     => CategoryController::class,
             'contact'        => ContactController::class,
             'subscription'   => SubscriptionController::class,
+            'epaper'         => EpaperController::class,
 
             'faq'            => FaqController::class,
             'term'           => TermController::class,
