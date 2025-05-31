@@ -1,105 +1,85 @@
-<x-admin-app-layout :title="'News'">
-    <div class="card card-flash">
-        <div class="card-header mt-6">
-            <div class="card-title"></div>
-            <div class="card-toolbar">
+<x-admin-app-layout :title="'News List'">
 
-                {{-- @if (Auth::guard('admin')->user()->can('add.brand')) --}}
-                <a href="{{ route('admin.news.create') }}" class="btn btn-light-primary">
-                    <span class="svg-icon svg-icon-3">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="none">
-                            <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5"
-                                fill="currentColor" />
-                            <rect x="10.8891" y="17.8033" width="12" height="2" rx="1"
-                                transform="rotate(-90 10.8891 17.8033)" fill="currentColor" />
-                            <rect x="6.01041" y="10.9247" width="12" height="2" rx="1"
-                                fill="currentColor" />
-                        </svg>
-                    </span>
-                    Add News
-                </a>
-                {{-- @endif --}}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="p-2 mt-5 card">
+
+                {{-- Header with title and create button --}}
+                <div class="px-2 card-header d-flex justify-content-between align-items-center">
+                    <h2 class="card-title">Manage News List</h2>
+                    <a href="{{ route('admin.news.create') }}" class="btn btn-primary" data-bs-toggle="tooltip"
+                        data-bs-placement="top" title="Create New News Post">
+                        <i class="fas fa-plus"></i> Create News
+                    </a>
+                </div>
+
+                {{-- Table section --}}
+                <div class="p-0 card-body">
+                    <table id="dataTableSet" class="table border rounded table-striped table-row-bordered gy-5 gs-7">
+                        <thead>
+                            <tr class="text-gray-800 fw-bold fs-6 px-7">
+                                <th>Sl</th>
+                                <th>Image</th>
+                                <th>Title</th>
+                                <th>Category</th>
+                                <th>Sub Category</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                                <th>Author</th>
+                                <th class="text-end">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($newses as $key => $news)
+                                <tr>
+                                    <td>{{ $key + 1 }}</td>
+                                    <td>
+                                        <img width="70" height="70" class="img-fluid rounded-2"
+                                            src="https://weekly-inqilab.vercel.app/_next/image?url=https%3A%2F%2Fv2.weeklyinqilab.com%2Fstorage%2Fnews%2Fthumbnail%2F54a94bb2360a30b3c42f614b8ab5c3761a864a7b87a4f1bf_LiFbnwaFrw1748495386.png&w=640&q=75"
+                                            alt="News Image">
+                                    </td>
+                                    <td>{{ $news->bangla_title }}</td>
+                                    <td>{{ optional($news->category)->bangla_name ?? optional($news->category)->name }}
+                                    </td>
+                                    <td>{{ optional($news->subCategory)->bangla_name ?? optional($news->subCategory)->name }}
+                                    </td>
+                                    <td>{{ $news->status }}</td>
+                                    <td>{{ $news->published_at }}</td>
+                                    <td>{{ $news->author_id }}</td>
+                                    <td class="text-end">
+                                        <div class="gap-2 d-flex justify-content-end">
+                                            <a href="{{ route('admin.news.edit', $news->id) }}"
+                                                class="btn btn-sm btn-primary rounded-pill">
+                                                <i class="text-white fas fa-pen-to-square fs-6 ps-2"></i>
+                                            </a>
+                                            <a href="{{ route('admin.news.destroy', $news->id) }}"
+                                                class="btn btn-sm btn-danger rounded-pill">
+                                                <i class="text-white fas fa-trash fs-6 ps-2"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
 
             </div>
         </div>
-
-        <div class="card-body pt-0">
-            <table id="kt_datatable_example_5" class="table table-striped table-row-bordered gy-5 gs-7 border rounded">
-                <thead class="bg-dark text-light">
-                    <tr>
-                        <th width="5%">Sl</th>
-                        <th width="10%">Category</th>
-                        <th width="10%">Sub Category</th>
-                        <th width="57%">Bangla Title</th>
-                        <th width="10%">Status</th>
-                        <th width="8%">Actions</th>
-                    </tr>
-                </thead>
-                <tbody class="fw-bold text-gray-600">
-
-                    @foreach ($newses as $key => $news)
-                        {{-- @dd([
-                            'news_category_id' => $news->category_id,
-                            'category_model' => $news->category,
-                            'news_sub_category_id' => $news->sub_category_id,
-                            'sub_category_model' => $news->subCategory,
-                        ]); --}}
-                        <tr>
-                            <td>{{ $key + 1 }}</td>
-                            <td class="text-start">
-                                {{ !empty(optional($news->category)->bangla_name) ? optional($news->category)->bangla_name : optional($news->category)->name }}
-                            </td>
-                            <td class="text-start">
-                                {{ !empty(optional($news->subCategory)->bangla_name) ? optional($news->subCategory)->bangla_name : optional($news->subCategory)->name }}
-                            </td>
-                            <td class="text-start">{{ $news->bangla_title }}</td>
-                            <td class="text-start">
-                                <p>
-                                    <span class="badge {{ $news->status == 'published' ? 'bg-success' : 'bg-danger' }}">
-                                        {{ ucfirst($news->status) }}
-                                    </span>
-                                </p>
-                            </td>
-
-
-                            <td>
-                                {{-- @if (Auth::guard('admin')->user()->can('edit.news')) --}}
-                                <a href="{{ route('admin.news.edit', $news->id) }}" class="text-primary">
-                                    <i class="fa-solid fa-edit text-primary me-7 fs-4"></i>
-                                </a>
-                                {{-- @endif
-
-                                @if (Auth::guard('admin')->user()->can('delete.news')) --}}
-                                <a href="{{ route('admin.news.destroy', $news->id) }}" class="delete">
-                                    <i class="fa-solid fa-trash text-danger fs-4"></i>
-                                </a>
-                                {{-- @endif --}}
-
-                            </td>
-                        </tr>
-                    @endforeach
-
-
-                </tbody>
-            </table>
-        </div>
-
     </div>
 
+    {{-- DataTables script --}}
     @push('scripts')
         <script>
-            $("#kt_datatable_example_5").DataTable({
-                "language": {
-                    "lengthMenu": "Show _MENU_",
+            $("#dataTableSet").DataTable({
+                language: {
+                    lengthMenu: "Show _MENU_",
                 },
-                "dom": "<'row'" +
-                    "<'col-sm-6 d-flex align-items-center justify-conten-start'l>" +
+                dom: "<'row'" +
+                    "<'col-sm-6 d-flex align-items-center justify-content-start'l>" +
                     "<'col-sm-6 d-flex align-items-center justify-content-end'f>" +
                     ">" +
-
                     "<'table-responsive'tr>" +
-
                     "<'row'" +
                     "<'col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start'i>" +
                     "<'col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end'p>" +

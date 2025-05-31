@@ -121,11 +121,11 @@
     @endif
     {{-- New Design Emplement --}}
     <section class="mt-2">
-        <div class="row gx-5 gx-xl-10">
+        <div class="row gx-5 gx-xl-5">
             <div class="col-lg-3">
                 <div class="card card-flush">
                     <div>
-                        <p class="px-10 py-10 bg-primary rounded-2 d-flex align-items-center justify-content-center">
+                        <p class="px-10 py-5 dashboard-bg bg-primary rounded-2 d-flex align-items-center justify-content-center">
                             <i class="text-white fas fa-newspaper fs-1"></i><span class="text-white fs-1 ps-4">
                                 News Available</span>
                         </p>
@@ -140,8 +140,8 @@
             <div class="col-lg-3">
                 <div class="card card-flush">
                     <div>
-                        <p class="px-10 py-10 bg-primary rounded-2 d-flex align-items-center justify-content-center">
-                            <i class="text-white fas fa-newspaper fs-1"></i><span class="text-white fs-1 ps-4">
+                        <p class="px-10 py-5 dashboard-bg bg-primary rounded-2 d-flex align-items-center justify-content-center">
+                            <i class="text-white fas fa-list fs-1"></i><span class="text-white fs-1 ps-4">
                                 Category</span>
                         </p>
                         <div class="text-center ps-5">
@@ -155,8 +155,8 @@
             <div class="col-lg-3">
                 <div class="card card-flush">
                     <div>
-                        <p class="px-10 py-10 bg-primary rounded-2 d-flex align-items-center justify-content-center">
-                            <i class="text-white fas fa-newspaper fs-1"></i><span class="text-white fs-1 ps-4">Pending
+                        <p class="px-10 py-5 dashboard-bg bg-primary rounded-2 d-flex align-items-center justify-content-center">
+                            <i class="text-white fas fa-spinner fs-1"></i><span class="text-white fs-1 ps-4">Pending
                                 News</span>
                         </p>
                         <div class="text-center ps-5">
@@ -170,13 +170,69 @@
             <div class="col-lg-3">
                 <div class="card card-flush">
                     <div>
-                        <p class="px-10 py-10 bg-primary rounded-2 d-flex align-items-center justify-content-center">
-                            <i class="text-white fas fa-newspaper fs-1"></i><span class="text-white fs-1 ps-4">Rejected
+                        <p class="px-10 py-5 dashboard-bg bg-primary rounded-2 d-flex align-items-center justify-content-center">
+                            <i class="text-white fas fa-close fs-1"></i><span class="text-white fs-1 ps-4">Rejected
                                 News</span>
                         </p>
                         <div class="text-center ps-5">
                             <span style="font-size: 60px">
                                 60
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="mt-5 card card-flush">
+                    <div>
+                        <p class="px-10 py-5 dashboard-bg bg-primary rounded-2 d-flex align-items-center justify-content-center">
+                            <i class="text-white fab fa-adversal fs-1"></i><span class="text-white fs-1 ps-4">Total Advertisment</span>
+                        </p>
+                        <div class="text-center ps-5">
+                            <span style="font-size: 60px">
+                                60
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="mt-5 card card-flush">
+                    <div>
+                        <p class="px-10 py-5 dashboard-bg bg-primary rounded-2 d-flex align-items-center justify-content-center">
+                            <i class="text-white fab fa-adversal fs-1"></i><span class="text-white fs-1 ps-4">Pending Advertisment</span>
+                        </p>
+                        <div class="text-center ps-5">
+                            <span style="font-size: 60px">
+                                60
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="mt-5 card card-flush">
+                    <div>
+                        <p class="px-10 py-5 dashboard-bg bg-primary rounded-2 d-flex align-items-center justify-content-center">
+                            <i class="text-white fab fa-adversal fs-1"></i><span class="text-white fs-1 ps-4">Expire Advertisment</span>
+                        </p>
+                        <div class="text-center ps-5">
+                            <span style="font-size: 60px">
+                                60
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="mt-5 card card-flush">
+                    <div>
+                        <p class="px-10 py-5 dashboard-bg bg-primary rounded-2 d-flex align-items-center justify-content-center">
+                            <i class="text-white fas fa-user fs-1"></i><span class="text-white fs-1 ps-4">User Visit</span>
+                        </p>
+                        <div class="text-center ps-5">
+                            <span style="font-size: 60px">
+                               1060
                             </span>
                         </div>
                     </div>

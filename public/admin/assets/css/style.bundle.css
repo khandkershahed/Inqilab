@@ -31871,6 +31871,7 @@ fieldset:disabled .btn {
     --bg-color: 0, 158, 247 !important;
 }
 
+
 .bg-primary.hoverable:hover {
     background-color: #ea1b23 !important;
 }
@@ -59046,6 +59047,10 @@ thead {
     background-color: #ea1b232e;
     font-weight: bold;
 }
+/* .dashboard-bg{
+    background-color: #ea1b232e !important;
+    color: black !important;
+} */
 th {
     font-weight: 600 !important;
     color: #6c757d !important;

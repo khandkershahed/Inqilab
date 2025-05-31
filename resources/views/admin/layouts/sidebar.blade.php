@@ -176,7 +176,7 @@
             @csrf
             <a href="{{ route('admin.logout') }}" class="btn btn-custom btn-primary w-100"
                 onclick="event.preventDefault(); this.closest('form').submit();">
-                <span class="btn-label">{{ __('Log Out') }}</span>
+                <span class="btn-label"><i class="fas fa-door-open"></i> {{ __('Log Out') }}</span>
             </a>
         </form>
     </div>
