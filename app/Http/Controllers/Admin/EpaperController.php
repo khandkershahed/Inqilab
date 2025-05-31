@@ -165,6 +165,8 @@ class EpaperController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $epaper = Epaper::findOrFail($id);
+        $epaper->delete();
+
     }
 }
