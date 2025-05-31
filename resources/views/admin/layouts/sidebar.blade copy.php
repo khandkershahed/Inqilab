@@ -4,14 +4,12 @@
     data-kt-drawer-toggle="#kt_aside_mobile_toggle">
     <div class="aside-logo flex-column-auto" id="kt_aside_logo">
 
-        <a href="">
-
-            {{-- <img alt="Logo"
-                src="{{ !empty($site->site_logo) && file_exists(public_path('storage/settings/' . $site->site_logo)) ? asset('storage/settings/' . $site->site_logo) : asset('') }}"
-                class="h-60px logo w-200px"> --}}
-
-            <h3 class="text-light">New Site</h3>
-
+        <a href="{{ route('admin.dashboard') }}">
+            <img alt="Logo"
+                src="{{ !empty($site->site_logo) && file_exists(public_path('storage/settings/' . $site->site_logo))
+                    ? asset('storage/settings/' . $site->site_logo)
+                    : asset('images/logo.webp') }}"
+                class="h-60px logo w-200px">
         </a>
         <div id="kt_aside_toggle" class="w-auto px-0 btn btn-icon btn-active-color-primary aside-toggle active"
             data-kt-toggle="true" data-kt-toggle-state="active" data-kt-toggle-target="body"
@@ -65,7 +63,7 @@
                 </div>
 
                 {{-- Site Content  --}}
-                {{-- @php
+                @php
                     $menuItems = [
                         //====================== Frontend Management Start ============
                         [
@@ -73,17 +71,13 @@
                             'icon' => 'icons/duotune/ecommerce/ecm002.svg',
 
                             'routes' => [
-                                'admin.product.index',
-                                'admin.product.create',
-                                'admin.product.edit',
+                                'admin.news.index',
+                                'admin.news.create',
+                                'admin.news.edit',
 
-                                'admin.banner.index',
-                                'admin.banner.create',
-                                'admin.banner.edit',
-
-                                'admin.brands.index',
-                                'admin.brands.create',
-                                'admin.brands.edit',
+                                'admin.advertisement.index',
+                                'admin.advertisement.create',
+                                'admin.advertisement.edit',
 
                                 'admin.categories.index',
                                 'admin.categories.create',
@@ -112,24 +106,6 @@
 
                             'subMenu' => [
                                 [
-                                    'title' => 'Product',
-                                    'routes' => ['admin.product.index', 'admin.product.create', 'admin.product.edit'],
-                                    'route' => 'admin.product.index',
-                                ],
-
-                                [
-                                    'title' => 'Banner',
-                                    'routes' => ['admin.banner.index', 'admin.banner.create', 'admin.banner.edit'],
-                                    'route' => 'admin.banner.index',
-                                ],
-
-                                [
-                                    'title' => 'Brand',
-                                    'routes' => ['admin.brands.index', 'admin.brands.create', 'admin.brands.edit'],
-                                    'route' => 'admin.brands.index',
-                                ],
-
-                                [
                                     'title' => 'Category',
                                     'routes' => [
                                         'admin.categories.index',
@@ -138,27 +114,20 @@
                                     ],
                                     'route' => 'admin.categories.index',
                                 ],
+                                [
+                                    'title' => 'News',
+                                    'routes' => ['admin.news.index', 'admin.news.create', 'admin.news.edit'],
+                                    'route' => 'admin.news.index',
+                                ],
 
                                 [
-                                    'title' => 'Blog Category',
+                                    'title' => 'Advertisement',
                                     'routes' => [
-                                        'admin.blog_category.index',
-                                        'admin.blog_category.create',
-                                        'admin.blog_category.edit',
+                                        'admin.advertisement.index',
+                                        'admin.advertisement.create',
+                                        'admin.advertisement.edit',
                                     ],
-                                    'route' => 'admin.blog_category.index',
-                                ],
-
-                                [
-                                    'title' => 'Blog',
-                                    'routes' => ['admin.blog.index', 'admin.blog.create', 'admin.blog.edit'],
-                                    'route' => 'admin.blog.index',
-                                ],
-
-                                [
-                                    'title' => 'Coupon',
-                                    'routes' => ['admin.coupon.index', 'admin.coupon.create', 'admin.coupon.edit'],
-                                    'route' => 'admin.coupon.index',
+                                    'route' => 'admin.advertisement.index',
                                 ],
 
                                 [
@@ -180,6 +149,7 @@
                                 ],
                             ],
                         ],
+
                         //====================== Frontend Management End ==============
 
                         // ========================= Setting Start ====================
@@ -202,14 +172,6 @@
                                 'admin.support-policy.index',
                                 'admin.support-policy.create',
                                 'admin.support-policy.edit',
-
-                                'admin.return-policy.index',
-                                'admin.return-policy.create',
-                                'admin.return-policy.edit',
-
-                                'admin.buying-policy.index',
-                                'admin.buying-policy.create',
-                                'admin.buying-policy.edit',
                             ],
 
                             'subMenu' => [
@@ -239,26 +201,6 @@
                                         'admin.support-policy.edit',
                                     ],
                                     'route' => 'admin.support-policy.index',
-                                ],
-
-                                [
-                                    'title' => 'Return & Policy',
-                                    'routes' => [
-                                        'admin.return-policy.index',
-                                        'admin.return-policy.create',
-                                        'admin.return-policy.edit',
-                                    ],
-                                    'route' => 'admin.return-policy.index',
-                                ],
-
-                                [
-                                    'title' => 'Buying & Policy',
-                                    'routes' => [
-                                        'admin.buying-policy.index',
-                                        'admin.buying-policy.create',
-                                        'admin.buying-policy.edit',
-                                    ],
-                                    'route' => 'admin.buying-policy.index',
                                 ],
                             ],
                         ],
@@ -296,43 +238,43 @@
                         // =================== Management Section End =================
 
                         // =================== Role & Permission Start ================
-                        [
-                            'title' => 'Role & Permission',
-                            'icon' => 'icons/duotune/ecommerce/ecm002.svg',
+                        // [
+                        //     'title' => 'Role & Permission',
+                        //     'icon' => 'icons/duotune/ecommerce/ecm002.svg',
 
-                            'routes' => [
-                                'all.role',
-                                'all.permission',
-                                'all.admin.permission',
-                                'add.roles.permission',
-                                'all.roles.permission',
-                            ],
+                        //     'routes' => [
+                        //         'all.role',
+                        //         'all.permission',
+                        //         'all.admin.permission',
+                        //         'add.roles.permission',
+                        //         'all.roles.permission',
+                        //     ],
 
-                            'subMenu' => [
-                                [
-                                    'title' => 'All Admin',
-                                    'routes' => ['all.admin.permission'],
-                                    'route' => 'all.admin.permission',
-                                ],
-                                [
-                                    'title' => 'Role',
-                                    'routes' => ['all.role'],
-                                    'route' => 'all.role',
-                                ],
-                                [
-                                    'title' => 'Permission',
-                                    'routes' => ['all.permission'],
-                                    'route' => 'all.permission',
-                                ],
-                            ],
-                        ],
+                        //     'subMenu' => [
+                        //         [
+                        //             'title' => 'All Admin',
+                        //             'routes' => ['all.admin.permission'],
+                        //             'route' => 'all.admin.permission',
+                        //         ],
+                        //         [
+                        //             'title' => 'Role',
+                        //             'routes' => ['all.role'],
+                        //             'route' => 'all.role',
+                        //         ],
+                        //         [
+                        //             'title' => 'Permission',
+                        //             'routes' => ['all.permission'],
+                        //             'route' => 'all.permission',
+                        //         ],
+                        //     ],
+                        // ],
                         // ================== Role & Permission End ===================
                     ];
-                @endphp --}}
+                @endphp
 
                 {{-- @if (Auth::guard('admin')->user()->can('brand.menu') || Auth::guard('admin')->user()->can('permission.menu') || Auth::guard('admin')->user()->can('role.menu') || Auth::guard('admin')->user()->can('admin.menu') || Auth::guard('admin')->user()->can('web_setting.menu')) --}}
 
-                {{-- @foreach ($menuItems as $item)
+                @foreach ($menuItems as $item)
                     <div data-kt-menu-trigger="click"
                         class="menu-item menu-accordion {{ Route::is(...$item['routes'] ?? []) ? 'here show' : '' }}">
                         <span class="menu-link">
@@ -406,7 +348,7 @@
                             </div>
                         @endif
                     </div>
-                @endforeach --}}
+                @endforeach
 
                 {{-- @endif --}}
 
@@ -415,8 +357,8 @@
     </div>
 
     <div class="px-5 pt-5 aside-footer flex-column-auto pb-7" id="kt_aside_footer">
-        <form method="POST" action="{{ route('logout') }}">
-            <a href="{{ route('logout') }}" class="btn btn-custom btn-primary w-100"
+        <form method="POST" action="{{ route('admin.logout') }}">
+            <a href="{{ route('admin.logout') }}" class="btn btn-custom btn-primary w-100"
                 onclick="event.preventDefault();this.closest('form').submit();">
                 <span class="btn-label">
                     @csrf
