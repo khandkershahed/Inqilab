@@ -26,7 +26,7 @@ class AdvertisementController extends Controller
     public function create()
     {
         return view('admin.pages.advertisement.create');
-    }
+    } 
 
     /**
      * Store a newly created resource in storage.

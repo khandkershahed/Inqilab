@@ -1,4 +1,4 @@
-@props([
+{{-- @props([
     'id' => null,
     'type' => 'text',
     'name',
@@ -17,20 +17,19 @@
     }
 @endphp
 <style>
-    .custom-input{
+    .custom-input {
         border: 1px solid #e4e6ef !important;
     }
 </style>
 
-<input id="{{ $id ?? $name }}" class="{{ $inputClasses }} form-control-solid custom-input" type="{{ $type }}" name="{{ $name }}"
-    value="{{ old($name, $value) }}" placeholder="{{ $placeholder }}" aria-label="{{ $placeholder }}"
-    {{ $required ? 'required' : '' }} {{ $step ? "step=$step" : '' }} {{ $maxlength ? "maxlength=$maxlength" : '' }}>
-
-@if ($error)
+<input id="{{ $id ?? '' }}" type="{{ $type ?? 'text' }}"
+    class="form-control form-control-solid @error($name)is-invalid @enderror" name="{{ $name }}" step="0.01"
+    maxlength="250" placeholder="{{ $placeholder ?? '' }}" value="{{ old($name, $value ?? '') }}" {{ $required ?? '' }} />
+@error($name)
     <div class="invalid-feedback">
-        {{ $error }}
+        {{ $message }}
     </div>
-@endif
+@enderror --}}
 
 {{--
 <input class="form-control @error($name)is-invalid @enderror" id="{{ $id ?? '' }}" {{ $required ? 'required' : '' }} type="{{ $type ?? 'text' }}"
@@ -54,3 +53,13 @@
 @enderror --}}
 {{-- <x-input id="full_name" type="text" name="full_name" placeholder="Enter full name"
     colSize="col-lg-8"></x-input> --}}
+
+
+<input id="{{ $id ?? '' }}" type="{{ $type ?? 'text' }}"
+    class="form-control form-control-solid @error($name)is-invalid @enderror" name="{{ $name }}" step="0.01"
+    maxlength="250" placeholder="{{ $placeholder ?? '' }}" value="{{ old($name, $value ?? '') }}" {{ $required ?? '' }} />
+@error($name)
+    <div class="invalid-feedback">
+        {{ $message }}
+    </div>
+@enderror

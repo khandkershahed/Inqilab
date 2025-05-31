@@ -25,7 +25,7 @@ return new class extends Migration
             $table->unsignedInteger('total_pages')->default(1)->nullable();
             $table->string('epaper_pdf_url')->nullable();
             $table->string('epaper_category')->nullable();
-            $table->json('tags')->nullable();
+            $table->text('tags')->nullable();
             $table->string('published_by')->nullable();
             $table->string('region')->nullable();
             $table->boolean('is_active')->default(true)->nullable();

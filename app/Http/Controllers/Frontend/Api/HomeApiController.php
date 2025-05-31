@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend\Api;
 
 use App\Models\News;
+use App\Models\Epaper;
 use App\Models\Setting;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -592,6 +593,97 @@ class HomeApiController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Failed to retrieve advertisements.',
+                'error'   => $e->getMessage(),
+            ], 500);
+        }
+    }
+    public function ePaper(){
+        try {
+            $epapers = Epaper::where('is_active', true)
+                ->latest()
+                ->get();
+
+            if ($epapers->isEmpty()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'No E-Paper found.',
+                ], 404);
+            }
+
+            $data = $epapers->map(function ($epaper) {
+                return [
+                    'id'                 => $epaper->id,
+                    'epaper_name'        => $epaper->epaper_name,
+                    'slug'               => $epaper->slug,
+                    'epaper_title'       => $epaper->epaper_title,
+                    'post_date'          => $epaper->post_date,
+                    'epaper_image'       => $epaper->epaper_image ?? null,
+                    'epaper_image_alt'   => $epaper->epaper_image_alt,
+                    'language'           => $epaper->language,
+                    'page_number'        => $epaper->page_number,
+                    'total_pages'        => $epaper->total_pages,
+                    'epaper_pdf_url'     => $epaper->epaper_pdf_url ?? null,
+                    'tags'               => json_decode($epaper->tags, true),
+                    'published_by'       => $epaper->published_by,
+                    'region'             => $epaper->region,
+                ];
+            });
+
+            return response()->json([
+                'success'  => true,
+                'message'  => 'ePapers retrieved successfully.',
+                'data'     => $data,
+            ], 200);
+        } catch (\Exception $e) {
+            Log::error('Failed to fetch ePapers: ' . $e->getMessage());
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to retrieve ePapers.',
+                'error'   => $e->getMessage(),
+            ], 500);
+        }
+    }
+    public function ePaperDetails($slug)
+    {
+        try {
+            $epaper = Epaper::where('slug', $slug)
+                ->where('is_active', true)
+                ->first();
+
+            if (!$epaper) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'E-Paper not found.',
+                ], 404);
+            }
+
+            return response()->json([
+                'success' => true,
+                'message' => 'E-Paper details retrieved successfully.',
+                'data'    => [
+                    'id'                 => $epaper->id,
+                    'epaper_name'        => $epaper->epaper_name,
+                    'slug'               => $epaper->slug,
+                    'epaper_title'       => $epaper->epaper_title,
+                    'post_date'          => $epaper->post_date,
+                    'epaper_image'       => $epaper->epaper_image ?? null,
+                    'epaper_image_alt'   => $epaper->epaper_image_alt,
+                    'language'           => $epaper->language,
+                    'page_number'        => $epaper->page_number,
+                    'total_pages'        => $epaper->total_pages,
+                    'epaper_pdf_url'     => $epaper->epaper_pdf_url ?? null,
+                    'tags'               => json_decode($epaper->tags, true),
+                    'published_by'       => $epaper->published_by,
+                    'region'             => $epaper->region,
+                ],
+            ], 200);
+        } catch (\Exception $e) {
+            Log::error('Failed to fetch ePaper details: ' . $e->getMessage());
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to retrieve ePaper details.',
                 'error'   => $e->getMessage(),
             ], 500);
         }

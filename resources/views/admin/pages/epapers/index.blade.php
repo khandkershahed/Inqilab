@@ -25,12 +25,12 @@
         </div>
 
         <div class="card-body pt-0">
-            <table id="kt_datatable_example_5" class="table table-striped table-row-bordered gy-5 gs-7 border rounded">
-                <thead class="bg-dark text-light">
+            <table id="dataTableSet" class="table border rounded table-striped table-row-bordered gy-5 gs-7">
+                <thead>
                     <tr>
                         <th width="5%">Sl</th>
-                        <th width="20%">E Paper Name</th>
-                        <th width="57%">Bangla Title</th>
+                        <th width="35%">Image</th>
+                        <th width="42%">E Paper Name</th>
                         <th width="10%">Status</th>
                         <th width="8%">Actions</th>
                     </tr>
@@ -42,16 +42,15 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td class="text-start">
+                                <img src="{{ $epaper->epaper_image ?? $epaper->epaper_image  }}" alt="" width="150px">
+                            </td>
+                            <td class="text-start">
                                 {{ $epaper->epaper_name }}
                             </td>
                             <td class="text-start">
-
-                            </td>
-                            <td class="text-start">{{ $epaper->bangla_title }}</td>
-                            <td class="text-start">
                                 <p>
-                                    <span class="badge {{ $epaper->status == 'published' ? 'bg-success' : 'bg-danger' }}">
-                                        {{ ucfirst($epaper->status) }}
+                                    <span class="badge {{ $epaper->is_active == '1' ? 'bg-success' : 'bg-danger' }}">
+                                        {{ $epaper->is_active == '1' ? 'Active' : 'Inactive' }}
                                     </span>
                                 </p>
                             </td>
