@@ -36,6 +36,8 @@ Route::prefix('api/v1')->group(function () {
     Route::get('/advertisements', [HomeApiController::class, 'advertisements']);
     Route::get('/epapers', [HomeApiController::class, 'ePaper']);
     Route::get('/epaper-details/{slug}', [HomeApiController::class, 'ePaperDetails']);
+    Route::post('/contact/add', [HomeApiController::class, 'contactStore']);
+    // Route::post('/faqs', [HomeApiController::class, 'faqs']);
     // Route::post('/register', [UserApiController::class, 'register']);
     // Route::post('/login', [UserApiController::class, 'login']);
     // Route::post('/reset-password/{token}', [UserApiController::class, 'reset']);

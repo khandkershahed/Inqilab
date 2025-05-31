@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend\Api;
 
 use App\Models\News;
 use App\Models\Epaper;
+use App\Models\Contact;
 use App\Models\Setting;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -12,6 +13,8 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\URL;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\NewsResource;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class HomeApiController extends Controller
 {
@@ -597,7 +600,8 @@ class HomeApiController extends Controller
             ], 500);
         }
     }
-    public function ePaper(){
+    public function ePaper()
+    {
         try {
             $epapers = Epaper::where('is_active', true)
                 ->latest()
@@ -685,6 +689,85 @@ class HomeApiController extends Controller
                 'success' => false,
                 'message' => 'Failed to retrieve ePaper details.',
                 'error'   => $e->getMessage(),
+            ], 500);
+        }
+    }
+    public function contactStore(Request $request)
+    {
+        // Validate the request data
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:150',
+            'email' => 'required|email|max:150',
+            'phone' => 'nullable|string|max:20',
+            'subject' => 'nullable|string',
+            'message' => 'nullable|string',
+            'ip_address' => 'nullable|ip|max:100',
+            // 'g-recaptcha-response' => ['required', new Recaptcha],
+        ], [
+            'name.required' => 'The name field is required.',
+            'name.string' => 'The name must be a string.',
+            'name.max' => 'The name may not be greater than :max characters.',
+            'email.required' => 'The email field is required.',
+            'email.email' => 'Please enter a valid email address.',
+            'email.max' => 'The email may not be greater than :max characters.',
+            'phone.string' => 'The phone must be a string.',
+            'phone.max' => 'The phone may not be greater than :max characters.',
+            'phone.regex' => 'The phone field must contain only numeric characters and must be proper number.',
+            'subject.string' => 'The subject must be a string.',
+            'message.string' => 'The message must be a string.',
+            'ip_address.ip' => 'Please enter a valid IP address.',
+            'ip_address.max' => 'The IP address may not be greater than :max characters.',
+            // 'g-recaptcha-response.required' => 'The reCAPTCHA field is required.',
+        ]);
+
+        if ($request->filled('phone')) {
+            $validator->sometimes('phone', 'regex:/^[0-9]+$/i', function ($input) {
+                return $input->phone;
+            });
+        }
+
+        if ($validator->fails()) {
+            foreach ($validator->messages()->all() as $message) {
+                Session::flash('error', $message);
+                // Toastr::error($message, 'Failed', ['timeOut' => 3000]);
+            }
+            return redirect()->back()->withInput();
+        }
+
+
+
+        try {
+            $typePrefix = 'MSG';
+            $today = date('dmy');
+            $lastCode = Contact::where('code', 'like', $typePrefix . '-' . $today . '%')->orderBy('id', 'desc')->first();
+
+            $newNumber = $lastCode ? (int) explode('-', $lastCode->code)[2] + 1 : 1;
+            $code = $typePrefix . '-' . $today . '-' . $newNumber;
+
+            Contact::create([
+                'code'       => $code,
+                'name'       => $request->name,
+                'email'      => $request->email,
+                'phone'      => $request->phone,
+                'subject'    => $request->subject,
+                'message'    => $request->message,
+                'ip_address' => request()->ip(),
+                'status'     => 'pending',
+                'priority'   => 'normal',
+                'call'       => $request->call,
+            ]);
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Your message has been sent successfully.',
+            ], 200);
+        } catch (\Exception $e) {
+            Log::error('Failed to store contact message: ' . $e->getMessage());
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to send your message.',
+                'error' => $e->getMessage(),
             ], 500);
         }
     }
