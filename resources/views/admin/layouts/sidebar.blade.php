@@ -5,19 +5,17 @@
     <div class="aside-logo flex-column-auto" id="kt_aside_logo">
 
         <a href="{{ route('admin.dashboard') }}">
-
-            {{-- <img alt="Logo"
-                src="{{ !empty($site->site_logo) && file_exists(public_path('storage/settings/' . $site->site_logo)) ? asset('storage/settings/' . $site->site_logo) : asset('') }}"
-                class="h-60px logo w-200px"> --}}
-
-            <h3 class="text-black fw-bold">New Site</h3>
-
+            <img alt="Logo"
+                src="{{ !empty($site->site_logo) && file_exists(public_path('storage/settings/' . $site->site_logo))
+                    ? asset('storage/settings/' . $site->site_logo)
+                    : asset('images/logo.webp') }}"
+                class="h-60px logo w-200px">
         </a>
-        <div id="kt_aside_toggle" class="btn btn-icon w-auto px-0 btn-active-color-primary aside-toggle active"
+        <div id="kt_aside_toggle" class="w-auto px-0 btn btn-icon btn-active-color-primary aside-toggle active"
             data-kt-toggle="true" data-kt-toggle-state="active" data-kt-toggle-target="body"
             data-kt-toggle-name="aside-minimize">
 
-            <span class="svg-icon svg-icon-1 rotate-180">
+            <span class="rotate-180 svg-icon svg-icon-1">
 
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                     fill="none">
@@ -34,7 +32,7 @@
         </div>
     </div>
     <div class="aside-menu flex-column-fluid">
-        <div class="hover-scroll-overlay-y my-5 my-lg-5" id="kt_aside_menu_wrapper" data-kt-scroll="true"
+        <div class="my-5 hover-scroll-overlay-y my-lg-5" id="kt_aside_menu_wrapper" data-kt-scroll="true"
             data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-height="auto"
             data-kt-scroll-dependencies="#kt_aside_logo, #kt_aside_footer" data-kt-scroll-wrappers="#kt_aside_menu"
             data-kt-scroll-offset="0" style="height: 318px;">
@@ -124,7 +122,11 @@
 
                                 [
                                     'title' => 'Advertisement',
-                                    'routes' => ['admin.advertisement.index', 'admin.advertisement.create', 'admin.advertisement.edit'],
+                                    'routes' => [
+                                        'admin.advertisement.index',
+                                        'admin.advertisement.create',
+                                        'admin.advertisement.edit',
+                                    ],
                                     'route' => 'admin.advertisement.index',
                                 ],
 
@@ -298,7 +300,7 @@
                                 class="menu-sub menu-sub-accordion {{ Route::is(...$item['routes'] ?? []) ? 'menu-active-bg' : '' }}">
                                 @foreach ($item['subMenu'] as $subItem)
                                     @if (isset($subItem['subMenu']))
-                                        <div data-kt-menu-trigger="click" class="menu-item menu-accordion mb-1">
+                                        <div data-kt-menu-trigger="click" class="mb-1 menu-item menu-accordion">
                                             <span class="menu-link">
                                                 <span class="menu-bullet">
                                                     <span class="bullet bullet-dot"></span>
@@ -353,7 +355,7 @@
         </div>
     </div>
 
-    <div class="aside-footer flex-column-auto pt-5 pb-7 px-5" id="kt_aside_footer">
+    <div class="px-5 pt-5 aside-footer flex-column-auto pb-7" id="kt_aside_footer">
         <form method="POST" action="{{ route('admin.logout') }}">
             <a href="{{ route('admin.logout') }}" class="btn btn-custom btn-primary w-100"
                 onclick="event.preventDefault();this.closest('form').submit();">
