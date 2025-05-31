@@ -43,7 +43,7 @@
 
                     @foreach ($brands as $key => $brand)
                         <tr>
-                            <td>{{ $key + 1 }}</td>
+                            <td>{{ $loop->iteration }}</td>
 
                             <td class="">
                                 <img src="{{ !empty($brand->image) ? url('storage/' . $brand->image) : 'https://ui-avatars.com/api/?name=' . urlencode($brand->name) }}"

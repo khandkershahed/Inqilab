@@ -1,6 +1,6 @@
 <x-admin-app-layout :title="'Category Edit'">
     <div class="card card-flash">
-        <div class="card-header mt-6">
+        <div class="mt-6 card-header">
             <div class="card-title"></div>
             <div class="card-toolbar">
                 <a href="{{ route('admin.categories.index') }}" class="btn btn-light-info">
@@ -20,7 +20,7 @@
                 </a>
             </div>
         </div>
-        <div class="card-body pt-0">
+        <div class="pt-0 card-body">
             <form method="POST" action="{{ route('admin.categories.update', $category->id) }}"
                 enctype="multipart/form-data">
                 @csrf
@@ -65,13 +65,13 @@
                         <x-metronic.label for="code"
                             class="col-form-label required fw-bold fs-6">{{ __('Category Code') }}</x-metronic.label>
                         <x-metronic.input id="code" type="text" name="code" placeholder="Category Code"
-                            :value="old('code',$category->code)"></x-metronic.input>
+                            :value="old('code', $category->code)"></x-metronic.input>
                     </div>
                     <div class="col-lg-3 mb-7">
                         <x-metronic.label for="serial"
                             class="col-form-label required fw-bold fs-6">{{ __('Category serial') }}</x-metronic.label>
                         <x-metronic.input id="serial" type="text" name="serial" placeholder="Category serial"
-                            :value="old('serial',$category->serial)"></x-metronic.input>
+                            :value="old('serial', $category->serial)"></x-metronic.input>
                     </div>
                     <div class="col-lg-12 mb-7">
                         <x-metronic.label for="description" class="col-form-label fw-bold fs-6 ">{{ __('Description') }}
@@ -82,11 +82,23 @@
                     </div>
 
                     <div class="col-lg-4 mb-7">
-                        <x-metronic.label for="logo" class="col-form-label fw-bold fs-6 ">{{ __('Icon') }}
-                        </x-metronic.label>
-
-                        <x-metronic.file-input id="logo" name="logo" :source="asset('storage/' . $category->logo)"
-                            :value="old('logo', $category->logo)"></x-metronic.file-input>
+                        <div class="row">
+                            <div class="col-8 d-flex align-items-center">
+                                <span class="input-group-btn">
+                                    <a id="lfm" data-input="thumbnail" data-preview="holder"
+                                        class="btn btn-primary d-flex align-items-center">
+                                        <i class="fas fa-image"></i> Choose
+                                    </a>
+                                </span>
+                                <input id="thumbnail" class="form-control" type="text" name="logo"
+                                    value="{{ $category->logo }}" placeholder="Image Path">
+                            </div>
+                            <div class="col-4">
+                                <div id="holder" style="margin-top:15px;max-height:100px;">
+                                    <img width="150px" src="{{ $category->logo }}" alt="">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-lg-4 mb-7">
                         <x-metronic.label for="image"
@@ -110,7 +122,7 @@
                 <div class="text-end pt-15">
 
                     <x-metronic.button type="submit"
-                        class="dark rounded-1 px-5">{{ __('Update Data') }}</x-metronic.button>
+                        class="px-5 dark rounded-1">{{ __('Update Data') }}</x-metronic.button>
 
                 </div>
 

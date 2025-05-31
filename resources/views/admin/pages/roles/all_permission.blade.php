@@ -95,7 +95,7 @@
                                 @foreach ($permissions as $key => $permission)
                                     <tr>
 
-                                        <td>{{ $key + 1 }}</td>
+                                        <td>{{ $loop->iteration }}</td>
                                         <td>{{ $permission->name }}</td>
                                         <td>{{ $permission->group_name }}</td>
                                         <td>

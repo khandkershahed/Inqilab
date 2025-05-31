@@ -1,7 +1,7 @@
 <x-admin-app-layout :title="'Category Add'">
     <div class="card card-flash">
         <!--begin::Card header-->
-        <div class="card-header mt-6">
+        <div class="mt-6 card-header">
             <div class="card-title"></div>
 
             <!--begin::Card toolbar-->
@@ -24,7 +24,7 @@
                 </a>
             </div>
         </div>
-        <div class="card-body pt-0">
+        <div class="pt-0 card-body">
             <form method="POST" action="{{ route('admin.categories.store') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
@@ -63,14 +63,14 @@
                     <div class="col-lg-3 mb-7">
                         <x-metronic.label for="code"
                             class="col-form-label required fw-bold fs-6">{{ __('Category Code') }}</x-metronic.label>
-                        <x-metronic.input id="code" type="text" name="code"
-                            placeholder="Category Code" :value="old('code')"></x-metronic.input>
+                        <x-metronic.input id="code" type="text" name="code" placeholder="Category Code"
+                            :value="old('code')"></x-metronic.input>
                     </div>
                     <div class="col-lg-3 mb-7">
                         <x-metronic.label for="serial"
                             class="col-form-label required fw-bold fs-6">{{ __('Category serial') }}</x-metronic.label>
-                        <x-metronic.input id="serial" type="text" name="serial"
-                            placeholder="Category serial" :value="old('serial')"></x-metronic.input>
+                        <x-metronic.input id="serial" type="text" name="serial" placeholder="Category serial"
+                            :value="old('serial')"></x-metronic.input>
                     </div>
 
 
@@ -82,16 +82,33 @@
                     </div>
 
                     <div class="col-lg-4 mb-7">
-                        <x-metronic.label for="logo" class="col-form-label fw-bold fs-6 ">{{ __('Icon') }}
-                        </x-metronic.label>
-
-                        <x-metronic.file-input id="logo" name="logo" :value="old('logo')"></x-metronic.file-input>
+                        <div>
+                            <x-metronic.label for="logo" class="col-form-label fw-bold fs-6">{{ __('Icon') }}
+                            </x-metronic.label>
+                        </div>
+                        <div class="row">
+                            <div class="col-8 d-flex align-items-center">
+                                <span class="input-group-btn">
+                                    <a id="lfm" data-input="logo" data-preview="holder"
+                                        class="btn btn-primary d-flex align-items-center">
+                                        <i class="fas fa-image"></i> Choose
+                                    </a>
+                                </span>
+                                <input id="logo" class="form-control" type="text" name="image_path"
+                                    value="" placeholder="Image Path">
+                            </div>
+                            <div class="col-4">
+                                <div id="holder" style="margin-top:15px;max-height:100px;"></div>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-lg-4 mb-7">
-                        <x-metronic.label for="image" class="col-form-label fw-bold fs-6">{{ __('Thumbnail Image') }}
+                        <x-metronic.label for="image"
+                            class="col-form-label fw-bold fs-6">{{ __('Thumbnail Image') }}
                         </x-metronic.label>
 
-                        <x-metronic.file-input id="image" name="image" :value="old('image')"></x-metronic.file-input>
+                        <x-metronic.file-input id="image" name="image"
+                            :value="old('image')"></x-metronic.file-input>
                     </div>
                     <div class="col-lg-4 mb-7">
                         <x-metronic.label for="banner_image"
@@ -108,7 +125,7 @@
                 <div class="text-end pt-15">
 
                     <x-metronic.button type="submit"
-                        class="dark rounded-1 px-5">{{ __('Submit') }}</x-metronic.button>
+                        class="px-5 dark rounded-1">{{ __('Submit') }}</x-metronic.button>
 
                 </div>
 

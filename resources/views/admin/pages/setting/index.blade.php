@@ -1,21 +1,21 @@
 <x-admin-app-layout :title="'Website Setting'">
 
     <div class="row g-2" id="columns-container">
-        <div class="row py-10 pt-0">
-            <div class="col-lg-2">
+        <div class="py-10 pt-0 row">
+            <div class="col-lg-12">
                 <div class="custom-fixed-top">
-                    <div class="d-flex flex-column flex-md-row rounded border bg-white">
+                    <div class="bg-white border rounded ">
                         @include('admin.pages.setting.partials.tab_trigger')
                     </div>
                 </div>
             </div>
-            <div class="card col-lg-10">
+            <div class="card col-lg-12">
                 <form class="form" action="{{ route('admin.settings.updateOrCreate') }}" method="POST"
                     enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="card-body">
-                        <div class="tab-content bg-white p-5" id="myTabContent">
+                        <div class="p-5 bg-white tab-content" id="myTabContent">
                             <div class="tab-pane fade active show" id="generalInfo" role="tabpanel">
                                 <div class="row">
                                     <div class="col-lg-12 general_info_container">
@@ -148,10 +148,10 @@
                         </div>
 
                     </div>
-                    <div class="card-footer py-3">
+                    <div class="py-3 card-footer">
                         <div class="text-end">
                             <x-metronic.button type="submit" class="primary">
-                                {{ __('Submit') }}
+                              <i class="fas fa-cloud-arrow-up"></i>  {{ __('Save Data') }}
                             </x-metronic.button>
                         </div>
 

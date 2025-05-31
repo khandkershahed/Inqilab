@@ -60,7 +60,7 @@
                                 <!--begin::Table row-->
                                 @foreach ($roles as $key => $item)
                                     <tr>
-                                        <td style="width: 30px;">{{ $key + 1 }}</td>
+                                        <td style="width: 30px;">{{ $loop->iteration }}</td>
                                         <td style="width: 100px;">{{ $item->name }}</td>
                                         <td>
 

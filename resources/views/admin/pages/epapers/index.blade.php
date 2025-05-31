@@ -40,7 +40,7 @@
                     @foreach ($epapers as $key => $epaper)
 
                         <tr>
-                            <td>{{ $key + 1 }}</td>
+                            <td>{{ $loop->iteration }}</td>
                             <td class="text-start">
                                 {{ $epaper->epaper_name }}
                             </td>

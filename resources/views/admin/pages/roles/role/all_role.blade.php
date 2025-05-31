@@ -46,7 +46,7 @@
                                 @foreach ($roles as $key => $role)
                                     <tr>
 
-                                        <td>{{ $key + 1 }}</td>
+                                        <td>{{ $loop->iteration }}</td>
                                         <td>{{ $role->name }}</td>
 
                                         <td>

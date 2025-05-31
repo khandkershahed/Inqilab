@@ -43,7 +43,7 @@
 
                     @foreach ($banners as $key => $banner)
                         <tr>
-                            <td>{{ $key + 1 }}</td>
+                            <td>{{ $loop->iteration }}</td>
 
                             <td class="text-start">
 

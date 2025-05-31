@@ -44,7 +44,7 @@
 
                     @foreach ($coupons as $key => $coupon)
                         <tr>
-                            <td>{{ $key + 1 }}</td>
+                            <td>{{ $loop->iteration }}</td>
 
                             <td class="text-start">{{ $coupon->badge }}</td>
                             <td class="text-start">{{ $coupon->name }}</td>

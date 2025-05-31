@@ -1,5 +1,5 @@
-<ul class="nav nav-tabs nav-pills flex-row border-0 flex-md-column mb-3 mb-md-0 fs-6 w-100 pb-3" role="tablist">
-    <li class="nav-item w-100 me-0 mb-md-2" role="presentation">
+<ul class="px-3 py-3 mb-3 border-0 shadow-lg d-flex nav nav-tabs nav-pills mb-md-0 fs-6" role="tablist">
+    <li class="nav-item me-0 " role="presentation">
         <a class="nav-link active w-100 btn btn-flex btn-active-info fs-6 fw-normal" data-bs-toggle="tab"
             href="#generalInfo" aria-selected="false" role="tab" tabindex="-1">
             <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -36,7 +36,7 @@
             <span class="ps-2">General Information</span>
         </a>
     </li>
-    <li class="nav-item w-100 me-0 mb-md-2" role="presentation">
+    <li class="nav-item me-0 " role="presentation">
         <a class="nav-link w-100 btn btn-flex btn-active-info fs-6 fw-normal" data-bs-toggle="tab"
             href="#footer" aria-selected="false" role="tab" tabindex="-1">
             <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -80,7 +80,7 @@
         </a>
     </li>
 
-    <li class="nav-item w-100 me-0 mb-md-2" role="presentation">
+    <li class="nav-item me-0 " role="presentation">
         <a class="nav-link w-100 btn btn-flex btn-active-info fs-6 fw-normal" data-bs-toggle="tab"
             href="#businessHours" aria-selected="false" role="tab" tabindex="-1">
             <i class="fas fa-clock fs-2 text-primary"></i>
@@ -88,17 +88,17 @@
         </a>
     </li>
 
-    <li class="nav-item w-100 me-0 mb-md-2" role="presentation">
+    <li class="nav-item me-0 " role="presentation">
         <a class="nav-link w-100 btn btn-flex btn-active-info fs-6 fw-normal" data-bs-toggle="tab" href="#email"
             aria-selected="false" role="tab" tabindex="-1">
             <i class="fas fa-envelope fs-2 text-danger"></i>
             <span class="ps-2">Email Settings</span>
         </a>
     </li>
-    <li class="nav-item w-100 me-0 mb-md-2" role="presentation">
+    <li class="nav-item me-0" role="presentation">
         <a class="nav-link w-100 btn btn-flex btn-active-info fs-6 fw-normal" data-bs-toggle="tab" href="#advanced_settings"
             aria-selected="false" role="tab" tabindex="-1">
-            <i class="fas fa-cog fs-2 text-black"></i>
+            <i class="text-black fas fa-cog fs-2"></i>
             <span class="ps-2">Advanced Settings</span>
         </a>
     </li>
@@ -145,7 +145,7 @@
         </a>
     </li> --}}
 
-    <li class="nav-item w-100 me-0 mb-md-2" role="presentation">
+    <li class="nav-item me-0" role="presentation">
         <a class="nav-link w-100 btn btn-flex btn-active-info fs-6 fw-normal" data-bs-toggle="tab" href="#seo"
             aria-selected="false" role="tab" tabindex="-1">
             <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -270,7 +270,7 @@
             </svg>
             <span class="ps-2">Seo</span></a>
     </li>
-    <li class="nav-item w-100 me-0 mb-md-2" role="presentation">
+    <li class="nav-item me-0" role="presentation">
         <a class="nav-link w-100 btn btn-flex btn-active-info fs-6 fw-normal" data-bs-toggle="tab"
             href="#socialLinks" aria-selected="false" role="tab" tabindex="-1">
             <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"

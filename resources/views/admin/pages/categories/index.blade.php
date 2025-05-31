@@ -30,10 +30,10 @@
                         <tbody>
                             @forelse ($categories as $category)
                                 <tr>
-                                    <td>{{ $key + 1 }}</td>
+                                    <td>{{ $loop->iteration }}</td>
                                     <td>
                                         <img width="70" height="70" class="img-fluid rounded-2"
-                                            src="{{ !empty(optional($category)->logo) ? url(optional($category)->logo) : asset('images/no_image.jpg') }}"
+                                            src="https://v2.weeklyinqilab.com/storage/{{ $category->logo }}  "
                                             alt="{{ $category->page_name }}">
                                     </td>
                                     <td>{{ $category->name }}</td>
@@ -50,10 +50,10 @@
                                     </td>
                                     <td class="text-end">
                                         <div class="gap-2 d-flex justify-content-end">
-                                            <a href="{{ route('admin.categories.show', $child->id) }}"
+                                            {{-- <a href="{{ route('admin.categories.show', $child->id) }}"
                                                 class="btn btn-sm btn-primary rounded-pill">
                                                 <i class="text-white fas fa-eye fs-6 ps-2"></i>
-                                            </a>
+                                            </a> --}}
                                             <a href="{{ route('admin.categories.edit', $category->id) }}"
                                                 class="btn btn-sm btn-primary rounded-pill">
                                                 <i class="text-white fas fa-pen-to-square fs-6 ps-2"></i>

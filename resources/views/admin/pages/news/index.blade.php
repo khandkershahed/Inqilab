@@ -32,11 +32,14 @@
                         <tbody>
                             @foreach ($newses as $key => $news)
                                 <tr>
-                                    <td>{{ $key + 1 }}</td>
+                                    <td>{{ $loop->iteration }}</td>
                                     <td>
+                                        {{-- <img width="70" height="70" class="img-fluid rounded-2"
+                                            src="{{ !empty(optional($news)->thumbnail) ? url(optional($news)->thumbnail) : asset('images/no_image.jpg') }}"
+                                            alt="{{ $news->page_name }}"> --}}
                                         <img width="70" height="70" class="img-fluid rounded-2"
-                                            src="https://weekly-inqilab.vercel.app/_next/image?url=https%3A%2F%2Fv2.weeklyinqilab.com%2Fstorage%2Fnews%2Fthumbnail%2F54a94bb2360a30b3c42f614b8ab5c3761a864a7b87a4f1bf_LiFbnwaFrw1748495386.png&w=640&q=75"
-                                            alt="News Image">
+                                            src="https://v2.weeklyinqilab.com/storage/{{ $news->thumbnail }}"
+                                            alt="{{ $news->bangla_name }}">
                                     </td>
                                     <td>{{ $news->bangla_title }}</td>
                                     <td>{{ optional($news->category)->bangla_name ?? optional($news->category)->name }}

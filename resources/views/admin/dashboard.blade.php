@@ -1,4 +1,4 @@
-<x-admin-app-layout :title="'Inqilab Dashboard'">
+<x-admin-app-layout :title="'Inqilab || Admin Dashboard'">
 
     <style>
         .bxs-star {
@@ -125,9 +125,10 @@
             <div class="col-lg-3">
                 <div class="card card-flush">
                     <div>
-                        <p class="px-10 py-5 dashboard-bg bg-primary rounded-2 d-flex align-items-center justify-content-center">
+                        <p
+                            class="px-10 py-5 dashboard-bg bg-primary rounded-2 d-flex align-items-center justify-content-center">
                             <i class="text-white fas fa-newspaper fs-1"></i><span class="text-white fs-1 ps-4">
-                                News Available</span>
+                                Active News</span>
                         </p>
                         <div class="text-center ps-5">
                             <span style="font-size: 60px">
@@ -140,9 +141,10 @@
             <div class="col-lg-3">
                 <div class="card card-flush">
                     <div>
-                        <p class="px-10 py-5 dashboard-bg bg-primary rounded-2 d-flex align-items-center justify-content-center">
+                        <p
+                            class="px-10 py-5 dashboard-bg bg-primary rounded-2 d-flex align-items-center justify-content-center">
                             <i class="text-white fas fa-list fs-1"></i><span class="text-white fs-1 ps-4">
-                                Category</span>
+                                Categories</span>
                         </p>
                         <div class="text-center ps-5">
                             <span style="font-size: 60px">
@@ -155,7 +157,8 @@
             <div class="col-lg-3">
                 <div class="card card-flush">
                     <div>
-                        <p class="px-10 py-5 dashboard-bg bg-primary rounded-2 d-flex align-items-center justify-content-center">
+                        <p
+                            class="px-10 py-5 dashboard-bg bg-primary rounded-2 d-flex align-items-center justify-content-center">
                             <i class="text-white fas fa-spinner fs-1"></i><span class="text-white fs-1 ps-4">Pending
                                 News</span>
                         </p>
@@ -170,7 +173,8 @@
             <div class="col-lg-3">
                 <div class="card card-flush">
                     <div>
-                        <p class="px-10 py-5 dashboard-bg bg-primary rounded-2 d-flex align-items-center justify-content-center">
+                        <p
+                            class="px-10 py-5 dashboard-bg bg-primary rounded-2 d-flex align-items-center justify-content-center">
                             <i class="text-white fas fa-close fs-1"></i><span class="text-white fs-1 ps-4">Rejected
                                 News</span>
                         </p>
@@ -185,8 +189,10 @@
             <div class="col-lg-3">
                 <div class="mt-5 card card-flush">
                     <div>
-                        <p class="px-10 py-5 dashboard-bg bg-primary rounded-2 d-flex align-items-center justify-content-center">
-                            <i class="text-white fab fa-adversal fs-1"></i><span class="text-white fs-1 ps-4">Total Advertisment</span>
+                        <p
+                            class="px-10 py-5 dashboard-bg bg-primary rounded-2 d-flex align-items-center justify-content-center">
+                            <i class="text-white fab fa-adversal fs-1"></i><span class="text-white fs-1 ps-4">Total
+                                Advertisment</span>
                         </p>
                         <div class="text-center ps-5">
                             <span style="font-size: 60px">
@@ -199,8 +205,10 @@
             <div class="col-lg-3">
                 <div class="mt-5 card card-flush">
                     <div>
-                        <p class="px-10 py-5 dashboard-bg bg-primary rounded-2 d-flex align-items-center justify-content-center">
-                            <i class="text-white fab fa-adversal fs-1"></i><span class="text-white fs-1 ps-4">Pending Advertisment</span>
+                        <p
+                            class="px-10 py-5 dashboard-bg bg-primary rounded-2 d-flex align-items-center justify-content-center">
+                            <i class="text-white fab fa-adversal fs-1"></i><span class="text-white fs-1 ps-4">Pending
+                                Advertisment</span>
                         </p>
                         <div class="text-center ps-5">
                             <span style="font-size: 60px">
@@ -213,8 +221,10 @@
             <div class="col-lg-3">
                 <div class="mt-5 card card-flush">
                     <div>
-                        <p class="px-10 py-5 dashboard-bg bg-primary rounded-2 d-flex align-items-center justify-content-center">
-                            <i class="text-white fab fa-adversal fs-1"></i><span class="text-white fs-1 ps-4">Expire Advertisment</span>
+                        <p
+                            class="px-10 py-5 dashboard-bg bg-primary rounded-2 d-flex align-items-center justify-content-center">
+                            <i class="text-white fab fa-adversal fs-1"></i><span class="text-white fs-1 ps-4">Expire
+                                Advertisment</span>
                         </p>
                         <div class="text-center ps-5">
                             <span style="font-size: 60px">
@@ -227,12 +237,14 @@
             <div class="col-lg-3">
                 <div class="mt-5 card card-flush">
                     <div>
-                        <p class="px-10 py-5 dashboard-bg bg-primary rounded-2 d-flex align-items-center justify-content-center">
-                            <i class="text-white fas fa-user fs-1"></i><span class="text-white fs-1 ps-4">User Visit</span>
+                        <p
+                            class="px-10 py-5 dashboard-bg bg-primary rounded-2 d-flex align-items-center justify-content-center">
+                            <i class="text-white fas fa-user fs-1"></i><span class="text-white fs-1 ps-4">User
+                                Visit</span>
                         </p>
                         <div class="text-center ps-5">
                             <span style="font-size: 60px">
-                               1060
+                                1060
                             </span>
                         </div>
                     </div>
@@ -243,7 +255,8 @@
             <div class="col-lg-12">
                 <div class="p-2 mt-10 card">
                     <div class="p-0 card-body">
-                        <table id="allNewsList" class="table border rounded table-striped table-row-bordered gy-5 gs-7">
+                        <table id="allNewsList"
+                            class="table border rounded table-striped table-row-bordered gy-5 gs-7">
                             <thead>
                                 <tr class="text-gray-800 fw-bold fs-6 px-7">
                                     <th>Sl</th>
@@ -262,8 +275,8 @@
                                     <td>
                                         <div>
                                             <img width="70" height="70" class="img-fluid rounded-2"
-                                            src="https://weekly-inqilab.vercel.app/_next/image?url=https%3A%2F%2Fv2.weeklyinqilab.com%2Fstorage%2Fnews%2Fthumbnail%2F54a94bb2360a30b3c42f614b8ab5c3761a864a7b87a4f1bf_LiFbnwaFrw1748495386.png&w=640&q=75"
-                                            alt="">
+                                                src="https://weekly-inqilab.vercel.app/_next/image?url=https%3A%2F%2Fv2.weeklyinqilab.com%2Fstorage%2Fnews%2Fthumbnail%2F54a94bb2360a30b3c42f614b8ab5c3761a864a7b87a4f1bf_LiFbnwaFrw1748495386.png&w=640&q=75"
+                                                alt="">
                                         </div>
                                     </td>
                                     <td>Omnis sit rerum qui veniam doloribus ist</td>

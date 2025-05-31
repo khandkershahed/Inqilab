@@ -73,7 +73,7 @@
                                 @foreach ($users as $key => $user)
                                     <tr>
 
-                                        <td>{{ $key + 1 }}</td>
+                                        <td>{{ $loop->iteration }}</td>
                                         <td>{{ $user->name }}</td>
                                         <td>{{ $user->email }}</td>
 

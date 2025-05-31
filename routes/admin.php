@@ -82,6 +82,8 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
     );
 
     Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
+    Route::get('/faq', [FaqController::class, 'index'])->name('faq.index');
+    Route::put('/settings', [SettingController::class, 'updateOrcreateSetting'])->name('settings.updateOrCreate');
     Route::put('/settings', [SettingController::class, 'updateOrcreateSetting'])->name('settings.updateOrCreate');
 
     Route::post('advertisement/toggle-status/{id}', [AdvertisementController::class, 'toggleStatus'])->name('advertisement.toggle-status');

@@ -16,8 +16,13 @@
         $inputClasses .= ' is-invalid';
     }
 @endphp
+<style>
+    .custom-input{
+        border: 1px solid #e4e6ef !important;
+    }
+</style>
 
-<input id="{{ $id ?? $name }}" class="{{ $inputClasses }}" type="{{ $type }}" name="{{ $name }}"
+<input id="{{ $id ?? $name }}" class="{{ $inputClasses }} form-control-solid custom-input" type="{{ $type }}" name="{{ $name }}"
     value="{{ old($name, $value) }}" placeholder="{{ $placeholder }}" aria-label="{{ $placeholder }}"
     {{ $required ? 'required' : '' }} {{ $step ? "step=$step" : '' }} {{ $maxlength ? "maxlength=$maxlength" : '' }}>
 

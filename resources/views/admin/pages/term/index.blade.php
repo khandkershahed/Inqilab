@@ -45,7 +45,7 @@
 
                     @foreach ($terms as $key => $term)
                         <tr>
-                            <td>{{ $key + 1 }}</td>
+                            <td>{{ $loop->iteration }}</td>
 
                             <td class="text-start">{{ $term->title }}</td>
                             <td class="text-start">{{ $term->version }}</td>

@@ -32,7 +32,7 @@
                             @if ($advertisements)
                                 @foreach ($advertisements as $advertisement)
                                     <tr>
-                                        <td>{{ $key + 1 }}</td>
+                                        <td>{{ $loop->iteration }}</td>
                                         <td>
                                             <img width="70" height="70" class="img-fluid rounded-2"
                                                 src="{{ !empty(optional($advertisement)->image_path) ? url(optional($advertisement)->image_path) : asset('images/no_image.jpg') }}"
