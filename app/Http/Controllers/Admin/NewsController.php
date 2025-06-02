@@ -7,9 +7,10 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\NewsRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\Admin\NewsRequest;
 
 class NewsController extends Controller
 {
@@ -45,26 +46,26 @@ class NewsController extends Controller
 
         try {
             // Initialize variables to store file paths
-            $files = [
-                'thumbnail'     => $request->file('thumbnail'),
-                'banner_image'  => $request->file('banner_image'),
-            ];
-            $uploadedFiles = [];
+            // $files = [
+            //     'thumbnail'     => $request->file('thumbnail'),
+            //     'banner_image'  => $request->file('banner_image'),
+            // ];
+            // $uploadedFiles = [];
 
-            foreach ($files as $key => $file) {
-                if (!empty($file)) {
-                    $filePath = 'news/' . $key;
-                    $uploadResult = customUpload($file, $filePath);
+            // foreach ($files as $key => $file) {
+            //     if (!empty($file)) {
+            //         $filePath = 'news/' . $key;
+            //         $uploadResult = customUpload($file, $filePath);
 
-                    if ($uploadResult['status'] === 0) {
-                        return redirect()->back()->with('error', $uploadResult['error_message']);
-                    }
+            //         if ($uploadResult['status'] === 0) {
+            //             return redirect()->back()->with('error', $uploadResult['error_message']);
+            //         }
 
-                    $uploadedFiles[$key] = $uploadResult;
-                } else {
-                    $uploadedFiles[$key] = ['status' => 0];
-                }
-            }
+            //         $uploadedFiles[$key] = $uploadResult;
+            //     } else {
+            //         $uploadedFiles[$key] = ['status' => 0];
+            //     }
+            // }
 
             // Handle boolean flags
             $flags = [
@@ -91,8 +92,10 @@ class NewsController extends Controller
                 'content'               => $request->content,
                 'bangla_content'        => $request->bangla_content,
                 'video_url'             => $request->video_url,
-                'thumbnail'             => $uploadedFiles['thumbnail']['status'] === 1 ? $uploadedFiles['thumbnail']['file_path'] : null,
-                'banner_image'          => $uploadedFiles['banner_image']['status'] === 1 ? $uploadedFiles['banner_image']['file_path'] : null,
+                'thumbnail'             => $request->thumbnail,
+                'banner_image'          => $request->banner_image,
+                // 'thumbnail'             => $uploadedFiles['thumbnail']['status'] === 1 ? $uploadedFiles['thumbnail']['file_path'] : null,
+                // 'banner_image'          => $uploadedFiles['banner_image']['status'] === 1 ? $uploadedFiles['banner_image']['file_path'] : null,
                 'meta_title'            => $request->meta_title,
                 'meta_description'      => $request->meta_description,
                 'meta_keywords'         => $request->meta_keywords,
@@ -161,27 +164,27 @@ class NewsController extends Controller
         DB::beginTransaction();
         try {
             // Initialize updated file paths
-            $files = [
-                'thumbnail'     => $request->file('thumbnail'),
-                'banner_image'  => $request->file('banner_image'),
-            ];
-            $uploadedFiles = [];
-            foreach ($files as $key => $file) {
-                if (!empty($file)) {
-                    $uploadPath = 'news/' . $key;
-                    $uploadResult = customUpload($file, $uploadPath);
-                    if ($uploadResult['status'] === 0) {
-                        return redirect()->back()->with('error', $uploadResult['error_message']);
-                    }
-                    // Delete the old file if exists
-                    if (!empty($news->$key)) {
-                        Storage::disk('public')->delete($news->$key);
-                    }
-                    $uploadedFiles[$key] = $uploadResult['file_path'];
-                } else {
-                    $uploadedFiles[$key] = $news->$key; // Keep existing path if no new upload
-                }
-            }
+            // $files = [
+            //     'thumbnail'     => $request->file('thumbnail'),
+            //     'banner_image'  => $request->file('banner_image'),
+            // ];
+            // $uploadedFiles = [];
+            // foreach ($files as $key => $file) {
+            //     if (!empty($file)) {
+            //         $uploadPath = 'news/' . $key;
+            //         $uploadResult = customUpload($file, $uploadPath);
+            //         if ($uploadResult['status'] === 0) {
+            //             return redirect()->back()->with('error', $uploadResult['error_message']);
+            //         }
+            //         // Delete the old file if exists
+            //         if (!empty($news->$key)) {
+            //             Storage::disk('public')->delete($news->$key);
+            //         }
+            //         $uploadedFiles[$key] = $uploadResult['file_path'];
+            //     } else {
+            //         $uploadedFiles[$key] = $news->$key; // Keep existing path if no new upload
+            //     }
+            // }
 
             // Handle boolean flags
             $flags = [
@@ -208,8 +211,10 @@ class NewsController extends Controller
                 'content'               => $request->content,
                 'bangla_content'        => $request->bangla_content,
                 'video_url'             => $request->video_url,
-                'thumbnail'             => $uploadedFiles['thumbnail'],
-                'banner_image'          => $uploadedFiles['banner_image'],
+                'thumbnail'             => $request->thumbnail,
+                'banner_image'          => $request->banner_image,
+                // 'thumbnail'             => $uploadedFiles['thumbnail'],
+                // 'banner_image'          => $uploadedFiles['banner_image'],
                 'meta_title'            => $request->meta_title,
                 'meta_description'      => $request->meta_description,
                 'meta_keywords'         => $request->meta_keywords,
@@ -228,11 +233,6 @@ class NewsController extends Controller
             DB::rollBack();
 
             // If any new file was uploaded, delete it since the update failed
-            foreach (['thumbnail', 'banner_image'] as $key) {
-                if (!empty($uploadedFiles[$key]) && $uploadedFiles[$key] !== $news->$key) {
-                    Storage::disk('public')->delete($uploadedFiles[$key]);
-                }
-            }
 
             return back()->withInput()->with('error', 'Failed to update news: ' . $e->getMessage());
         }
@@ -244,6 +244,16 @@ class NewsController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $news = News::findOrFail($id);
+
+        // Delete thumbnail and banner image if they exist
+        if ($news->thumbnail) {
+            File::delete($news->thumbnail);
+        }
+        if ($news->banner_image) {
+            File::delete($news->banner_image);
+        }
+
+        $news->delete();
     }
 }
