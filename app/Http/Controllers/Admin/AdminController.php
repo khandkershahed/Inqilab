@@ -24,8 +24,7 @@ class AdminController extends Controller
         // Load only necessary fields for published news (avoid N+1)
         $newses = News::where('status', 'published')
             ->latest()
-            ->select('id', 'title', 'created_at') // keep minimal
-            ->limit(20) // limit results to speed up load
+            ->limit(25) // limit results to speed up load
             ->get();
 
         // Category count
