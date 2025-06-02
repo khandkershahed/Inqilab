@@ -273,7 +273,7 @@
                             <tbody>
                                 @foreach ($newses as $news)
                                     <tr>
-                                        <td>{{ $loop->iteration() }}</td>
+                                        <td>{{ $loop->iteration }}</td>
                                         <td>
                                             <div>
                                                 <img width="70" height="70" class="img-fluid rounded-2"
