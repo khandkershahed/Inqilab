@@ -240,13 +240,13 @@
                                         </div>
                                     </div>
                                     <div class="pt-0 card-body row">
-                                        <div class="mb-5 fv-row">
+                                        {{-- <div class="mb-5 fv-row">
                                             <x-metronic.label class="form-label">News Content</x-metronic.label>
                                             <textarea name="content" class="ckeditor">{!! old('content', $news->content) !!}</textarea>
                                             <div class="text-muted fs-7">
                                                 Add News content here.
                                             </div>
-                                        </div>
+                                        </div> --}}
                                         <div class="mb-5 fv-row">
                                             <x-metronic.label class="form-label">News Content Bangla</x-metronic.label>
                                             <textarea name="bangla_content" class="ckeditor">{!! old('bangla_content', $news->bangla_content) !!}</textarea>
