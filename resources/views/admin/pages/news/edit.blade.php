@@ -183,7 +183,7 @@
                                                     <div class="col-4">
                                                         <div id="holder1"
                                                             style="margin-top:15px; max-height:100px;">
-                                                            <img width="150px" src="{{ $news->thumbnail_image }}" alt="">
+                                                            <img width="150px" src="{{ $news->thumbnail }}" alt="">
                                                         </div>
                                                     </div>
                                                 </div>

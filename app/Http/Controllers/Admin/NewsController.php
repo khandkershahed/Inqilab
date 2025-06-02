@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\News;
 use App\Models\Category;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -189,11 +190,18 @@ class NewsController extends Controller
                 'thumbnail'     => $request->file('thumbnail'),
                 'banner_image'  => $request->file('banner_image'),
             ];
-            $uploadedFiles = [];
+            $deleteFileFromUrl = function ($url) {
+            $relativePath = Str::replaceFirst(url('/'), '', $url); // remove domain
+            $filePath = public_path($relativePath); // convert to full filesystem path
+
+            if (File::exists($filePath)) {
+                File::delete($filePath);
+            }
+        };
             foreach ($files as $key => $file) {
                 if (!empty($file)) {
                     if (!empty($news->$key)) {
-                        File::delete($news->$key);
+                       $deleteFileFromUrl($news->$key);
                     }
                 }
             }
@@ -258,11 +266,24 @@ class NewsController extends Controller
         $news = News::findOrFail($id);
 
         // Delete thumbnail and banner image if they exist
+        // Helper to delete file from full URL
+        $deleteFileFromUrl = function ($url) {
+            $relativePath = Str::replaceFirst(url('/'), '', $url); // remove domain
+            $filePath = public_path($relativePath); // convert to full filesystem path
+
+            if (File::exists($filePath)) {
+                File::delete($filePath);
+            }
+        };
+
+        // Delete thumbnail
         if ($news->thumbnail) {
-            File::delete($news->thumbnail);
+            $deleteFileFromUrl($news->thumbnail);
         }
+
+        // Delete banner image
         if ($news->banner_image) {
-            File::delete($news->banner_image);
+            $deleteFileFromUrl($news->banner_image);
         }
 
         $news->delete();
