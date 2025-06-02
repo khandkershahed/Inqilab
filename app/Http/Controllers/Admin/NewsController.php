@@ -7,6 +7,7 @@ use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -164,47 +165,35 @@ class NewsController extends Controller
         $news = News::findOrFail($id);
         DB::beginTransaction();
         try {
-            // Initialize updated file paths
-            // $files = [
-            //     'thumbnail'     => $request->file('thumbnail'),
-            //     'banner_image'  => $request->file('banner_image'),
-            // ];
-            // $uploadedFiles = [];
-            // foreach ($files as $key => $file) {
-            //     if (!empty($file)) {
-            //         $uploadPath = 'news/' . $key;
-            //         $uploadResult = customUpload($file, $uploadPath);
-            //         if ($uploadResult['status'] === 0) {
-            //             return redirect()->back()->with('error', $uploadResult['error_message']);
-            //         }
-            //         // Delete the old file if exists
-            //         if (!empty($news->$key)) {
-            //             Storage::disk('public')->delete($news->$key);
-            //         }
-            //         $uploadedFiles[$key] = $uploadResult['file_path'];
-            //     } else {
-            //         $uploadedFiles[$key] = $news->$key; // Keep existing path if no new upload
-            //     }
-            // }
-            $files = [
-                'thumbnail'     => $request->file('thumbnail'),
-                'banner_image'  => $request->file('banner_image'),
-            ];
-            $deleteFileFromUrl = function ($url) {
-            $relativePath = Str::replaceFirst(url('/'), '', $url); // remove domain
-            $filePath = public_path($relativePath); // convert to full filesystem path
 
-            if (File::exists($filePath)) {
-                File::delete($filePath);
-            }
-        };
-            foreach ($files as $key => $file) {
-                if (!empty($file)) {
-                    if (!empty($news->$key)) {
-                       $deleteFileFromUrl($news->$key);
-                    }
+            $newThumbnail = $request->input('thumbnail');
+            $newBannerImage = $request->input('banner_image');
+
+            // Helper: Delete file from full URL
+            $deleteFileFromUrl = function ($url) {
+                $relativePath = ltrim(Str::replaceFirst(url('/'), '', $url), '/'); // clean up
+                $filePath = public_path($relativePath);
+                // dd($filePath); // Debugging line to check file path
+                if (File::exists($filePath)) {
+                    File::delete($filePath);
+                } else {
+                    Log::warning('File not found for deletion', [
+                        'url' => $url,
+                        'resolved_path' => $filePath
+                    ]);
                 }
+            };
+
+            // If thumbnail is changed, delete old one
+            if ($newThumbnail != null && $newThumbnail !== $news->thumbnail) {
+                $deleteFileFromUrl($news->thumbnail);
             }
+
+            // If banner image is changed, delete old one
+            if ($newBannerImage != null && $newBannerImage !== $news->banner_image) {
+                $deleteFileFromUrl($news->banner_image);
+            }
+
             // Handle boolean flags
             $flags = [
                 'is_featured',
@@ -268,12 +257,17 @@ class NewsController extends Controller
         // Delete thumbnail and banner image if they exist
         // Helper to delete file from full URL
         $deleteFileFromUrl = function ($url) {
-            $relativePath = Str::replaceFirst(url('/'), '', $url); // remove domain
-            $filePath = public_path($relativePath); // convert to full filesystem path
-
-            if (File::exists($filePath)) {
-                File::delete($filePath);
-            }
+            $relativePath = ltrim(Str::replaceFirst(url('/'), '', $url), '/'); // clean up
+                $filePath = public_path($relativePath);
+                // dd($filePath); // Debugging line to check file path
+                if (File::exists($filePath)) {
+                    File::delete($filePath);
+                } else {
+                    Log::warning('File not found for deletion', [
+                        'url' => $url,
+                        'resolved_path' => $filePath
+                    ]);
+                }
         };
 
         // Delete thumbnail
@@ -289,3 +283,27 @@ class NewsController extends Controller
         $news->delete();
     }
 }
+
+
+// Initialize updated file paths
+            // $files = [
+            //     'thumbnail'     => $request->file('thumbnail'),
+            //     'banner_image'  => $request->file('banner_image'),
+            // ];
+            // $uploadedFiles = [];
+            // foreach ($files as $key => $file) {
+            //     if (!empty($file)) {
+            //         $uploadPath = 'news/' . $key;
+            //         $uploadResult = customUpload($file, $uploadPath);
+            //         if ($uploadResult['status'] === 0) {
+            //             return redirect()->back()->with('error', $uploadResult['error_message']);
+            //         }
+            //         // Delete the old file if exists
+            //         if (!empty($news->$key)) {
+            //             Storage::disk('public')->delete($news->$key);
+            //         }
+            //         $uploadedFiles[$key] = $uploadResult['file_path'];
+            //     } else {
+            //         $uploadedFiles[$key] = $news->$key; // Keep existing path if no new upload
+            //     }
+            // }

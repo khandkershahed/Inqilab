@@ -62,9 +62,12 @@ class HomeApiController extends Controller
             'slug'         => $category->slug,
             'code'         => $category->code,
             'status'       => $category->status,
-            'logo'         => $category->logo ? url('storage/' . $category->logo) : null,
-            'image'        => $category->image ? url('storage/' . $category->image) : null,
-            'banner_image' => $category->banner_image ? url('storage/' . $category->banner_image) : null,
+            'logo'         => $category->logo ?? null,
+            'image'        => $category->image ?? null,
+            'banner_image' => $category->banner_image ?? null,
+            // 'logo'         => $category->logo ? url('storage/' . $category->logo) : null,
+            // 'image'        => $category->image ? url('storage/' . $category->image) : null,
+            // 'banner_image' => $category->banner_image ? url('storage/' . $category->banner_image) : null,
             'children'     => $category->children->map(fn($child) => $this->transformCategory($child)),
         ];
     }

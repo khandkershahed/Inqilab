@@ -82,6 +82,10 @@
                     </div>
 
                     <div class="col-lg-4 mb-7">
+                        <div>
+                            <x-metronic.label for="logo" class="col-form-label fw-bold fs-6">{{ __('Icon') }}
+                            </x-metronic.label>
+                        </div>
                         <div class="row">
                             <div class="col-8 d-flex align-items-center">
                                 <span class="input-group-btn">
@@ -102,7 +106,7 @@
                     </div>
                     <div class="col-lg-4 mb-7">
                         <x-metronic.label for="image"
-                            class="col-form-label fw-bold fs-6 required">{{ __('Thumbnail Image') }}
+                            class="col-form-label fw-bold fs-6">{{ __('Thumbnail Image') }}
                         </x-metronic.label>
 
                         <x-metronic.file-input id="image" name="image" :source="asset('storage/' . $category->image)"
@@ -120,10 +124,10 @@
                 </div>
 
                 <div class="text-end pt-15">
-
-                    <x-metronic.button type="submit"
-                        class="px-5 dark rounded-1">{{ __('Update Data') }}</x-metronic.button>
-
+                    <button type="submit" class="btn btn-primary">
+                        <span class="indicator-label"> Update Changes </span>
+                        </span>
+                    </button>
                 </div>
 
             </form>
