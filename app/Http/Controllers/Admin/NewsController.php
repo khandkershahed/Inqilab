@@ -185,7 +185,18 @@ class NewsController extends Controller
             //         $uploadedFiles[$key] = $news->$key; // Keep existing path if no new upload
             //     }
             // }
-
+            $files = [
+                'thumbnail'     => $request->file('thumbnail'),
+                'banner_image'  => $request->file('banner_image'),
+            ];
+            $uploadedFiles = [];
+            foreach ($files as $key => $file) {
+                if (!empty($file)) {
+                    if (!empty($news->$key)) {
+                        File::delete($news->$key);
+                    }
+                }
+            }
             // Handle boolean flags
             $flags = [
                 'is_featured',
@@ -211,8 +222,8 @@ class NewsController extends Controller
                 'content'               => $request->content,
                 'bangla_content'        => $request->bangla_content,
                 'video_url'             => $request->video_url,
-                'thumbnail'             => $request->thumbnail,
-                'banner_image'          => $request->banner_image,
+                'thumbnail'             => $request->thumbnail ?? $news->thumbnail,
+                'banner_image'          => $request->banner_image ?? $news->banner_image,
                 // 'thumbnail'             => $uploadedFiles['thumbnail'],
                 // 'banner_image'          => $uploadedFiles['banner_image'],
                 'meta_title'            => $request->meta_title,
