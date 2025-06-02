@@ -29,8 +29,8 @@ class NewsRequest extends FormRequest
             'video_url'             => 'nullable|url',
             'thumbnail'             => 'nullable|image|mimes:jpg,jpeg,png,webp|max:3072',
             'banner_image'          => 'nullable|image|mimes:jpg,jpeg,png,webp|max:4096',
-            'thumbnail'             => 'nullable|url',
-            'banner_image'          => 'nullable|url',
+            'thumbnail'             => 'nullable',
+            'banner_image'          => 'nullable',
 
             'category_id'           => 'nullable|exists:categories,id',
             'sub_category_id'       => 'nullable|exists:categories,id',
