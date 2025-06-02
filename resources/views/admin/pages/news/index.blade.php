@@ -38,8 +38,7 @@
                                             src="{{ !empty(optional($news)->thumbnail) ? url(optional($news)->thumbnail) : asset('images/no_image.jpg') }}"
                                             alt="{{ $news->page_name }}"> --}}
                                         <img width="70" height="70" class="img-fluid rounded-2"
-                                            src="https://v2.weeklyinqilab.com/storage/{{ $news->thumbnail }}"
-                                            alt="{{ $news->bangla_name }}">
+                                            src="{{ $news->thumbnail }}" alt="{{ $news->bangla_name }}">
                                     </td>
                                     <td>{{ $news->bangla_title }}</td>
                                     <td>{{ optional($news->category)->bangla_name ?? optional($news->category)->name }}
@@ -48,7 +47,7 @@
                                     </td>
                                     <td>{{ $news->status }}</td>
                                     <td>{{ $news->published_at }}</td>
-                                    <td>{{ $news->author_id }}</td>
+                                    <td>{{ optional($news->author)->name }}</td>
                                     <td class="text-end">
                                         <div class="gap-2 d-flex justify-content-end">
                                             <a href="{{ route('admin.news.edit', $news->id) }}"
@@ -56,7 +55,7 @@
                                                 <i class="text-white fas fa-pen-to-square fs-6 ps-2"></i>
                                             </a>
                                             <a href="{{ route('admin.news.destroy', $news->id) }}"
-                                                class="btn btn-sm btn-danger rounded-pill">
+                                                class="btn btn-sm btn-danger rounded-pill delete">
                                                 <i class="text-white fas fa-trash fs-6 ps-2"></i>
                                             </a>
                                         </div>

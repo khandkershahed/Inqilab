@@ -29,4 +29,8 @@ class News extends Model
     {
         return $this->hasMany(NewsImage::class, 'news_id');
     }
+    public function author()
+    {
+        return $this->belongsTo(Admin::class, 'created_by');
+    }
 }

@@ -40,10 +40,10 @@
                         <x-metronic.select-option id="ad_type" name="ad_type" data-hide-search="true"
                             data-placeholder="Select Ad Type">
                             <option></option>
-                            <option value="image" @selected(old('ad_type') == 'image') >Image</option>
-                            <option value="html" @selected(old('ad_type') == 'html') >HTML</option>
-                            <option value="video" @selected(old('ad_type') == 'video') >Video</option>
-                            <option value="script" @selected(old('ad_type') == 'script') >Script</option>
+                            <option value="image" @selected(old('ad_type') == 'image')>Image</option>
+                            <option value="html" @selected(old('ad_type') == 'html')>HTML</option>
+                            <option value="video" @selected(old('ad_type') == 'video')>Video</option>
+                            <option value="script" @selected(old('ad_type') == 'script')>Script</option>
                         </x-metronic.select-option>
                     </div>
 
@@ -53,19 +53,21 @@
                             <x-metronic.label for="image" class="col-form-label fw-bold fs-6">{{ __('AD Image') }}
                             </x-metronic.label>
                         </div>
+
                         <div class="row">
                             <div class="col-8 d-flex align-items-center">
                                 <span class="input-group-btn">
-                                    <a id="lfm" data-input="thumbnail" data-preview="holder"
-                                        class="btn btn-primary d-flex align-items-center">
-                                        <i class="fas fa-image"></i> Choose
+                                    <a class="lfm-btn btn btn-primary d-flex align-items-center" data-input="thumbnail1"
+                                        data-preview="holder1" data-type="image">
+                                        <i class="fas fa-image me-2"></i> Choose
                                     </a>
                                 </span>
-                                <input id="thumbnail" class="form-control" type="text" name="image_path"
-                                    value="" placeholder="Image Path">
+                                <input id="thumbnail1" class="form-control" type="text" name="image_path"
+                                    placeholder="Image Path">
                             </div>
                             <div class="col-4">
-                                <div id="holder" style="margin-top:15px;max-height:100px;"></div>
+                                <div id="holder1" style="margin-top:15px; max-height:100px;">
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -165,7 +167,7 @@
                     <div class="col-lg-4 mb-3">
                         <x-metronic.label for="start_date"
                             class="col-form-label fw-bold fs-6">{{ __('Start Date') }}</x-metronic.label>
-                            <input type="date" id="start_date" name="start_date" class="form-control"
+                        <input type="date" id="start_date" name="start_date" class="form-control"
                             value="{{ old('start_date', $today) }}" min="{{ $today }}" />
                     </div>
 
@@ -182,10 +184,10 @@
                         <x-metronic.label for="status"
                             class="col-form-label fw-bold fs-6">{{ __('Status') }}</x-metronic.label>
                         <x-metronic.select-option id="status" name="status" data-hide-search="true">
-                            <option value="pending" @selected(old('status') == 'pending' )>Pending</option>
-                            <option value="approved" @selected(old('status') == 'approved' )>Approved</option>
-                            <option value="rejected" @selected(old('status') == 'rejected' )>Rejected</option>
-                            <option value="expired" @selected(old('status') == 'expired' )>Expired</option>
+                            <option value="pending" @selected(old('status') == 'pending')>Pending</option>
+                            <option value="approved" @selected(old('status') == 'approved')>Approved</option>
+                            <option value="rejected" @selected(old('status') == 'rejected')>Rejected</option>
+                            <option value="expired" @selected(old('status') == 'expired')>Expired</option>
                         </x-metronic.select-option>
                     </div>
 

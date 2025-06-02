@@ -54,19 +54,21 @@
                             <x-metronic.label for="image" class="col-form-label fw-bold fs-6">{{ __('AD Image') }}
                             </x-metronic.label>
                         </div>
+                       
+
                         <div class="row">
                             <div class="col-8 d-flex align-items-center">
                                 <span class="input-group-btn">
-                                    <a id="lfm" data-input="thumbnail" data-preview="holder"
-                                        class="btn btn-primary d-flex align-items-center">
-                                        <i class="fas fa-image"></i> Choose
+                                    <a class="lfm-btn btn btn-primary d-flex align-items-center" data-input="thumbnail1"
+                                        data-preview="holder1" data-type="image">
+                                        <i class="fas fa-image me-2"></i> Choose
                                     </a>
                                 </span>
                                 <input id="thumbnail" class="form-control" type="text" name="image_path"
                                     value="{{ $advertisement->image_path }}" placeholder="Image Path">
                             </div>
                             <div class="col-4">
-                                <div id="holder" style="margin-top:15px;max-height:100px;">
+                                <div id="holder1" style="margin-top:15px; max-height:100px;">
                                     <img width="150px" src="{{ $advertisement->image_path }}" alt="">
                                 </div>
                             </div>

@@ -163,75 +163,55 @@
                                         <div class="row">
                                             <div class="col-lg-6 mb-7">
                                                 <div>
-                                                    <x-metronic.label for="thumbnail" class="form-label">Thumbnail image
-                                                        (Only *.png,, *.webp *.jpg and *.jpeg)</x-metronic.label>
+                                                    <x-metronic.label for="thumbnail1" class="form-label">
+                                                        Thumbnail image (Only *.png, *.webp, *.jpg, *.jpeg)
+                                                    </x-metronic.label>
                                                 </div>
-                                                <div class="image-input image-input-empty" data-kt-image-input="true"
-                                                    style="width: auto;background-size: contain;
-                                                    border: 1px solid #009ae5;">
-                                                    <div class="image-input-wrapper w-150px h-150px"></div>
-                                                    <label
-                                                        class="shadow btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body"
-                                                        data-kt-image-input-action="change" data-bs-toggle="tooltip"
-                                                        data-bs-dismiss="click" title="Change avatar">
-                                                        <i class="bi bi-pencil-fill fs-7"></i>
-                                                        <input type="file" name="thumbnail" id="thumbnail"
-                                                            accept=".png, .jpg, .jpeg, .webp" />
-                                                        <input type="hidden" name="avatar_remove" />
-                                                    </label>
-
-                                                    <span
-                                                        class="shadow btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body"
-                                                        data-kt-image-input-action="cancel" data-bs-toggle="tooltip"
-                                                        data-bs-dismiss="click" title="Cancel avatar">
-                                                        <i class="bi bi-x fs-2"></i>
-                                                    </span>
-
-                                                    <span
-                                                        class="shadow btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body"
-                                                        data-kt-image-input-action="remove" data-bs-toggle="tooltip"
-                                                        data-bs-dismiss="click" title="Remove avatar">
-                                                        <i class="bi bi-x fs-2"></i>
-                                                    </span>
+                                                <div class="row">
+                                                    <div class="col-8 d-flex align-items-center">
+                                                        <span class="input-group-btn">
+                                                            <a class="lfm-btn btn btn-primary d-flex align-items-center"
+                                                                data-input="thumbnail1" data-preview="holder1"
+                                                                data-type="image">
+                                                                <i class="fas fa-image me-2"></i> Choose
+                                                            </a>
+                                                        </span>
+                                                        <input id="thumbnail1" class="form-control" type="text"
+                                                            name="thumbnail_image" placeholder="Image Path">
+                                                    </div>
+                                                    <div class="col-4">
+                                                        <div id="holder1" style="margin-top:15px; max-height:100px;">
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
+
                                             <div class="col-lg-6 mb-7">
                                                 <div>
-                                                    <x-metronic.label for="banner_image" class="form-label">Banner
-                                                        image (Only *.png,, *.webp *.jpg and *.jpeg)</x-metronic.label>
+                                                    <x-metronic.label for="thumbnail2" class="form-label">
+                                                        Banner image (Only *.png, *.webp, *.jpg, *.jpeg)
+                                                    </x-metronic.label>
                                                 </div>
-                                                <div class="image-input image-input-empty" data-kt-image-input="true"
-                                                    style="width: auto;
-                                                    background-size: contain;
-                                                    border: 1px solid #e52a00;">
-                                                    <div class="image-input-wrapper w-150px h-150px"></div>
-
-                                                    <label
-                                                        class="shadow btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body"
-                                                        data-kt-image-input-action="change" data-bs-toggle="tooltip"
-                                                        data-bs-dismiss="click" title="Change avatar">
-                                                        <i class="bi bi-pencil-fill fs-7"></i>
-
-                                                        <input type="file" name="banner_image" id="banner_image"
-                                                            accept=".png, .jpg, .jpeg, .webp" />
-                                                        <input type="hidden" name="avatar_remove" />
-                                                    </label>
-
-                                                    <span
-                                                        class="shadow btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body"
-                                                        data-kt-image-input-action="cancel" data-bs-toggle="tooltip"
-                                                        data-bs-dismiss="click" title="Cancel avatar">
-                                                        <i class="bi bi-x fs-2"></i>
-                                                    </span>
-
-                                                    <span
-                                                        class="shadow btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body"
-                                                        data-kt-image-input-action="remove" data-bs-toggle="tooltip"
-                                                        data-bs-dismiss="click" title="Remove avatar">
-                                                        <i class="bi bi-x fs-2"></i>
-                                                    </span>
+                                                <div class="row">
+                                                    <div class="col-8 d-flex align-items-center">
+                                                        <span class="input-group-btn">
+                                                            <a class="lfm-btn btn btn-primary d-flex align-items-center"
+                                                                data-input="thumbnail2" data-preview="holder2"
+                                                                data-type="image">
+                                                                <i class="fas fa-image me-2"></i> Choose
+                                                            </a>
+                                                        </span>
+                                                        <input id="thumbnail2" class="form-control"
+                                                            type="text" name="banner_image"
+                                                            placeholder="Image Path">
+                                                    </div>
+                                                    <div class="col-4">
+                                                        <div id="holder2"
+                                                            style="margin-top:15px; max-height:100px;"></div>
+                                                    </div>
                                                 </div>
                                             </div>
+
 
                                             <div class="col-lg-12">
                                                 <div class="pt-5 fv-row">
