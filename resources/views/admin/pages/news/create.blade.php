@@ -177,7 +177,7 @@
                                                             </a>
                                                         </span>
                                                         <input id="thumbnail1" class="form-control" type="text"
-                                                            name="thumbnail_image" placeholder="Image Path">
+                                                            name="thumbnail" placeholder="Image Path">
                                                     </div>
                                                     <div class="col-4">
                                                         <div id="holder1" style="margin-top:15px; max-height:100px;">
