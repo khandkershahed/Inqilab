@@ -245,7 +245,7 @@
                         </p>
                         <div class="text-center ps-5">
                             <span style="font-size: 60px">
-                                1060
+                                0
                             </span>
                         </div>
                     </div>

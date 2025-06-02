@@ -18,15 +18,15 @@
                     <table id="dataTableSet" class="table border rounded table-striped table-row-bordered gy-5 gs-7">
                         <thead>
                             <tr class="text-gray-800 fw-bold fs-6 px-7">
-                                <th>Sl</th>
-                                <th>Image</th>
-                                <th>Title</th>
-                                <th>Category</th>
-                                <th>Sub Category</th>
-                                <th>Status</th>
-                                <th>Date</th>
-                                <th>Author</th>
-                                <th class="text-end">Action</th>
+                                <th width="3%">Sl</th>
+                                <th width="15%">Image</th>
+                                <th width="25%">Title</th>
+                                <th width="10%">Category</th>
+                                <th width="10%">Sub Category</th>
+                                <th width="8%">Status</th>
+                                <th width="9%">Date</th>
+                                <th width="8%">Author</th>
+                                <th width="12%" class="text-end">Action</th>
                             </tr>
                         </thead>
                         <tbody>
