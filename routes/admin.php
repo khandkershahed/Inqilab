@@ -73,7 +73,7 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
 
             'faq'            => FaqController::class,
             'term'           => TermController::class,
-            'support-policy' => SupportPolicyController::class,
+            // 'support-policy' => SupportPolicyController::class,
 
             'staff'          => StaffController::class,
             'user'           => UserManagementController::class,

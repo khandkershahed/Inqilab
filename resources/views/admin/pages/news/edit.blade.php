@@ -164,79 +164,55 @@
                                         <div class="row">
                                             <div class="col-lg-6 mb-7">
                                                 <div>
-                                                    <x-metronic.label for="" class="form-label">Thumbnail image
-                                                        (Only *.png,, *.webp *.jpg and *.jpeg)</x-metronic.label>
+                                                    <x-metronic.label for="thumbnail1" class="form-label">
+                                                        Thumbnail image (Only *.png, *.webp, *.jpg, *.jpeg)
+                                                    </x-metronic.label>
                                                 </div>
-                                                <div class="image-input image-input-empty" data-kt-image-input="true"
-                                                    style="background-image: url({{ asset('storage/' . $news->thumbnail) }}); width: auto; background-size: contain;
-                                                    background-position: center;
-                                                    border: 1px solid #009ae5;">
-                                                    <div class="image-input-wrapper w-150px h-150px"
-                                                        style="background-size: contain; background-position: center">
+                                                <div class="row">
+                                                    <div class="col-8 d-flex align-items-center">
+                                                        <span class="input-group-btn">
+                                                            <a class="lfm-btn btn btn-primary d-flex align-items-center"
+                                                                data-input="thumbnail1" data-preview="holder1"
+                                                                data-type="image">
+                                                                <i class="fas fa-image me-2"></i> Choose
+                                                            </a>
+                                                        </span>
+                                                        <input id="thumbnail1" class="form-control" type="text"
+                                                            name="thumbnail" placeholder="Image Path">
                                                     </div>
-                                                    <label
-                                                        class="shadow btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body"
-                                                        data-kt-image-input-action="change" data-bs-toggle="tooltip"
-                                                        data-bs-dismiss="click" title="Change avatar">
-                                                        <i class="bi bi-pencil-fill fs-7"></i>
-                                                        <input type="file" name="thumbnail"
-                                                            accept=".png, .jpg, .jpeg, .webp" />
-                                                        <input type="hidden" name="avatar_remove" />
-                                                    </label>
-
-                                                    <span
-                                                        class="shadow btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body"
-                                                        data-kt-image-input-action="cancel" data-bs-toggle="tooltip"
-                                                        data-bs-dismiss="click" title="Cancel avatar">
-                                                        <i class="bi bi-x fs-2"></i>
-                                                    </span>
-
-                                                    <span
-                                                        class="shadow btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body"
-                                                        data-kt-image-input-action="remove" data-bs-toggle="tooltip"
-                                                        data-bs-dismiss="click" title="Remove avatar">
-                                                        <i class="bi bi-x fs-2"></i>
-                                                    </span>
+                                                    <div class="col-4">
+                                                        <div id="holder1"
+                                                            style="margin-top:15px; max-height:100px;">
+                                                            <img width="150px" src="{{ $news->thumbnail }}" alt="">
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
+
                                             <div class="col-lg-6 mb-7">
                                                 <div>
-                                                    <x-metronic.label for="" class="form-label">Banner image
-                                                        (Only
-                                                        *.png,, *.webp *.jpg and *.jpeg)</x-metronic.label>
+                                                    <x-metronic.label for="thumbnail2" class="form-label">
+                                                        Banner image (Only *.png, *.webp, *.jpg, *.jpeg)
+                                                    </x-metronic.label>
                                                 </div>
-                                                <div class="image-input image-input-empty" data-kt-image-input="true"
-                                                    style="background-image: url({{ asset('storage/' . $news->banner_image) }}); width: auto; background-size: contain;
-                                                    background-position: center;
-                                                    border: 1px solid #009ae5;">
-                                                    <div class="image-input-wrapper w-150px h-150px"
-                                                        style="background-size: contain; background-position: center">
+                                                <div class="row">
+                                                    <div class="col-8 d-flex align-items-center">
+                                                        <span class="input-group-btn">
+                                                            <a class="lfm-btn btn btn-primary d-flex align-items-center"
+                                                                data-input="thumbnail2" data-preview="holder2"
+                                                                data-type="image">
+                                                                <i class="fas fa-image me-2"></i> Choose
+                                                            </a>
+                                                        </span>
+                                                        <input id="thumbnail2" class="form-control" type="text"
+                                                            name="banner_image" placeholder="Image Path">
                                                     </div>
-
-                                                    <label
-                                                        class="shadow btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body"
-                                                        data-kt-image-input-action="change" data-bs-toggle="tooltip"
-                                                        data-bs-dismiss="click" title="Change avatar">
-                                                        <i class="bi bi-pencil-fill fs-7"></i>
-
-                                                        <input type="file" name="banner_image"
-                                                            accept=".png, .jpg, .jpeg, .webp" />
-                                                        <input type="hidden" name="avatar_remove" />
-                                                    </label>
-
-                                                    <span
-                                                        class="shadow btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body"
-                                                        data-kt-image-input-action="cancel" data-bs-toggle="tooltip"
-                                                        data-bs-dismiss="click" title="Cancel avatar">
-                                                        <i class="bi bi-x fs-2"></i>
-                                                    </span>
-
-                                                    <span
-                                                        class="shadow btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body"
-                                                        data-kt-image-input-action="remove" data-bs-toggle="tooltip"
-                                                        data-bs-dismiss="click" title="Remove avatar">
-                                                        <i class="bi bi-x fs-2"></i>
-                                                    </span>
+                                                    <div class="col-4">
+                                                        <div id="holder2"
+                                                            style="margin-top:15px; max-height:100px;">
+                                                            <img width="150px" src="{{ $news->banner_image }}" alt="">
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
 
@@ -264,13 +240,13 @@
                                         </div>
                                     </div>
                                     <div class="pt-0 card-body row">
-                                        <div class="mb-5 fv-row">
+                                        {{-- <div class="mb-5 fv-row">
                                             <x-metronic.label class="form-label">News Content</x-metronic.label>
                                             <textarea name="content" class="ckeditor">{!! old('content', $news->content) !!}</textarea>
                                             <div class="text-muted fs-7">
                                                 Add News content here.
                                             </div>
-                                        </div>
+                                        </div> --}}
                                         <div class="mb-5 fv-row">
                                             <x-metronic.label class="form-label">News Content Bangla</x-metronic.label>
                                             <textarea name="bangla_content" class="ckeditor">{!! old('bangla_content', $news->bangla_content) !!}</textarea>

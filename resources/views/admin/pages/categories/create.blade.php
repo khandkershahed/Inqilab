@@ -123,10 +123,10 @@
                 </div>
 
                 <div class="text-end pt-15">
-
-                    <x-metronic.button type="submit"
-                        class="px-5 dark rounded-1">{{ __('Submit') }}</x-metronic.button>
-
+                    <button type="submit" class="btn btn-primary">
+                        <span class="indicator-label"> Save Changes </span>
+                        </span>
+                    </button>
                 </div>
 
             </form>

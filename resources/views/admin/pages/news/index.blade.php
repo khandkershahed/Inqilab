@@ -18,15 +18,15 @@
                     <table id="dataTableSet" class="table border rounded table-striped table-row-bordered gy-5 gs-7">
                         <thead>
                             <tr class="text-gray-800 fw-bold fs-6 px-7">
-                                <th>Sl</th>
-                                <th>Image</th>
-                                <th>Title</th>
-                                <th>Category</th>
-                                <th>Sub Category</th>
-                                <th>Status</th>
-                                <th>Date</th>
-                                <th>Author</th>
-                                <th class="text-end">Action</th>
+                                <th width="3%">Sl</th>
+                                <th width="15%">Image</th>
+                                <th width="25%">Title</th>
+                                <th width="10%">Category</th>
+                                <th width="10%">Sub Category</th>
+                                <th width="8%">Status</th>
+                                <th width="9%">Date</th>
+                                <th width="8%">Author</th>
+                                <th width="12%" class="text-end">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -38,8 +38,7 @@
                                             src="{{ !empty(optional($news)->thumbnail) ? url(optional($news)->thumbnail) : asset('images/no_image.jpg') }}"
                                             alt="{{ $news->page_name }}"> --}}
                                         <img width="70" height="70" class="img-fluid rounded-2"
-                                            src="https://v2.weeklyinqilab.com/storage/{{ $news->thumbnail }}"
-                                            alt="{{ $news->bangla_name }}">
+                                            src="{{ $news->thumbnail }}" alt="{{ $news->bangla_name }}">
                                     </td>
                                     <td>{{ $news->bangla_title }}</td>
                                     <td>{{ optional($news->category)->bangla_name ?? optional($news->category)->name }}
@@ -48,7 +47,7 @@
                                     </td>
                                     <td>{{ $news->status }}</td>
                                     <td>{{ $news->published_at }}</td>
-                                    <td>{{ $news->author_id }}</td>
+                                    <td>{{ optional($news->author)->name }}</td>
                                     <td class="text-end">
                                         <div class="gap-2 d-flex justify-content-end">
                                             <a href="{{ route('admin.news.edit', $news->id) }}"
@@ -56,7 +55,7 @@
                                                 <i class="text-white fas fa-pen-to-square fs-6 ps-2"></i>
                                             </a>
                                             <a href="{{ route('admin.news.destroy', $news->id) }}"
-                                                class="btn btn-sm btn-danger rounded-pill">
+                                                class="btn btn-sm btn-danger rounded-pill delete">
                                                 <i class="text-white fas fa-trash fs-6 ps-2"></i>
                                             </a>
                                         </div>

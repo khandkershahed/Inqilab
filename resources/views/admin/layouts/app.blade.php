@@ -127,70 +127,47 @@
                 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
             }
         });
+
         $(document).ready(function() {
-            // Initialize tooltips
-            $('[data-bs-toggle="tooltip"]').tooltip();
+            // Bootstrap tooltips/popovers
+            // Init filemanager for all .lfm-btn elements
+            document.querySelectorAll('.lfm-btn').forEach(function(button) {
+                button.addEventListener('click', function() {
+                    var route_prefix = '/laravel-filemanager';
+                    var type = button.getAttribute('data-type') || 'file';
+                    var target_input = document.getElementById(button.getAttribute('data-input'));
+                    var target_preview = document.getElementById(button.getAttribute(
+                        'data-preview'));
 
-            // Initialize popovers
-            $('[data-bs-toggle="popover"]').popover();
-        });
-        // Initialize the file manager button
-        document.addEventListener("DOMContentLoaded", function() {
-            lfm('lfm', 'image', {
-                prefix: '/laravel-filemanager'
-            });
-        });
-        //New folder create button in file manager pop up
-        document.addEventListener("DOMContentLoaded", function() {
-            var lfmButton = document.querySelector('.lfm');
-            if (lfmButton) {
-                lfmButton.addEventListener('click', function() {
-                    var route_prefix = lfmButton.getAttribute('data-input') || '/laravel-filemanager';
-                    window.open(route_prefix + '?type=' + (lfmButton.getAttribute('data-type') || 'file'),
-                        'FileManager', 'width=900,height=600');
+                    window.open(route_prefix + '?type=' + type, 'FileManager',
+                        'width=900,height=600');
+
+                    window.SetUrl = function(items) {
+                        var file_path = items.map(function(item) {
+                            return item.url;
+                        }).join(',');
+
+                        // Set selected file URL to input
+                        target_input.value = file_path;
+                        target_input.dispatchEvent(new Event('change'));
+
+                        // Clear and set preview
+                        target_preview.innerHTML = '';
+                        items.forEach(function(item) {
+                            let img = document.createElement('img');
+                            img.setAttribute('style',
+                                'height: 5rem; margin-right: 10px');
+                            img.setAttribute('src', item.thumb_url);
+                            target_preview.appendChild(img);
+                        });
+
+                        target_preview.dispatchEvent(new Event('change'));
+                    };
                 });
-            }
-        });
-        $('#add-folder').click(function() {
-            alert('Clicked!');
-        });
-
-        var lfm = function(id, type, options) {
-            let button = document.getElementById(id);
-
-            button.addEventListener('click', function() {
-                var route_prefix = (options && options.prefix) ? options.prefix : '/laravel-filemanager';
-                var target_input = document.getElementById(button.getAttribute('data-input'));
-                var target_preview = document.getElementById(button.getAttribute('data-preview'));
-
-                window.open(route_prefix + '?type=' + (type || 'file'), 'FileManager',
-                    'width=900,height=600');
-
-                window.SetUrl = function(items) {
-                    var file_path = items.map(function(item) {
-                        return item.url;
-                    }).join(',');
-
-                    // set the value of the desired input to image url
-                    target_input.value = file_path;
-                    target_input.dispatchEvent(new Event('change'));
-
-                    // clear previous preview
-                    target_preview.innerHTML = '';
-
-                    // set or change the preview image src
-                    items.forEach(function(item) {
-                        let img = document.createElement('img')
-                        img.setAttribute('style', 'height: 5rem')
-                        img.setAttribute('src', item.thumb_url)
-                        target_preview.appendChild(img);
-                    });
-
-                    // trigger change event
-                    target_preview.dispatchEvent(new Event('change'));
-                };
             });
-        };
+
+
+        });
     </script>
 
 
