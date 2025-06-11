@@ -110,7 +110,7 @@
                                         </div>
                                     </div>
                                     <div class="pt-0 card-body">
-                                        <div class="mb-5 fv-row">
+                                        {{-- <div class="mb-5 fv-row">
                                             <x-metronic.label class="form-label">News English Title</x-metronic.label>
                                             <x-metronic.input type="text" name="title" class="mb-2 form-control"
                                                 placeholder="News English Title" :value="old('title', $news->title)">
@@ -118,7 +118,7 @@
                                             <div class="text-muted fs-7">
                                                 News English Title is required for slug and recommended to be unique.
                                             </div>
-                                        </div>
+                                        </div> --}}
                                         <div class="mb-5 fv-row">
                                             <x-metronic.label class="form-label">News Bangla Title</x-metronic.label>
                                             <x-metronic.input type="text" name="bangla_title"
