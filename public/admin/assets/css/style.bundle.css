@@ -59189,3 +59189,8 @@ th {
     margin-left: -2rem !important;
     position: relative;
 }
+
+.login-form {
+  position: relative;
+  z-index: 999;
+}
