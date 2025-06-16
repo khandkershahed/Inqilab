@@ -59083,3 +59083,109 @@ th {
     padding: 13px;
     color: #a1a5b7 !important;
 }
+
+/* For Login Page */
+/* Basic page background */
+:root {
+  --primary-rgb: 3, 181, 98;
+  --primary-color: rgb(var(--primary-rgb));
+  --primary-border: rgb(var(--primary-rgb));
+  --primary01: rgba(var(--primary-rgb), 0.1);
+  --primary02: rgba(var(--primary-rgb), 0.2);
+  --primary03: rgba(var(--primary-rgb), 0.3);
+  --primary04: rgba(var(--primary-rgb), 0.4);
+  --primary05: rgba(var(--primary-rgb), 0.5);
+  --primary06: rgba(var(--primary-rgb), 0.6);
+  --primary07: rgba(var(--primary-rgb), 0.7);
+  --primary08: rgba(var(--primary-rgb), 0.8);
+  --primary09: rgba(var(--primary-rgb), 0.9);
+  --primary005: rgba(var(--primary-rgb), 0.05);
+}
+
+/* Card style */
+.signin-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 2.5rem 2rem;
+  width: 100%;
+  max-width: 450px;
+  box-shadow: 0 10px 25px rgb(0 0 0 / 0.15);
+}
+
+/* Heading */
+.signin-card h2 {
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+.signin-card .para {
+ color: #8d9eb5;
+}
+
+/* Form controls */
+.form-control {
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+}
+
+/* Button */
+.btn-primary {
+  width: 100%;
+  border-radius: 8px;
+  padding: 0.75rem;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+/* Footer text */
+.text-center a {
+  text-decoration: none;
+  color: #764ba2;
+  font-weight: 600;
+}
+
+.text-center a:hover {
+  text-decoration: underline;
+  color: #667eea;
+}
+.authentication-background {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  position: relative;
+  background-image: linear-gradient(
+    to right top,
+    rgba(var(--primary-rgb), 0.2),
+    transparent,
+    rgba(var(--primary-rgb), 0.1),
+    transparent,
+    rgba(var(--primary-rgb), 0.2)
+  );
+}
+
+.authentication-background:before {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 100%;
+    background-image: url(https://demo.spruko.com/html/yzen/dist/assets/images/media/svg/pattern-5.svg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -1;
+    opacity: 0.05;
+}
+.eye-btn{
+    top: 50px;
+}
+.form-check .remember-me{
+    width: 1.25rem;
+    height: 1.25rem;
+    top: 4px;
+    margin-left: -2rem !important;
+    position: relative;
+}
