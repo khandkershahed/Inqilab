@@ -14,10 +14,12 @@
         <!-- Login Card -->
         <div class="shadow-sm signin-card">
             <!-- Heading -->
-            <h2 class="mb-0">Welcome Back</h2>
-            <p class="pt-2 para">
-                Please log in to access your account and explore all features.
-            </p>
+            <div class="text-center">
+                <h2 class="mb-0">Welcome Back</h2>
+                <p class="pt-2 para">
+                    Please log in to access your account and explore all features.
+                </p>
+            </div>
 
             <!-- Session Status -->
             <x-auth-session-status class="mb-4" :status="session('status')" />
@@ -62,11 +64,11 @@
                         </x-metronic.label>
                     </div>
 
-                    @if (Route::has('admin.password.request'))
+                    {{-- @if (Route::has('admin.password.request'))
                         <a href="{{ route('admin.password.request') }}" class="text-decoration-none">
                             {{ __('Forgot password?') }}
                         </a>
-                    @endif
+                    @endif --}}
                 </div>
 
                 <!-- Submit Button -->
