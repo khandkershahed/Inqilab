@@ -5,7 +5,7 @@
 
 <head>
     <base href="../../../">
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>Weekly Inqilab | Admin Login</title>
     <meta charset="utf-8" />
     <meta name="description" content="." />
     <meta name="keywords" content="" />
@@ -16,7 +16,7 @@
     <meta property="og:url" content="" />
     <meta property="og:site_name" content="" />
     <link rel="canonical" href="" />
-    <link rel="shortcut icon" href="{{ asset('admin/assets/media/logos/favicon.ico') }}" />
+    <link rel="shortcut icon" href="{{ !empty($setting->site_favicon) && file_exists(public_path('storage/' . $setting->site_favicon)) ? asset('storage/' . $setting->site_favicon) : asset('images/no_icon.png') }}" />
 
     {{-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" /> --}}
 
