@@ -90,17 +90,7 @@
                                 <p class="badge badge-info custom-badge">Info</span>
                                 <div class="card-body p-1 px-2">
                                     <div class="row">
-                                        <div class="col-lg-12 mb-5">
-                                            <div class="row">
-                                                <div class="col-lg-4 col-sm-5">
-                                                    <p class="fw-bold" title="Country Name">Category :</p>
-                                                </div>
-                                                <div class="col-lg-8 col-sm-6">
-                                                    <p> {{ $faq->faqCategory ? $faq->faqCategory->name : 'No Category' }}
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        
                                         <div class="col-lg-12 mb-5">
                                             <div class="row">
                                                 <div class="col-lg-4 col-sm-5">
