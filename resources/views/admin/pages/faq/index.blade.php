@@ -90,7 +90,7 @@
                                 <p class="badge badge-info custom-badge">Info</span>
                                 <div class="card-body p-1 px-2">
                                     <div class="row">
-                                        
+
                                         <div class="col-lg-12 mb-5">
                                             <div class="row">
                                                 <div class="col-lg-4 col-sm-5">
@@ -122,8 +122,8 @@
                                                 <div class="col-lg-8 col-sm-6">
                                                     <p>
                                                         <span
-                                                            class="badge {{ $faq->status == 1 ? 'bg-success' : 'bg-danger' }}">
-                                                            {{ $faq->status == 1 ? 'active' : 'inactive' }}</span>
+                                                            class="badge {{ $faq->status == 'active' ? 'bg-success' : 'bg-danger' }}">
+                                                            {{ $faq->status == 'active' ? 'active' : 'inactive' }}</span>
                                                     </p>
                                                 </div>
                                             </div>
