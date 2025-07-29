@@ -1,6 +1,6 @@
 <x-admin-app-layout :title="'Faq List'">
     <div class="card">
-        <div class="card-header bg-info align-items-center d-flex justify-content-between">
+        <div class="card-header bg-primary align-items-center d-flex justify-content-between">
             <div>
                 <h1 class="mb-0 text-center w-100 text-white">Manage All Faqs</h1>
             </div>
@@ -26,9 +26,9 @@
                 <thead class="bg-light-danger">
                     <tr class="fw-semibold fs-6 text-gray-800">
                         <th class="" width="5%">Sl</th>
-                        <th class="" width="20%">Category Name</th>
-                        <th class="" width="45%">Order Number</th>
-                        <th class="" width="20%">Status</th>
+                        <th class="" width="60%">Question</th>
+                        <th class="" width="10%">Order Number</th>
+                        <th class="" width="15%">Status</th>
                         <th class="" width="10%">Action</th>
                     </tr>
                 </thead>
@@ -40,7 +40,7 @@
                                     {{ $loop->iteration }}
                                 </td>
                                 <td>
-                                    {{ $faq->faqCategory ? $faq->faqCategory->name : 'No Category' }}
+                                    {{ $faq->question }}
                                 </td>
                                 <td>
                                     {{ $faq->order }}
