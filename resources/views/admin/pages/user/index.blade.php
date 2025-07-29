@@ -6,7 +6,7 @@
                 {{-- Header with title and create button --}}
                 <div class="px-2 card-header d-flex justify-content-between align-items-center">
                     <h2 class="card-title">Manage User List</h2>
-                    <a href="{{ route('admin.user.create') }}" class="btn btn-primary" data-bs-toggle="tooltip"
+                    <a href="{{ route('admin.user.create') }}" class="btn btn-primary w-250px" data-bs-toggle="tooltip"
                         data-bs-placement="top" title="Create New News Post">
                         <i class="fas fa-plus"></i> Create User
                     </a>
