@@ -6,8 +6,8 @@
                 {{-- Header with title and create button --}}
                 <div class="px-2 card-header d-flex justify-content-between align-items-center">
                     <h2 class="card-title">Manage Advertisement List</h2>
-                    <a href="{{ route('admin.advertisement.create') }}" class="btn btn-primary" data-bs-toggle="tooltip"
-                        data-bs-placement="top" title="Create New News Post">
+                    <a href="{{ route('admin.advertisement.create') }}" class="btn btn-primary w-225px" data-bs-toggle="tooltip"
+                        data-bs-placement="top" title="Create New Advertisement">
                         <i class="fas fa-plus"></i> Create Advertisement
                     </a>
                 </div>

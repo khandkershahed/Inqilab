@@ -1,7 +1,9 @@
 <x-admin-app-layout :title="'E-Papers'">
     <div class="card card-flash">
         <div class="card-header mt-6">
-            <div class="card-title"></div>
+            <div class="card-title">
+                <h2 class="card-title">Manage E-Papers</h2>
+            </div>
             <div class="card-toolbar">
 
                 {{-- @if (Auth::guard('admin')->user()->can('add.brand')) --}}
