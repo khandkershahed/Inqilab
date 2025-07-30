@@ -115,7 +115,7 @@
                             value="{{ old('biometric_id', $staff->biometric_id) }}"></x-metronic.input>
                     </div>
 
-                    {{-- <div class="col-lg-3 mb-3">
+                    <div class="col-lg-3 mb-3">
                         <x-metronic.label for="password"
                             class="col-form-label fw-bold fs-6">{{ __('Password') }}</x-metronic.label>
                         <x-metronic.input id="password" type="password" name="password"
@@ -128,7 +128,7 @@
                             class="col-form-label fw-bold fs-6">{{ __('Confirm Password') }}</x-metronic.label>
                         <x-metronic.input id="confirm_password" type="password" name="password_confirmation"
                             placeholder="Confirm new password" autocomplete="new-password"></x-metronic.input>
-                    </div> --}}
+                    </div>
 
                     <div class="col-lg-3 mb-3">
                         <x-metronic.label for="photo"

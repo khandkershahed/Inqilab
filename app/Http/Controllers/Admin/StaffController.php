@@ -67,6 +67,7 @@ class StaffController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'username' => $request->username,
+            'status' => $request->status,
             'designation' => $request->designation,
             'photo' => $uploadedFiles['photo']['status']    == 1 ? $uploadedFiles['photo']['file_path']   : null,
             'password' => Hash::make($request->password),
@@ -140,6 +141,7 @@ class StaffController extends Controller
             'email'       => $request->email ? $request->email: $staff->email,
             'username'    => $request->username,
             'designation' => $request->designation,
+            'status'      => $request->status,
             'photo'       => $uploadedFiles['photo']['status'] == 1 ? $uploadedFiles['photo']['file_path'] : $staff->photo,
             'password'    => $request->password ? Hash::make($request->password) : $staff->password,
         ]);
