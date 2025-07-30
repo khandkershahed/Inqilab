@@ -34,12 +34,11 @@
                     <div class="col-lg-3 mb-3">
                         <x-metronic.label for="status" class="col-form-label required fw-bold fs-6">
                             {{ __('Select a Status') }}</x-metronic.label>
-                        <x-metronic.select-option id="status" name="status" data-hide-search="true"
-                            data-placeholder="Select an option">
-                            <option value="active" {{ old('status', $staff->status) == 'active' ? 'selected' : '' }}>
-                                Active</option>
-                            <option value="inactive"
-                                {{ old('status', $staff->status) == 'inactive' ? 'selected' : '' }}>Inactive</option>
+                        <x-metronic.select-option id="status" class="mb-2 form-select" data-control="select2"
+                            data-hide-search="true" name="status" data-placeholder="Select an option">
+                            <option></option>
+                            <option value="active" @selected(old('status', $staff->status) == 'active')>active</option>
+                            <option value="inactive" @selected(old('status', $staff->status) == 'inactive')>inactive</option>
                         </x-metronic.select-option>
                     </div>
 
@@ -47,87 +46,79 @@
                         <x-metronic.label for="name"
                             class="col-form-label required fw-bold fs-6">{{ __('Name') }}</x-metronic.label>
                         <x-metronic.input id="name" type="text" name="name" placeholder="Enter the name"
-                            value="{{ old('name', $staff->name) }}"></x-metronic.input>
+                            :value="old('name', $staff->name)"></x-metronic.input>
                     </div>
 
                     <div class="col-lg-3 mb-3">
                         <x-metronic.label for="username"
                             class="col-form-label fw-bold fs-6">{{ __('Username') }}</x-metronic.label>
                         <x-metronic.input id="username" type="text" name="username" placeholder="Enter the username"
-                            value="{{ old('username', $staff->username) }}"></x-metronic.input>
+                            :value="old('username', $staff->username)"></x-metronic.input>
                     </div>
 
                     <div class="col-lg-3 mb-3">
                         <x-metronic.label for="email"
                             class="col-form-label required fw-bold fs-6">{{ __('Email') }}</x-metronic.label>
                         <x-metronic.input id="email" type="email" name="email" placeholder="Enter the email"
-                            value="{{ old('email', $staff->email) }}"></x-metronic.input>
+                            :value="old('email', $staff->email)"></x-metronic.input>
                     </div>
 
                     <div class="col-lg-3 mb-3">
                         <x-metronic.label for="phone"
                             class="col-form-label fw-bold fs-6">{{ __('Phone') }}</x-metronic.label>
                         <x-metronic.input id="phone" type="text" name="phone" placeholder="Enter the phone"
-                            value="{{ old('phone', $staff->phone) }}"></x-metronic.input>
+                            :value="old('phone', $staff->phone)"></x-metronic.input>
                     </div>
 
                     <div class="col-lg-3 mb-3">
                         <x-metronic.label for="designation"
                             class="col-form-label fw-bold fs-6">{{ __('Designation') }}</x-metronic.label>
                         <x-metronic.input id="designation" type="text" name="designation"
-                            placeholder="Enter designation"
-                            value="{{ old('designation', $staff->designation) }}"></x-metronic.input>
+                            placeholder="Enter designation" :value="old('designation', $staff->designation)"></x-metronic.input>
                     </div>
 
                     <div class="col-lg-3 mb-3">
                         <x-metronic.label for="address"
                             class="col-form-label fw-bold fs-6">{{ __('Address') }}</x-metronic.label>
                         <x-metronic.input id="address" type="text" name="address" placeholder="Enter the address"
-                            value="{{ old('address', $staff->address) }}"></x-metronic.input>
+                            :value="old('address', $staff->address)"></x-metronic.input>
                     </div>
 
                     <div class="col-lg-3 mb-3">
                         <x-metronic.label for="country"
                             class="col-form-label fw-bold fs-6">{{ __('Country') }}</x-metronic.label>
                         <x-metronic.input id="country" type="text" name="country" placeholder="Enter country"
-                            value="{{ old('country', $staff->country) }}"></x-metronic.input>
+                            :value="old('country', $staff->country)"></x-metronic.input>
                     </div>
 
                     <div class="col-lg-3 mb-3">
                         <x-metronic.label for="city"
                             class="col-form-label fw-bold fs-6">{{ __('City') }}</x-metronic.label>
                         <x-metronic.input id="city" type="text" name="city" placeholder="Enter city"
-                            value="{{ old('city', $staff->city) }}"></x-metronic.input>
+                            :value="old('city', $staff->city)"></x-metronic.input>
                     </div>
 
                     <div class="col-lg-3 mb-3">
                         <x-metronic.label for="zipcode"
                             class="col-form-label fw-bold fs-6">{{ __('Zipcode') }}</x-metronic.label>
                         <x-metronic.input id="zipcode" type="text" name="zipcode" placeholder="Enter zipcode"
-                            value="{{ old('zipcode', $staff->zipcode) }}"></x-metronic.input>
+                            :value="old('zipcode', $staff->zipcode)"></x-metronic.input>
                     </div>
 
-                    <div class="col-lg-3 mb-3">
-                        <x-metronic.label for="biometric_id"
-                            class="col-form-label fw-bold fs-6">{{ __('Biometric ID') }}</x-metronic.label>
-                        <x-metronic.input id="biometric_id" type="text" name="biometric_id"
-                            placeholder="Enter biometric ID"
-                            value="{{ old('biometric_id', $staff->biometric_id) }}"></x-metronic.input>
-                    </div>
+
 
                     <div class="col-lg-3 mb-3">
                         <x-metronic.label for="password"
                             class="col-form-label fw-bold fs-6">{{ __('Password') }}</x-metronic.label>
                         <x-metronic.input id="password" type="password" name="password"
-                            placeholder="Enter a new password (optional)"
-                            autocomplete="new-password"></x-metronic.input>
+                            placeholder="Enter a new password (optional)"></x-metronic.input>
                     </div>
 
                     <div class="col-lg-3 mb-3">
                         <x-metronic.label for="confirm_password"
                             class="col-form-label fw-bold fs-6">{{ __('Confirm Password') }}</x-metronic.label>
                         <x-metronic.input id="confirm_password" type="password" name="password_confirmation"
-                            placeholder="Confirm new password" autocomplete="new-password"></x-metronic.input>
+                            placeholder="Confirm new password"></x-metronic.input>
                     </div>
 
                     <div class="col-lg-3 mb-3">
