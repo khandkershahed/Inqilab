@@ -141,7 +141,7 @@ class StaffController extends Controller
             'email'       => $request->email ? $request->email: $staff->email,
             'username'    => $request->username,
             'designation' => $request->designation,
-            'status'      => $request->status,
+            'status'      => $request->status ? $request->status : 'active',
             'photo'       => $uploadedFiles['photo']['status'] == 1 ? $uploadedFiles['photo']['file_path'] : $staff->photo,
             'password'    => $request->password ? Hash::make($request->password) : $staff->password,
         ]);
