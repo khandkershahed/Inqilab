@@ -7,7 +7,7 @@
                 {{-- Header with title and create button --}}
                 <div class="px-2 card-header d-flex justify-content-between align-items-center">
                     <h2 class="card-title">Manage News List</h2>
-                    <a href="{{ route('admin.news.create') }}" class="btn btn-primary" data-bs-toggle="tooltip"
+                    <a href="{{ route('admin.news.create') }}" class="btn btn-primary w-200px" data-bs-toggle="tooltip"
                         data-bs-placement="top" title="Create New News Post">
                         <i class="fas fa-plus"></i> Create News
                     </a>

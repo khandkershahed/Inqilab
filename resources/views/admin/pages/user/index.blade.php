@@ -6,7 +6,7 @@
                 {{-- Header with title and create button --}}
                 <div class="px-2 card-header d-flex justify-content-between align-items-center">
                     <h2 class="card-title">Manage User List</h2>
-                    <a href="{{ route('admin.user.create') }}" class="btn btn-primary" data-bs-toggle="tooltip"
+                    <a href="{{ route('admin.user.create') }}" class="btn btn-primary w-250px" data-bs-toggle="tooltip"
                         data-bs-placement="top" title="Create New News Post">
                         <i class="fas fa-plus"></i> Create User
                     </a>
@@ -50,17 +50,21 @@
                                     </td>
                                     <td class="text-end">
                                         <a href="{{ route('admin.user.edit', $user->id) }}"
-                                            class="btn btn-sm btn-primary rounded-pill">
+                                            class="btn btn-sm btn-primary rounded-pill mb-2 w-100px">
                                             <i class="text-white fas fa-pen-to-square fs-6 ps-2"></i>
                                         </a>
-                                        <form action="{{ route('admin.user.destroy', $user->id) }}" method="POST"
+                                        <a href="{{ route('admin.user.destroy', $user->id) }}"
+                                            class="btn btn-sm btn-primary rounded-pill mb-2 w-100px delete">
+                                            <i class="text-white fas fa-trash fs-6 ps-2"></i>
+                                        </a>
+                                        {{-- <form action="{{ route('admin.user.destroy', $user->id) }}" method="POST"
                                             style="display:inline;">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-sm btn-primary rounded-pill">
                                                 <i class="text-white fas fa-trash fs-6 ps-2"></i>
                                             </button>
-                                        </form>
+                                        </form> --}}
                                     </td>
                                 </tr>
                             @endforeach

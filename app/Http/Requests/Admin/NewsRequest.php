@@ -18,8 +18,8 @@ class NewsRequest extends FormRequest
         $newsId = $this->route('news');
 
         return [
-            'title'                 => 'required|string|max:1000|unique:news,title,' . $newsId,
-            'bangla_title'          => 'nullable|string|max:1000',
+            // 'title'                 => 'required|string|max:1000|unique:news,title,' . $newsId,
+            'bangla_title'          => 'required|string|max:1000|unique:news,bangla_title,' . $newsId,
             'slug'                  => 'nullable|string|max:1000|unique:news,slug,' . $newsId,
             'tags'                  => 'nullable|string|max:1000',
             'summary'               => 'nullable|string',

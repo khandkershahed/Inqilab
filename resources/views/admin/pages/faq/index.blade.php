@@ -1,68 +1,143 @@
 <x-admin-app-layout :title="'Faq List'">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="p-2 mt-5 card">
-
-                {{-- Header with title and create button --}}
-                <div class="px-2 card-header d-flex justify-content-between align-items-center">
-                    <h2 class="card-title">Manage Faq List</h2>
-                </div>
-
-                {{-- Table section --}}
-                <div class="p-0 card-body">
-                    <table id="dataTableSet" class="table border rounded table-striped table-row-bordered gy-5 gs-7">
-                        <thead>
-                            <tr class="text-gray-800 fw-bold fs-6 px-7">
-                                <th width="5%">Sl</th>
-                                <th width="20%">Question</th>
-                                <th width="45%">Ans</th>
-                                <th width="20%">Status</th>
-                                <th width="10%" class="text-end">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>
-                                    {{-- {{ $faq->question }} --}}
-                                    Lorem ipsum dolor sit amet?
-                                </td>
-                                <td>
-                                    {{-- {{ $faq->answer }} --}}
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque vero ullam illo.
-                                    Possimus maiores vero deserunt consequuntur voluptatem blanditiis inventore!
-                                </td>
-                                <td>
-                                    {{-- <p>
-                                        <span class="badge {{ $faq->status == 'active' ? 'bg-success' : 'bg-danger' }}">
-                                            {{ ucfirst($faq->status) }}
-                                        </span>
-                                    </p> --}}
-                                    <p>
-                                        <span class="badge bg-success">active</span>
-                                    </p>
-                                </td>
-
-                                <td class="text-end">
-                                    <div class="gap-2 d-flex justify-content-end">
-                                        <a href="#" class="btn btn-sm btn-primary rounded-pill">
-                                            <i class="text-white fas fa-pen-to-square fs-6 ps-2"></i>
-                                        </a>
-                                        <a href="#" class="btn btn-sm btn-danger rounded-pill">
-                                            <i class="text-white fas fa-trash fs-6 ps-2"></i>
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
+    <div class="card">
+        <div class="card-header bg-primary align-items-center d-flex justify-content-between">
+            <div>
+                <h1 class="mb-0 text-center w-100 text-white">Manage All Faqs</h1>
+            </div>
+            <div>
+                <a href="{{ route('admin.faq.create') }}" class="btn btn-light-primary rounded-2">
+                    <span class="svg-icon svg-icon-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                            fill="none">
+                            <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5"
+                                fill="currentColor" />
+                            <rect x="10.8891" y="17.8033" width="12" height="2" rx="1"
+                                transform="rotate(-90 10.8891 17.8033)" fill="currentColor" />
+                            <rect x="6.01041" y="10.9247" width="12" height="2" rx="1"
+                                fill="currentColor" />
+                        </svg>
+                    </span>
+                    Create Faq
+                </a>
             </div>
         </div>
+        <div class="card-body py-0">
+            <table id="dataTableSet" class="table my-datatable table-striped table-row-bordered gy-5 gs-7">
+                <thead class="bg-light-danger">
+                    <tr class="fw-semibold fs-6 text-gray-800">
+                        <th class="" width="5%">Sl</th>
+                        <th class="" width="60%">Question</th>
+                        <th class="" width="10%">Order Number</th>
+                        <th class="" width="15%">Status</th>
+                        <th class="" width="10%">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if ($faqs)
+                        @foreach ($faqs as $faq)
+                            <tr class="odd">
+                                <td>
+                                    {{ $loop->iteration }}
+                                </td>
+                                <td>
+                                    {{ $faq->question }}
+                                </td>
+                                <td>
+                                    {{ $faq->order }}
+                                </td>
+                                <td>
+                                    <span class="badge {{ $faq->status == 'active' ? 'bg-success' : 'bg-danger' }}">
+                                        {{ $faq->status == 'active' ? 'Active' : 'InActive' }}</span>
+                                </td>
+                                <td class="d-flex justify-content-between align-items-center">
+                                    <a href="#"
+                                        class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1"
+                                        data-bs-toggle="modal" data-bs-target="#faqViewModal_{{ $faq->id }}">
+                                        <i class="fa-solid fa-expand"></i>
+                                    </a>
+                                    <a href="{{ route('admin.faq.edit', $faq->id) }}"
+                                        class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </a>
+                                    <a href="{{ route('admin.faq.destroy', $faq->id) }}"
+                                        class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 delete"
+                                        data-kt-docs-table-filter="delete_row">
+                                        <i class="fa-solid fa-trash-can-arrow-up"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    @endif
+                </tbody>
+            </table>
+        </div>
     </div>
+    {{-- View Modal --}}
+    @foreach ($faqs as $faq)
+        <div class="modal fade" id="faqViewModal_{{ $faq->id }}" data-backdrop="static">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content rounded-0 border-0 shadow-sm">
+                    <div class="modal-header p-2 rounded-0">
+                        <h5 class="modal-title ps-5">View Faq</h5>
+                        <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal"
+                            aria-label="Close">
+                            <i class="fa-solid fa-circle-xmark"></i>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container px-0">
+                            <div class="card border rounded-0">
+                                <p class="badge badge-info custom-badge">Info</span>
+                                <div class="card-body p-1 px-2">
+                                    <div class="row">
 
-    {{-- DataTables script --}}
+                                        <div class="col-lg-12 mb-5">
+                                            <div class="row">
+                                                <div class="col-lg-4 col-sm-5">
+                                                    <p class="fw-bold">Question :</p>
+                                                </div>
+                                                <div class="col-lg-8 col-sm-6">
+                                                    <p>{{ $faq->question }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-12 mb-5">
+                                            <div class="row">
+                                                <div class="col-lg-4 col-sm-5">
+                                                    <p class="fw-bold">Answer :</p>
+                                                </div>
+                                                <div class="col-lg-8 col-sm-6">
+                                                    <p>
+                                                        {{ $faq->answer }}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12 mb-5">
+                                            <div class="row">
+                                                <div class="col-lg-4 col-sm-5">
+                                                    <p class="fw-bold">Status :</p>
+                                                </div>
+                                                <div class="col-lg-8 col-sm-6">
+                                                    <p>
+                                                        <span
+                                                            class="badge {{ $faq->status == 'active' ? 'bg-success' : 'bg-danger' }}">
+                                                            {{ $faq->status == 'active' ? 'active' : 'inactive' }}</span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
+
     @push('scripts')
         <script>
             $("#dataTableSet").DataTable({
@@ -81,93 +156,4 @@
             });
         </script>
     @endpush
-
-    {{-- <div class="card card-flash">
-        <div class="mt-6 card-header">
-            <div class="card-title"></div>
-            <div class="card-toolbar">
-                <a href="{{ route('admin.faq.create') }}" class="btn btn-light-primary">
-                    <span class="svg-icon svg-icon-3">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="none">
-                            <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5"
-                                fill="currentColor" />
-                            <rect x="10.8891" y="17.8033" width="12" height="2" rx="1"
-                                transform="rotate(-90 10.8891 17.8033)" fill="currentColor" />
-                            <rect x="6.01041" y="10.9247" width="12" height="2" rx="1"
-                                fill="currentColor" />
-                        </svg>
-                    </span>
-                    Add Faq
-                </a>
-
-            </div>
-        </div>
-
-        <div class="pt-0 card-body">
-            <table id="kt_datatable_example_5" class="table border rounded table-striped table-row-bordered gy-5 gs-7">
-                <thead class="bg-dark text-light">
-                    <tr>
-                        <th width="2%">No</th>
-                        <th width="30%">Question</th>
-                        <th width="5%">Status</th>
-                        <th width="5%">Actions</th>
-                    </tr>
-                </thead>
-                <tbody class="text-gray-600 fw-bold">
-
-                        <tr>
-                            <td>1</td>
-
-                            <td class="text-start">{{ $faq->question }}</td>
-
-                            <td class="text-start">
-                                <p>
-                                    <span class="badge {{ $faq->status == 'active' ? 'bg-success' : 'bg-danger' }}">
-                                        {{ ucfirst($faq->status) }}
-                                    </span>
-                                </p>
-
-                            </td>
-
-
-                            <td>
-                                <a href="{{ route('admin.faq.edit', $faq->id) }}" class="">
-                                    <i class="fa-solid fa-edit text-primary me-1 fs-4"></i>
-                                </a>
-                                <a href="{{ route('admin.faq.destroy', $faq->id) }}" class="delete">
-                                    <i class="fa-solid fa-trash text-danger fs-4"></i>
-                                </a>
-
-                            </td>
-                        </tr>
-
-                </tbody>
-            </table>
-        </div>
-
-    </div>
-
-    @push('scripts')
-        <script>
-            $("#kt_datatable_example_5").DataTable({
-                "language": {
-                    "lengthMenu": "Show _MENU_",
-                },
-                "dom": "<'row'" +
-                    "<'col-sm-6 d-flex align-items-center justify-conten-start'l>" +
-                    "<'col-sm-6 d-flex align-items-center justify-content-end'f>" +
-                    ">" +
-
-                    "<'table-responsive'tr>" +
-
-                    "<'row'" +
-                    "<'col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start'i>" +
-                    "<'col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end'p>" +
-                    ">"
-            });
-        </script>
-    @endpush --}}
-
-
 </x-admin-app-layout>

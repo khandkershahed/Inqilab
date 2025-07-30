@@ -222,7 +222,7 @@ class NewsController extends Controller
 
             // Update News data
             $news->update([
-                'title'                 => $request->title,
+                'title'                 => $request->bangla_title,
                 'bangla_title'          => $request->bangla_title,
                 'tags'                  => $request->tags,
                 'summary'               => $request->summary,

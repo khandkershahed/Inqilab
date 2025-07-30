@@ -763,7 +763,7 @@ function usingTinymce3() {
   return !!window.tinyMCEPopup;
 }
 
-function usingTinymce4AndColorbox() {
+function usingTinymce4AndColorbox() { 
   return !!getUrlParam('field_name');
 }
 

@@ -34,7 +34,11 @@
 
     <link href="{{ asset('admin/assets/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('admin/assets/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
-
+    <style>
+        .fl-wrapper {
+            z-index: 9999 !important;
+        }
+    </style>
     @props(['title'])
     <title>{{ $title ?? config('app.name', 'NewSite') }}</title>
 </head>
