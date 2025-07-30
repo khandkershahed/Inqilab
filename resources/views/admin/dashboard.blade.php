@@ -6,7 +6,7 @@
         }
     </style>
 
-    @if (Auth::guard('admin')->user()->status == 'active')
+    {{-- @if (Auth::guard('admin')->user()->status == 'active')
         <div class="row gy-5 g-xl-8">
             @php
                 $hour = \Carbon\Carbon::now('Asia/Dhaka')->format('H');
@@ -24,7 +24,7 @@
                 </div>
             </div>
         </div>
-    @endif
+    @endif --}}
     {{-- New Design Emplement --}}
     <section class="mt-2">
         <div class="row gx-5 gx-xl-5">
