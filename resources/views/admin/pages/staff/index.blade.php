@@ -50,17 +50,14 @@
                                     </td>
                                     <td class="text-end">
                                         <a href="{{ route('admin.staff.edit', $staff->id) }}"
-                                            class="btn btn-sm btn-primary rounded-pill">
+                                            class="btn btn-sm btn-primary rounded-pill w-75px">
                                             <i class="text-white fas fa-pen-to-square fs-6 ps-2"></i>
                                         </a>
-                                        <form action="{{ route('admin.staff.destroy', $staff->id) }}" method="POST"
-                                            style="display:inline;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-primary rounded-pill">
-                                                <i class="text-white fas fa-trash fs-6 ps-2"></i>
-                                            </button>
-                                        </form>
+                                        <a href="{{ route('admin.staff.destroy', $staff->id) }}"
+                                            class="btn btn-sm btn-primary rounded-pill w-75px delete">
+                                            <i class="text-white fas fa-trash fs-6 ps-2"></i>
+                                        </a>
+                                        
                                     </td>
                                 </tr>
                             @endforeach
