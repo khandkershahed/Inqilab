@@ -96,20 +96,20 @@ class CategoryController extends Controller
             }
             // Create the category model instance
             $category = Category::create([
-                'name'         => $request->name,
-                'bangla_name'  => $request->bangla_name,
-                'parent_id'    => $request->parent_id,
-                'code'         => $request->code,
-                'serial'       => $request->serial,
-
-                'logo'         => $uploadedFiles['logo']['status']         == 1 ? $uploadedFiles['logo']['file_path']        : null,
-                'image'        => $uploadedFiles['image']['status']        == 1 ? $uploadedFiles['image']['file_path']       : null,
-                'banner_image' => $uploadedFiles['banner_image']['status'] == 1 ? $uploadedFiles['banner_image']['file_path'] : null,
-
-                'added_by'     => Auth::guard('admin')->user()->name,
-
-                'description'  => $request->description,
-                'status'       => $request->status,
+                'name'            => $request->name,
+                'bangla_name'     => $request->bangla_name,
+                'parent_id'       => $request->parent_id,
+                'code'            => $request->code,
+                'serial'          => $request->serial,
+                'banner_image'    => $request->banner_image,
+                'logo'            => $request->logo,
+                'image'           => $request->image,
+                // 'logo'         => $uploadedFiles['logo']['status']         == 1 ? $uploadedFiles['logo']['file_path']        : null,
+                // 'image'        => $uploadedFiles['image']['status']        == 1 ? $uploadedFiles['image']['file_path']       : null,
+                // 'banner_image' => $uploadedFiles['banner_image']['status'] == 1 ? $uploadedFiles['banner_image']['file_path']: null,
+                'added_by'        => Auth::guard('admin')->user()->name,
+                'description'     => $request->description,
+                'status'          => $request->status,
             ]);
 
             // Commit the database transaction
@@ -127,7 +127,7 @@ class CategoryController extends Controller
             DB::rollback();
 
             // Return back with error message
-            return redirect()->back()->withInput()->with('error', 'An error occurred while creating the Category: ' . $e->getMessage());
+            return redirect()->back()->withInput()->with('message', 'An error occurred while creating the Category: ' . $e->getMessage());
         }
     }
 
@@ -190,16 +190,19 @@ class CategoryController extends Controller
             }
             // Update the category with the new or existing file paths
             $category->update([
-                'name'         => $request->name,
-                'bangla_name'  => $request->bangla_name,
-                'parent_id'    => $request->parent_id,
-                'code'         => $request->code,
-                'serial'       => $request->serial,
-                'logo'         => $uploadedFiles['logo']['status'] == 1 ? $uploadedFiles['logo']['file_path'] : $category->logo,
-                'image'        => $uploadedFiles['image']['status'] == 1 ? $uploadedFiles['image']['file_path'] : $category->image,
-                'banner_image' => $uploadedFiles['banner_image']['status'] == 1 ? $uploadedFiles['banner_image']['file_path'] : $category->banner_image,
-                'description'  => $request->description,
-                'status'       => $request->status,
+                'name'            => $request->name,
+                'bangla_name'     => $request->bangla_name,
+                'parent_id'       => $request->parent_id,
+                'code'            => $request->code,
+                'serial'          => $request->serial,
+                'banner_image'    => $request->banner_image ?? $category->banner_image,
+                'logo'            => $request->logo ?? $category->logo,
+                'image'           => $request->image ?? $category->image,
+                // 'logo'         => $uploadedFiles['logo']['status']         == 1 ? $uploadedFiles['logo']['file_path']        : $category->logo,
+                // 'image'        => $uploadedFiles['image']['status']        == 1 ? $uploadedFiles['image']['file_path']       : $category->image,
+                // 'banner_image' => $uploadedFiles['banner_image']['status'] == 1 ? $uploadedFiles['banner_image']['file_path']: $category->banner_image,
+                'description'     => $request->description,
+                'status'          => $request->status,
 
                 'updated_by'   => Auth::guard('admin')->user()->name,
             ]);

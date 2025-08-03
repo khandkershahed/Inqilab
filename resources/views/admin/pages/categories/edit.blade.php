@@ -90,7 +90,7 @@
                             <div class="col-8 d-flex align-items-center">
                                 <span class="input-group-btn">
                                     <a id="lfm" data-input="thumbnail" data-preview="holder"
-                                        class="btn btn-primary d-flex align-items-center">
+                                        class="btn btn-primary d-flex align-items-center lfm-btn">
                                         <i class="fas fa-image"></i> Choose
                                     </a>
                                 </span>
@@ -109,16 +109,46 @@
                             class="col-form-label fw-bold fs-6">{{ __('Thumbnail Image') }}
                         </x-metronic.label>
 
-                        <x-metronic.file-input id="image" name="image" :source="asset('storage/' . $category->image)"
-                            :value="old('image', $category->image)"></x-metronic.file-input>
+                         <div class="row">
+                            <div class="col-8 d-flex align-items-center">
+                                <span class="input-group-btn">
+                                    <a id="lfm" data-input="thumbnail" data-preview="holder"
+                                        class="btn btn-primary d-flex align-items-center lfm-btn">
+                                        <i class="fas fa-image"></i> Choose
+                                    </a>
+                                </span>
+                                <input id="thumbnail" class="form-control" type="text" name="image"
+                                    value="{{ $category->image }}" placeholder="Image Path">
+                            </div>
+                            <div class="col-4">
+                                <div id="holder" style="margin-top:15px;max-height:100px;">
+                                    <img width="150px" src="{{ $category->image }}" alt="">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-lg-4 mb-7">
                         <x-metronic.label for="banner_image"
                             class="col-form-label fw-bold fs-6 ">{{ __('Banner Image') }}
                         </x-metronic.label>
 
-                        <x-metronic.file-input id="banner_image" :source="asset('storage/' . $category->banner_image)" :value="old('banner_image', $category->banner_image)"
-                            name="banner_image"></x-metronic.file-input>
+                         <div class="row">
+                            <div class="col-8 d-flex align-items-center">
+                                <span class="input-group-btn">
+                                    <a id="lfm" data-input="thumbnail" data-preview="holder"
+                                        class="btn btn-primary d-flex align-items-center lfm-btn">
+                                        <i class="fas fa-image"></i> Choose
+                                    </a>
+                                </span>
+                                <input id="thumbnail" class="form-control" type="text" name="banner_image"
+                                    value="{{ $category->banner_image }}" placeholder="Image Path">
+                            </div>
+                            <div class="col-4">
+                                <div id="holder" style="margin-top:15px;max-height:100px;">
+                                    <img width="150px" src="{{ $category->banner_image }}" alt="">
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                 </div>
