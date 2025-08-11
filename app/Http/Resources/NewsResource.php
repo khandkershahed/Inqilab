@@ -55,6 +55,7 @@ class NewsResource extends JsonResource
             'category_name'          => optional($this->category)->name,
             'category_bangla_name'   => optional($this->category)->bangla_name,
             'subCategory_name'       => optional($this->subCategory)->name,
-            'subCategory_bangla_name'=> optional($this->subCategory)->bangla_name,];
+            'subCategory_bangla_name' => optional($this->subCategory)->bangla_name,
+        ];
     }
 }

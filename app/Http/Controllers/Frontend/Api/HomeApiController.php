@@ -438,11 +438,14 @@ class HomeApiController extends Controller
                 ], 404);
             }
 
-            $relatedNews = News::where('category_id', $news->category_id)
-                ->orWhere('sub_category_id', $news->sub_category_id)
+            $relatedNews = News::where(function ($query) use ($news) {
+                $query->where('category_id', $news->category_id)
+                    ->orWhere('sub_category_id', $news->sub_category_id);
+            })
                 ->where('slug', '!=', $slug)
                 ->where('status', 'published')
                 ->orderByDesc('published_at')
+                ->limit(10)
                 ->get();
 
             return response()->json([
@@ -461,6 +464,7 @@ class HomeApiController extends Controller
             ], 500);
         }
     }
+
     public function globalSearch(Request $request)
     {
         $query = $request->input('query');
