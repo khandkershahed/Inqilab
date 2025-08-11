@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\URL;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\NewsResource;
+use App\Http\Resources\RelatedNewsResource;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
@@ -452,7 +453,7 @@ class HomeApiController extends Controller
                 'success' => true,
                 'message' => 'News details retrieved successfully.',
                 'news_details' => new NewsResource($news),
-                'related_news' => NewsResource::collection($relatedNews),
+                'related_news' => RelatedNewsResource::collection($relatedNews),
             ], 200);
         } catch (\Exception $e) {
             Log::error('Failed to fetch news details: ' . $e->getMessage());
