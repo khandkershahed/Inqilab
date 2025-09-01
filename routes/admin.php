@@ -60,7 +60,7 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
     Route::get('/profile', [AdminProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [AdminProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [AdminProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::get('/admin/news/ajax', [NewsController::class, 'ajaxList'])->name('admin.news.ajax');
+    Route::get('/admin/news/ajax', [NewsController::class, 'ajaxList'])->name('news.ajax');
 
     //Resource Controller
     Route::resources(
