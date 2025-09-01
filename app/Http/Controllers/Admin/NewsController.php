@@ -44,7 +44,7 @@ class NewsController extends Controller
     {
         if ($request->ajax()) {
             $query = News::with(['category:id,name,bangla_name', 'author:id,name'])
-                ->select('id', 'category_id', 'author_id', 'thumbnail', 'bangla_title', 'status', 'published_at');
+                ->select('id', 'category_id', 'author_id', 'thumbnail', 'bangla_title', 'status', 'published_at')->latest('id');
 
             return DataTables::of($query)
                 ->addIndexColumn()
