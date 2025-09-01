@@ -22,7 +22,7 @@
                                 <th width="10%">Category</th>
                                 <th width="8%">Status</th>
                                 <th width="9%">Date</th>
-                                <th width="8%">Author</th>
+                                {{-- <th width="8%">Author</th> --}}
                                 <th width="12%" class="text-end">Action</th>
                             </tr>
                         </thead>
@@ -118,10 +118,10 @@
                             data: 'published_at',
                             name: 'published_at'
                         },
-                        {
-                            data: 'author',
-                            name: 'author.name'
-                        },
+                        // {
+                        //     data: 'author',
+                        //     name: 'author.name'
+                        // },
                         {
                             data: 'action',
                             name: 'action',
