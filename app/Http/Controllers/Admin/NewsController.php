@@ -6,6 +6,7 @@ use App\Models\News;
 use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
@@ -32,9 +33,50 @@ class NewsController extends Controller
     public function index()
     {
         $data = [
-            'newses' => News::with('category', 'subCategory')->latest('id')->get(),
+            // 'newses' => News::select('id', 'category_id', 'thumbnail', 'bangla_title', 'status', 'published_at')->with(['category' => function ($query) {
+            //     $query->select('id', 'name', 'bangla_name');
+            // }])->latest('id')->get(),
         ];
         return view('admin.pages.news.index', $data);
+    }
+
+    public function ajaxList(Request $request)
+    {
+        if ($request->ajax()) {
+            $query = News::with(['category:id,name,bangla_name', 'author:id,name'])
+                ->select('id', 'category_id', 'author_id', 'thumbnail', 'bangla_title', 'status', 'published_at');
+
+            return DataTables::of($query)
+                ->addIndexColumn()
+                ->editColumn('thumbnail', function ($news) {
+                    return '<img src="' . $news->thumbnail . '" width="70" height="70" class="img-fluid rounded-2">';
+                })
+                ->editColumn('category', function ($news) {
+                    return $news->category->bangla_name ?? $news->category->name ?? '-';
+                })
+                ->editColumn('author', function ($news) {
+                    return $news->author->name ?? '-';
+                })
+                ->editColumn('published_at', function ($news) {
+                    return \Carbon\Carbon::parse($news->published_at)->format('Y-m-d');
+                })
+                ->editColumn('action', function ($news) {
+                    $edit = route('admin.news.edit', $news->id);
+                    $delete = route('admin.news.destroy', $news->id);
+                    return '
+                    <div class="d-flex justify-content-end gap-2">
+                        <a href="' . $edit . '" class="btn btn-sm btn-primary rounded-pill">
+                            <i class="fas fa-pen-to-square text-white"></i>
+                        </a>
+                        <a href="' . $delete . '" class="btn btn-sm btn-danger rounded-pill delete">
+                            <i class="fas fa-trash text-white"></i>
+                        </a>
+                    </div>
+                ';
+                })
+                ->rawColumns(['thumbnail', 'action']) // allow HTML rendering
+                ->make(true);
+        }
     }
 
     /**
@@ -86,6 +128,7 @@ class NewsController extends Controller
                 'is_breaking',
                 'show_on_homepage',
                 'show_in_slider',
+                'show_banner_image',
                 'is_trending'
             ];
 
@@ -107,6 +150,7 @@ class NewsController extends Controller
                 'video_url'             => $request->video_url,
                 'thumbnail'             => $request->thumbnail,
                 'banner_image'          => $request->banner_image,
+                'image_caption'         => $request->image_caption,
                 // 'thumbnail'             => $uploadedFiles['thumbnail']['status'] === 1 ? $uploadedFiles['thumbnail']['file_path'] : null,
                 // 'banner_image'          => $uploadedFiles['banner_image']['status'] === 1 ? $uploadedFiles['banner_image']['file_path'] : null,
                 'meta_title'            => $request->meta_title,
@@ -212,6 +256,7 @@ class NewsController extends Controller
                 'is_breaking',
                 'show_on_homepage',
                 'show_in_slider',
+                'show_banner_image',
                 'is_trending'
             ];
 
@@ -232,6 +277,7 @@ class NewsController extends Controller
                 'video_url'             => $request->video_url,
                 'thumbnail'             => $request->thumbnail ?? $news->thumbnail,
                 'banner_image'          => $request->banner_image ?? $news->banner_image,
+                'image_caption'         => $request->image_caption,
                 // 'thumbnail'             => $uploadedFiles['thumbnail'],
                 // 'banner_image'          => $uploadedFiles['banner_image'],
                 'meta_title'            => $request->meta_title,
@@ -269,16 +315,16 @@ class NewsController extends Controller
         // Helper to delete file from full URL
         $deleteFileFromUrl = function ($url) {
             $relativePath = ltrim(Str::replaceFirst(url('/'), '', $url), '/'); // clean up
-                $filePath = public_path($relativePath);
-                // dd($filePath); // Debugging line to check file path
-                if (File::exists($filePath)) {
-                    File::delete($filePath);
-                } else {
-                    Log::warning('File not found for deletion', [
-                        'url' => $url,
-                        'resolved_path' => $filePath
-                    ]);
-                }
+            $filePath = public_path($relativePath);
+            // dd($filePath); // Debugging line to check file path
+            if (File::exists($filePath)) {
+                File::delete($filePath);
+            } else {
+                Log::warning('File not found for deletion', [
+                    'url' => $url,
+                    'resolved_path' => $filePath
+                ]);
+            }
         };
 
         // Delete thumbnail

@@ -32,6 +32,7 @@ return new class extends Migration
             $table->string('thumbnail', 255)->nullable();
             $table->string('banner_image', 255)->nullable();
             $table->string('video_url', 255)->nullable(); // YouTube, Vimeo, etc.
+            $table->text('image_caption')->nullable(); // YouTube, Vimeo, etc.
 
             // Metadata
             $table->string('tags')->nullable(); // comma-separated
@@ -45,6 +46,7 @@ return new class extends Migration
             $table->boolean('is_most_read')->default(false);
             $table->boolean('is_breaking')->default(false);
             $table->boolean('show_on_homepage')->default(false);
+            $table->boolean('show_banner_image')->default(true);
             $table->boolean('show_in_slider')->default(false);
             $table->boolean('is_trending')->default(false);
 

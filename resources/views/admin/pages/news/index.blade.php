@@ -1,9 +1,7 @@
 <x-admin-app-layout :title="'News List'">
-
     <div class="row">
         <div class="col-lg-12">
             <div class="p-2 mt-5 card">
-
                 {{-- Header with title and create button --}}
                 <div class="px-2 card-header d-flex justify-content-between align-items-center">
                     <h2 class="card-title">Manage News List</h2>
@@ -22,7 +20,6 @@
                                 <th width="15%">Image</th>
                                 <th width="25%">Title</th>
                                 <th width="10%">Category</th>
-                                <th width="10%">Sub Category</th>
                                 <th width="8%">Status</th>
                                 <th width="9%">Date</th>
                                 <th width="8%">Author</th>
@@ -30,20 +27,15 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($newses as $key => $news)
+                            {{-- @foreach ($newses as $key => $news)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>
-                                        {{-- <img width="70" height="70" class="img-fluid rounded-2"
-                                            src="{{ !empty(optional($news)->thumbnail) ? url(optional($news)->thumbnail) : asset('images/no_image.jpg') }}"
-                                            alt="{{ $news->page_name }}"> --}}
                                         <img width="70" height="70" class="img-fluid rounded-2"
-                                            src="{{ $news->thumbnail }}" alt="{{ $news->bangla_name }}">
+                                            src="{{ $news->thumbnail }}" alt="{{ $news->bangla_title }}">
                                     </td>
                                     <td>{{ $news->bangla_title }}</td>
                                     <td>{{ optional($news->category)->bangla_name ?? optional($news->category)->name }}
-                                    </td>
-                                    <td>{{ optional($news->subCategory)->bangla_name ?? optional($news->subCategory)->name }}
                                     </td>
                                     <td>{{ $news->status }}</td>
                                     <td>{{ $news->published_at }}</td>
@@ -61,7 +53,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                            @endforeach
+                            @endforeach --}}
                         </tbody>
                     </table>
                 </div>
@@ -71,23 +63,88 @@
     </div>
 
     {{-- DataTables script --}}
+    {{-- @push('scripts')
+        <script>
+            $(document).ready(function() {
+                $("#dataTableSet").DataTable({
+                    language: {
+                        lengthMenu: "Show _MENU_",
+                    },
+                    dom: "<'row'" +
+                        "<'col-sm-6 d-flex align-items-center justify-content-start'l>" +
+                        "<'col-sm-6 d-flex align-items-center justify-content-end'f>" +
+                        ">" +
+                        "<'table-responsive'tr>" +
+                        "<'row'" +
+                        "<'col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start'i>" +
+                        "<'col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end'p>" +
+                        ">"
+                });
+            });
+        </script>
+    @endpush --}}
     @push('scripts')
         <script>
-            $("#dataTableSet").DataTable({
-                language: {
-                    lengthMenu: "Show _MENU_",
-                },
-                dom: "<'row'" +
-                    "<'col-sm-6 d-flex align-items-center justify-content-start'l>" +
-                    "<'col-sm-6 d-flex align-items-center justify-content-end'f>" +
-                    ">" +
-                    "<'table-responsive'tr>" +
-                    "<'row'" +
-                    "<'col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start'i>" +
-                    "<'col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end'p>" +
-                    ">"
+            $(document).ready(function() {
+                $('#dataTableSet').DataTable({
+                    processing: true,
+                    serverSide: true,
+                    ajax: "{{ route('admin.news.ajax') }}",
+                    columns: [{
+                            data: 'DT_RowIndex',
+                            name: 'DT_RowIndex',
+                            orderable: false,
+                            searchable: false
+                        },
+                        {
+                            data: 'thumbnail',
+                            name: 'thumbnail',
+                            orderable: false,
+                            searchable: false
+                        },
+                        {
+                            data: 'bangla_title',
+                            name: 'bangla_title'
+                        },
+                        {
+                            data: 'category',
+                            name: 'category.name'
+                        },
+                        {
+                            data: 'status',
+                            name: 'status'
+                        },
+                        {
+                            data: 'published_at',
+                            name: 'published_at'
+                        },
+                        {
+                            data: 'author',
+                            name: 'author.name'
+                        },
+                        {
+                            data: 'action',
+                            name: 'action',
+                            orderable: false,
+                            searchable: false
+                        }
+                    ],
+                    language: {
+                        lengthMenu: "Show _MENU_",
+                    },
+                    dom: "<'row'" +
+                        "<'col-sm-6 d-flex align-items-center justify-content-start'l>" +
+                        "<'col-sm-6 d-flex align-items-center justify-content-end'f>" +
+                        ">" +
+                        "<'table-responsive'tr>" +
+                        "<'row'" +
+                        "<'col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start'i>" +
+                        "<'col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end'p>" +
+                        ">"
+                });
             });
         </script>
     @endpush
+
 
 </x-admin-app-layout>

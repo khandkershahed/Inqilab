@@ -215,6 +215,14 @@
 
                                             <div class="col-lg-12">
                                                 <div class="pt-5 fv-row">
+                                                    <x-metronic.label for="image_caption" class="form-label">Image Caption</x-metronic.label>
+                                                    <input type="text" name="image_caption" class="mb-2 form-control"
+                                                        placeholder="Image Caption" id="image_caption"
+                                                        value="{{ old('image_caption') }}">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12">
+                                                <div class="pt-5 fv-row">
                                                     <x-metronic.label for="video_url" class="form-label">News
                                                         Video Link</x-metronic.label>
                                                     <input type="text" name="video_url" class="mb-2 form-control"
@@ -321,6 +329,14 @@
                                                         {{ old('is_trending') ? 'checked' : '' }}>
                                                     <label class="form-check-label" for="is_trending">
                                                         Trending News
+                                                    </label>
+                                                </div>
+                                                <div class="form-check form-check-custom form-check-solid mb-7">
+                                                    <input class="form-check-input" type="checkbox"
+                                                        name="show_banner_image" id="show_banner_image" value="1"
+                                                        {{ old('show_banner_image') ? 'checked' : 'checked' }}>
+                                                    <label class="form-check-label" for="show_banner_image">
+                                                        Show Banner Image
                                                     </label>
                                                 </div>
                                             </div>

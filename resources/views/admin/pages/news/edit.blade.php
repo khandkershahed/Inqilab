@@ -181,9 +181,9 @@
                                                             name="thumbnail" placeholder="Image Path">
                                                     </div>
                                                     <div class="col-4">
-                                                        <div id="holder1"
-                                                            style="margin-top:15px; max-height:100px;">
-                                                            <img width="150px" src="{{ $news->thumbnail }}" alt="">
+                                                        <div id="holder1" style="margin-top:15px; max-height:100px;">
+                                                            <img width="150px" src="{{ $news->thumbnail }}"
+                                                                alt="">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -210,9 +210,20 @@
                                                     <div class="col-4">
                                                         <div id="holder2"
                                                             style="margin-top:15px; max-height:100px;">
-                                                            <img width="150px" src="{{ $news->banner_image }}" alt="">
+                                                            <img width="150px" src="{{ $news->banner_image }}"
+                                                                alt="">
                                                         </div>
                                                     </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-12">
+                                                <div class="pt-5 fv-row">
+                                                    <x-metronic.label for="image_caption" class="form-label">Image
+                                                        Caption</x-metronic.label>
+                                                    <input type="text" name="image_caption"
+                                                        class="mb-2 form-control" placeholder="Image Caption"
+                                                        id="image_caption" value="{{ old('image_caption', $news->image_caption) }}">
                                                 </div>
                                             </div>
 
