@@ -230,6 +230,7 @@ class HomeApiController extends Controller
                 // ->with(['category', 'subCategory', 'images'])
                 ->where('status', 'published')
                 ->orderByDesc('published_at')
+                ->limit(30)
                 ->get(); // Optional: ->paginate(10)
 
             return response()->json([
@@ -256,6 +257,7 @@ class HomeApiController extends Controller
             $news = News::where('is_breaking', 1)
                 ->where('status', 'published')
                 ->orderByDesc('published_at')
+                ->limit(5)
                 ->get();
             if ($news->isEmpty()) {
                 return response()->json([
@@ -313,6 +315,7 @@ class HomeApiController extends Controller
             $news = News::where('show_in_slider', 1)
                 ->where('status', 'published')
                 ->orderByDesc('published_at')
+                ->limit(15)
                 ->get();
 
             if ($news->isEmpty()) {
@@ -342,6 +345,7 @@ class HomeApiController extends Controller
         try {
             $news = News::where('status', 'published')
                 ->orderByDesc('published_at')
+                ->limit(10)
                 ->get();
             if ($news->isEmpty()) {
                 return response()->json([
@@ -370,6 +374,8 @@ class HomeApiController extends Controller
         try {
             $news = News::where('is_most_read', 1)
                 ->where('status', 'published')
+                ->latest()
+                ->limit(10)
                 ->get();
 
             if ($news->isEmpty()) {
